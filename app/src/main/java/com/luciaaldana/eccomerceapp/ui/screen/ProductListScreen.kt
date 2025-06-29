@@ -21,12 +21,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
+import com.luciaaldana.eccomerceapp.core.utils.toPriceFormat
 import com.luciaaldana.eccomerceapp.model.data.Product
+import com.luciaaldana.eccomerceapp.viewmodel.CartViewModel
 import com.luciaaldana.eccomerceapp.viewmodel.ProductsViewModel
 
 @Composable
 fun ProductListScreen(navController: NavController) {
     val viewModel: ProductsViewModel = hiltViewModel()
+    val cartViewModel: CartViewModel = hiltViewModel()
     val products by viewModel.filteredProducts.collectAsState()
     val all by viewModel.allProducts.collectAsState()
 
@@ -58,6 +61,15 @@ fun ProductListScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
+        Button(
+            onClick = { navController.navigate("cart") },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Ir al carrito")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         // Grid escalonado
         @OptIn(ExperimentalFoundationApi::class)
         (LazyVerticalStaggeredGrid (
@@ -67,7 +79,9 @@ fun ProductListScreen(navController: NavController) {
             horizontalArrangement = Arrangement.Start,
     ) {
         items(products) { product ->
-            ProductCard(product = product)
+            ProductCard(product = product, onAddToCart = {
+                cartViewModel.add(product)
+            })
         }
     })
 //        LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -75,7 +89,6 @@ fun ProductListScreen(navController: NavController) {
 //                ProductCard(product = product)
 //            }
 //        }
-
     }
 }
 
@@ -107,7 +120,10 @@ fun CategoryDropdown(
 }
 
 @Composable
-fun ProductCard(product: Product) {
+fun ProductCard(
+    product: Product,
+    onAddToCart: () -> Unit
+) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -127,9 +143,16 @@ fun ProductCard(product: Product) {
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "\$${product.price}")
+            Text(text = "${product.price.toPriceFormat()}")
             if (product.includesDrink) {
                 Text(text = "Incluye bebida 🥤", style = MaterialTheme.typography.bodySmall)
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = onAddToCart,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Agregar al carrito")
             }
         }
     }

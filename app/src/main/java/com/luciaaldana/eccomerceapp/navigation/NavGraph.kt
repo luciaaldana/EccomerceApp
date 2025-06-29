@@ -8,7 +8,7 @@ import com.luciaaldana.eccomerceapp.ui.screen.*
 
 @Composable
 fun NavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "login") {
+    NavHost(navController = navController, startDestination = "productList") {
         composable( route = "login") { LoginScreen(navController) }
         composable( route = "register") { RegisterScreen(navController) }
         composable( route = "productList") { ProductListScreen(navController) }
