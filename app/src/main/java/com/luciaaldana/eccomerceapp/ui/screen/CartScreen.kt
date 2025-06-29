@@ -107,6 +107,13 @@ fun CartScreen(navController: NavController) {
             ) {
                 Text("Seguir comprando")
             }
+            Button(
+                onClick = { navController.navigate(route="orderConfirmation") },
+                modifier = Modifier.fillMaxWidth(),
+                enabled = items.isNotEmpty()
+            ) {
+                Text("Confirmar compra")
+            }
 
         }
     }

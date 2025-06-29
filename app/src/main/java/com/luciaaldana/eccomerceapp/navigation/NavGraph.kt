@@ -15,6 +15,7 @@ fun NavGraph(navController: NavHostController) {
         composable( route = "cart") { CartScreen(navController) }
         composable( route = "detail") { DetailScreen(navController) }
         composable( route = "profile") { ProfileScreen(navController) }
+        composable( route = "orderConfirmation") { OrderConfirmationScreen(navController) }
         composable( route = "orderHistory") { OrderHistoryScreen(navController) }
     }
 }
