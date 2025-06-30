@@ -2,6 +2,7 @@ package com.luciaaldana.eccomerceapp.ui.screen
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -110,7 +111,10 @@ fun ProductListScreen(navController: NavController) {
             items(products) { product ->
                 ProductCard(
                     product = product,
-                    onAddToCart = { cartViewModel.add(product) }
+                    onAddToCart = { cartViewModel.add(product) },
+                    onClick = {
+                        navController.navigate("detail/${product.id}")
+                    }
                 )
             }
         }
@@ -147,13 +151,15 @@ fun CategoryDropdown(
 @Composable
 fun ProductCard(
     product: Product,
-    onAddToCart: () -> Unit
+    onAddToCart: () -> Unit,
+    onClick: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(1.dp)
-            .height(300.dp),
+            .height(300.dp)
+            .clickable(onClick = onClick),
         shape = RectangleShape
     ) {
         Column(modifier = Modifier.padding(0.dp)) {
