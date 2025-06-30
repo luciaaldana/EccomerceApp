@@ -29,7 +29,13 @@ class AuthRepositoryImpl @Inject constructor() : AuthRepository {
         return true
     }
 
+    override fun getCurrentUser(): MockUser? = loggedInUser
+
     override fun logout() {
         loggedInUser = null
+    }
+
+    override fun updateCurrentUser(updatedUser: MockUser) {
+        loggedInUser = updatedUser
     }
 }

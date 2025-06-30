@@ -67,6 +67,14 @@ fun ProductListScreen(navController: NavController) {
         ) {
             Text("Ir al carrito")
         }
+        Button(
+            onClick = {
+                navController.navigate("profile")
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Ver mi perfil")
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
