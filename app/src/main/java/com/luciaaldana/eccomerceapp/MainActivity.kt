@@ -10,10 +10,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.luciaaldana.eccomerceapp.navigation.NavGraph
+import com.luciaaldana.eccomerceapp.navigation.AppNavGraph
+import com.luciaaldana.eccomerceapp.ui.components.BottomNavBar
 import com.luciaaldana.eccomerceapp.ui.theme.EccomerceAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,9 +27,23 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             EccomerceAppTheme {
-                MaterialTheme {
-                    val navController = rememberNavController()
-                    NavGraph(navController)
+                val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
+
+                val showBottomBar = currentRoute in listOf("productList", "cart", "detail", "profile")
+
+                Scaffold(
+                    bottomBar = {
+                        if (showBottomBar) {
+                            BottomNavBar(navController)
+                        }
+                    }
+                ) { innerPadding ->
+                    AppNavGraph(
+                        navController = navController,
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }

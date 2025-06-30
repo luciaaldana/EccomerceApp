@@ -11,10 +11,14 @@ import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -80,23 +84,36 @@ fun ProductListScreen(navController: NavController) {
 
         // Grid escalonado
         @OptIn(ExperimentalFoundationApi::class)
-        (LazyVerticalStaggeredGrid (
-            columns = StaggeredGridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
-            verticalItemSpacing = 12.dp,
-            horizontalArrangement = Arrangement.Start,
-    ) {
-        items(products) { product ->
-            ProductCard(product = product, onAddToCart = {
-                cartViewModel.add(product)
-            })
-        }
-    })
+//        (LazyVerticalStaggeredGrid (
+//            columns = StaggeredGridCells.Fixed(2),
+//            modifier = Modifier.fillMaxSize(),
+//            verticalItemSpacing = 12.dp,
+//            horizontalArrangement = Arrangement.Start,
+//    ) {
+//        items(products) { product ->
+//            ProductCard(product = product, onAddToCart = {
+//                cartViewModel.add(product)
+//            })
+//        }
+//    })
 //        LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
 //            items(products) { product ->
-//                ProductCard(product = product)
+//                ProductCard(product = product, onAddToCart = {
+//                cartViewModel.add(product)
+//            })
 //            }
 //        }
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            items(products) { product ->
+                ProductCard(
+                    product = product,
+                    onAddToCart = { cartViewModel.add(product) }
+                )
+            }
+        }
     }
 }
 
@@ -135,13 +152,11 @@ fun ProductCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(1.dp)
+            .height(300.dp),
+        shape = RectangleShape
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = product.name, style = MaterialTheme.typography.titleMedium)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(text = product.description)
-            Spacer(modifier = Modifier.height(8.dp))
+        Column(modifier = Modifier.padding(0.dp)) {
             Image(
                 painter = rememberAsyncImagePainter(product.imageUrl),
                 contentDescription = product.name,
@@ -151,16 +166,44 @@ fun ProductCard(
                 contentScale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.height(4.dp))
-            Text(text = "${product.price.toPriceFormat()}")
-            if (product.includesDrink) {
-                Text(text = "Incluye bebida 🥤", style = MaterialTheme.typography.bodySmall)
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Button(
-                onClick = onAddToCart,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Agregar al carrito")
+            Column(modifier = Modifier.padding(8.dp)) {
+                Text(
+                    text = product.name,
+                    style = MaterialTheme.typography.titleSmall,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = product.description,
+                    style = MaterialTheme.typography.bodySmall,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                ) {
+                    Text(
+                        text = "${product.price.toPriceFormat()}",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                    if (product.includesDrink) {
+                        Text(
+                            text = "* Incluye bebida 🥤",
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(
+                    onClick = onAddToCart,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Agregar al carrito")
+                }
             }
         }
     }
