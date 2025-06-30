@@ -19,13 +19,13 @@ fun Date.toRelativeTime(): String {
     val days = TimeUnit.MILLISECONDS.toDays(diffInMillis)
 
     return when {
-        minutes < 1 -> "justo ahora"
-        minutes == 1L -> "hace 1 minuto"
-        minutes < 60 -> "hace $minutes minutos"
-        hours == 1L -> "hace 1 hora"
-        hours < 24 -> "hace $hours horas"
-        days == 1L -> "ayer"
-        days < 7 -> "hace $days días"
+        minutes < 1 -> "Justo ahora"
+        minutes == 1L -> "Hace 1 minuto"
+        minutes < 60 -> "Hace $minutes minutos"
+        hours == 1L -> "Hace 1 hora"
+        hours < 24 -> "Hace $hours horas"
+        days == 1L -> "Ayer"
+        days < 7 -> "Hace $days días"
         else -> this.toReadableFormat()
     }
 }

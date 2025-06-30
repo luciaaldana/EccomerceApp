@@ -15,9 +15,8 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.luciaaldana.eccomerceapp.core.utils.toPriceFormat
 import com.luciaaldana.eccomerceapp.model.data.CartItem
+import com.luciaaldana.eccomerceapp.ui.components.Header
 import com.luciaaldana.eccomerceapp.viewmodel.CartViewModel
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-
 
 @Composable
 fun CartScreen(navController: NavController) {
@@ -28,93 +27,101 @@ fun CartScreen(navController: NavController) {
     val itemCount = items.count()
     val totalUnits = items.sumOf { it.quantity }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)
-    ) {
-        Text(text = "Carrito de compras", style = MaterialTheme.typography.headlineMedium)
-        Spacer(modifier = Modifier.height(16.dp))
+    Scaffold(
+        topBar = {
+            Header(title = "Carrito de compras", navController = navController)
+        }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            if (items.isEmpty()) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "Tu carrito está vacío")
+                    Button(
+                        onClick = { navController.navigate(route = "productList") },
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Seguir comprando")
+                    }
+                }
 
-        if (items.isEmpty()) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(text = "Tu carrito está vacío")
+            } else {
+                LazyColumn(modifier = Modifier.weight(1f)) {
+                    items(items) { item ->
+                        CartItemCard(item, onUpdate = { qty ->
+                            viewModel.updateQuantity(item.product, qty)
+                        }, onRemove = {
+                            viewModel.remove(item.product)
+                        })
+                        Spacer(modifier = Modifier.height(12.dp))
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+                Column {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(text = "Total", style = MaterialTheme.typography.titleLarge)
+                        Text(
+                            text = "${total.toPriceFormat()}",
+                            style = MaterialTheme.typography.titleLarge
+                        )
+
+                    }
+                    Text(
+                        text = "$itemCount productos",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            color = MaterialTheme.colorScheme.primary,
+                        ),
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                    Text(
+                        text = "$totalUnits unidades",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            color = MaterialTheme.colorScheme.primary,
+                        ),
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+
+                    Text(
+                        text = "Vaciar carrito",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            color = MaterialTheme.colorScheme.primary,
+                        ),
+                        modifier = Modifier
+                            .clickable { viewModel.clearCart() }
+                            .padding(top = 8.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(16.dp))
                 Button(
-                    onClick = { navController.navigate(route = "productList")  },
+                    onClick = { navController.navigate(route = "productList") },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Seguir comprando")
                 }
-            }
-
-        } else {
-            LazyColumn(modifier = Modifier.weight(1f)) {
-                items(items) { item ->
-                    CartItemCard(item, onUpdate = { qty ->
-                        viewModel.updateQuantity(item.product, qty)
-                    }, onRemove = {
-                        viewModel.remove(item.product)
-                    })
-                    Spacer(modifier = Modifier.height(12.dp))
-                }
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-            Column {
-                Row(
+                Button(
+                    onClick = { navController.navigate(route = "orderConfirmation") },
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    enabled = items.isNotEmpty()
                 ) {
-                    Text(text = "Total", style = MaterialTheme.typography.titleLarge)
-                    Text(text = "${total.toPriceFormat()}", style = MaterialTheme.typography.titleLarge)
-
+                    Text("Confirmar compra")
                 }
-                Text(
-                    text = "$itemCount productos",
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        color = MaterialTheme.colorScheme.primary,
-                    ),
-                    modifier = Modifier.padding(top = 4.dp)
-                )
-                Text(
-                    text = "$totalUnits unidades",
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        color = MaterialTheme.colorScheme.primary,
-                    ),
-                    modifier = Modifier.padding(top = 4.dp)
-                )
 
-                Text(
-                    text = "Vaciar carrito",
-                    style = MaterialTheme.typography.bodySmall.copy(
-                        color = MaterialTheme.colorScheme.primary,
-                    ),
-                    modifier = Modifier
-                        .clickable { viewModel.clearCart() }
-                        .padding(top = 8.dp)
-                )
             }
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                onClick = { navController.navigate(route = "productList")  },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Seguir comprando")
-            }
-            Button(
-                onClick = { navController.navigate(route="orderConfirmation") },
-                modifier = Modifier.fillMaxWidth(),
-                enabled = items.isNotEmpty()
-            ) {
-                Text("Confirmar compra")
-            }
-
         }
     }
 }

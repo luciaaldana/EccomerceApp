@@ -66,23 +66,6 @@ fun ProductListScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
-            onClick = { navController.navigate("cart") },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Ir al carrito")
-        }
-        Button(
-            onClick = {
-                navController.navigate("profile")
-            },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Ver mi perfil")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
         // Grid escalonado
         @OptIn(ExperimentalFoundationApi::class)
 //        (LazyVerticalStaggeredGrid (
