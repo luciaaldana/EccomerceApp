@@ -15,8 +15,6 @@ La app permite simular una tienda online donde el usuario puede:
 
 Actualmente, el proyecto utiliza datos **mockeados**, sin conexión a una API real.
 
----
-
 ## 👤 ¿Qué puede hacer el usuario?
 
 - 🛒 Explorar productos por nombre o categoría.
@@ -25,8 +23,6 @@ Actualmente, el proyecto utiliza datos **mockeados**, sin conexión a una API re
 - 🕒 Ver historial de pedidos.
 - 👤 Gestionar su perfil e imagen.
 - 🔐 Registrarse o loguearse (simulación).
-
----
 
 ## 🧱 Tecnologías principales
 
@@ -39,8 +35,6 @@ Actualmente, el proyecto utiliza datos **mockeados**, sin conexión a una API re
 - Coil (para carga de imágenes)
 - WorkManager (simulado para tareas futuras)
 - Arquitectura modular (app, feature, domain, data, core)
-
----
 
 ## 🧪 Estructura
 
@@ -68,8 +62,6 @@ ecommerce-app/
 │   └── utils/
 ```
 
----
-
 ## 🚀 Cómo clonar y ejecutar la app
 
 ### 🔧 Requisitos previos
@@ -93,18 +85,12 @@ cd ecommerce-app
 3. Elegí un emulador o dispositivo físico.
 4. Ejecutá el proyecto (`Run > Run app` o Shift + F10).
 
----
-
 ## 📸 Capturas de pantalla
 
 > 🚧
-
----
 
 ## 🛠️ Estado
 
 ✅ Funcionalidad base completa (login simulado, productos, carrito, confirmación, historial).  
 🧪 Pendiente: conexión con API real, validaciones avanzadas, testing, styles.  
 📦 Datos actualmente simulados con repositorios fake.
-
----
