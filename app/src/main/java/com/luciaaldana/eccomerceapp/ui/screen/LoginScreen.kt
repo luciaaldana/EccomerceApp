@@ -8,6 +8,7 @@ import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+//import com.luciaaldana.eccomerceapp.BuildConfig
 import com.luciaaldana.eccomerceapp.viewmodel.LoginViewModel
 
 @Composable
@@ -15,6 +16,8 @@ fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
+//val key = BuildConfig.API_KEY
+//    println("key --- ${key}")
     if (viewModel.isLoggedIn) {
         LaunchedEffect(Unit) {
             navController.navigate("productList") {
