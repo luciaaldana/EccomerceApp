@@ -61,7 +61,3 @@ A continuación se detallan las tecnologías utilizadas y su justificación.
 
 - **WorkManager**  
   > Planificado para tareas automáticas (actualización de datos, sincronización futura).
-
-## ✅ Conclusión
-
-Esta selección de herramientas permite mantener una arquitectura limpia, escalable y fácil de mantener, ideal para proyectos reales o educativos.
