@@ -4,8 +4,6 @@ Este proyecto fue desarrollado siguiendo la arquitectura **MVVM** y emplea una e
 
 A continuación se detallan las tecnologías utilizadas y su justificación.
 
----
-
 ## 🔤 Lenguaje y entorno
 
 - **Kotlin**  
@@ -16,8 +14,6 @@ A continuación se detallan las tecnologías utilizadas y su justificación.
 
 - **Java 17**  
   > Requerido para compatibilidad con las herramientas modernas de Android.
-
----
 
 ## 🎨 UI y navegación
 
@@ -30,8 +26,6 @@ A continuación se detallan las tecnologías utilizadas y su justificación.
 - **Navigation Compose**  
   > Navegación declarativa y segura entre pantallas usando rutas.
 
----
-
 ## 🧠 Arquitectura y estado
 
 - **MVVM (Model - View - ViewModel)**  
@@ -43,42 +37,30 @@ A continuación se detallan las tecnologías utilizadas y su justificación.
 - **StateFlow**  
   > Flujo reactivo para emitir cambios desde el ViewModel a la UI de forma segura.
 
----
-
 ## 💉 Inyección de dependencias
 
 - **Hilt**  
   > Framework oficial de Google para DI en Android. Simplifica la provisión de dependencias y ViewModels.
-
----
 
 ## 💾 Persistencia local
 
 - **Room**  
   > ORM moderno para base de datos SQLite. Permite persistir órdenes y recuperar historial incluso sin conexión.
 
----
-
 ## 🌐 Red (simulado)
 
 - **Retrofit + Gson (planificado)**  
   > Se utilizará para integrar la API real en fases posteriores. Actualmente se simulan los datos.
-
----
 
 ## 🖼️ Imágenes
 
 - **Coil**  
   > Carga eficiente de imágenes desde URL en Compose.
 
----
-
 ## 🛠️ Otros
 
 - **WorkManager**  
   > Planificado para tareas automáticas (actualización de datos, sincronización futura).
-
----
 
 ## 🗂️ Modularización
 
@@ -90,9 +72,6 @@ El proyecto está dividido en módulos para separar responsabilidades:
 - `:data` → Fuentes de datos (fake por ahora).
 - `:core:model`, `:core:navigation`, `:core:utils` → Elementos reutilizables.
 
----
-
 ## ✅ Conclusión
 
 Esta selección de herramientas permite mantener una arquitectura limpia, escalable y fácil de mantener, ideal para proyectos reales o educativos.
-
