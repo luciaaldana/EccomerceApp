@@ -62,16 +62,6 @@ A continuación se detallan las tecnologías utilizadas y su justificación.
 - **WorkManager**  
   > Planificado para tareas automáticas (actualización de datos, sincronización futura).
 
-## 🗂️ Modularización
-
-El proyecto está dividido en módulos para separar responsabilidades:
-
-- `:app` → Lógica principal de navegación y temas.
-- `:feature:*` → Funcionalidades como login, carrito, productos.
-- `:domain` → Casos de uso e interfaces de negocio.
-- `:data` → Fuentes de datos (fake por ahora).
-- `:core:model`, `:core:navigation`, `:core:utils` → Elementos reutilizables.
-
 ## ✅ Conclusión
 
 Esta selección de herramientas permite mantener una arquitectura limpia, escalable y fácil de mantener, ideal para proyectos reales o educativos.
