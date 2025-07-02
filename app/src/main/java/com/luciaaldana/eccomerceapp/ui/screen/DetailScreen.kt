@@ -18,7 +18,7 @@ import com.luciaaldana.eccomerceapp.viewmodel.ProductsViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    productId: Int,
+    productId: String,
     navController: NavController,
     onAddToCart: () -> Unit,
     viewModel: ProductsViewModel = hiltViewModel()

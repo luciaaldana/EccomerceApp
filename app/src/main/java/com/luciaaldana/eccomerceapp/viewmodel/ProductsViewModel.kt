@@ -38,7 +38,7 @@ class ProductsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _allProducts.value = productRepository.getAllProducts()
+            _allProducts.value = productRepository.getProducts()
         }
     }
 

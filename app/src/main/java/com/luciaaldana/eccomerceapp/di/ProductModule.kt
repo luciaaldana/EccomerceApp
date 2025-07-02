@@ -1,7 +1,9 @@
 package com.luciaaldana.eccomerceapp.di
 
+import com.luciaaldana.eccomerceapp.data.network.ProductApi
 import com.luciaaldana.eccomerceapp.model.repository.ProductRepository
 import com.luciaaldana.eccomerceapp.model.repository.ProductRepositoryImpl
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,9 +12,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object ProductModule {
+abstract class ProductModule {
 
-    @Provides
+    @Binds
     @Singleton
-    fun providesProductRepository(): ProductRepository = ProductRepositoryImpl()
+    abstract fun bindProductRepository(
+        impl: ProductRepositoryImpl
+    ): ProductRepository
 }

@@ -5,8 +5,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.luciaaldana.eccomerceapp.ui.screen.*
 import com.luciaaldana.eccomerceapp.viewmodel.CartViewModel
 import com.luciaaldana.eccomerceapp.viewmodel.ProductsViewModel
@@ -21,19 +23,22 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
         composable( route = "profile") { ProfileScreen(navController) }
         composable( route = "orderHistory") { OrderHistoryScreen(navController) }
         composable( route = "orderConfirmation") { OrderConfirmationScreen(navController) }
-        composable("detail/{productId}") { backStackEntry ->
-            val productId = backStackEntry.arguments?.getString("productId")?.toIntOrNull()
+        composable(
+            route = "detail/{productId}",
+            arguments = listOf(navArgument("productId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId")
             if (productId != null) {
                 val cartViewModel: CartViewModel = hiltViewModel()
                 val viewModel: ProductsViewModel = hiltViewModel()
                 val allProducts = viewModel.allProducts.collectAsState().value
                 val product = allProducts.find { it.id == productId }
 
-                if (product != null) {
+                product?.let {
                     DetailScreen(
                         productId = productId,
                         navController = navController,
-                        onAddToCart = { cartViewModel.add(product) }
+                        onAddToCart = { cartViewModel.add(it) }
                     )
                 }
             }

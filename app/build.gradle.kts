@@ -31,6 +31,7 @@ android {
 
         // ✅ Agregar propiedades a BuildConfig
         buildConfigField("String", "API_KEY", "\"${localProperties["API_KEY"]}\"")
+        buildConfigField("String", "RENDER_BASE_URL", "\"${localProperties["RENDER_BASE_URL"]}\"")
     }
 
     buildTypes {
@@ -73,6 +74,12 @@ dependencies {
     implementation(libs.hilt.android.gradle.plugin)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation("androidx.compose.foundation:foundation")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.moshi)
+    implementation(libs.moshi.kotlin)
+    kapt(libs.moshi.codegen)
+    implementation(libs.okhttp.logging)
+    implementation(libs.moshi)
     kapt(libs.dagger.android.processor)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
