@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.kover)
     kotlin("kapt")
 }
 
@@ -80,6 +81,12 @@ dependencies {
     kapt(libs.moshi.codegen)
     implementation(libs.okhttp.logging)
     implementation(libs.moshi)
+    testImplementation(libs.bundles.test.core)
+    testImplementation(libs.mockk)
+    testImplementation(libs.hilt.android.testing)
+    testImplementation(libs.coroutines.test)
+    testImplementation(libs.mockito.kotlin)
+    kaptTest(libs.hilt.compiler)
     kapt(libs.dagger.android.processor)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)

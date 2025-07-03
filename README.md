@@ -94,3 +94,8 @@ cd ecommerce-app
 ✅ Funcionalidad base completa (login simulado, productos, carrito, confirmación, historial).  
 🧪 Pendiente: conexión con API real, validaciones avanzadas, testing, styles.  
 📦 Datos actualmente simulados con repositorios fake.
+
+
+Documentación:
+- [Tecnologias](/docs/tecnologias.md)
+- [Test](/docs/testing.md)
