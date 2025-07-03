@@ -1,6 +1,8 @@
 # 🛍️ EcommerceApp
 
-Esta es una aplicación de e-commerce desarrollada con **Kotlin**, **Jetpack Compose** y una arquitectura modular basada en **MVVM**.
+> **Jetpack Compose · Modular Clean Architecture · Kotlin 2.0**
+>
+> Aplicación de e-commerce con Catálogo, carrito y perfil de usuario con navegación bottom‑bar, persistencia local y pruebas unitarias con cobertura Kover.
 
 ## 📱 Descripción
 
