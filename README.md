@@ -208,10 +208,8 @@ open app/build/reports/kover/debug/html/index.html
 
 - [📖 Tecnologías Utilizadas](docs/tecnologias.md)
 - [🔗 Dependencias Hilt](docs/dependencias_hilt.md)
-- [⚙️ Configuración Claude](CLAUDE.md)
 
 ### 🧪 Testing
 
 - [🧪 Guía de Testing](docs/test/testing.md) - Configuración general y comandos
 - [📋 CartViewModel Testing](docs/test/cartviewmodel-testing.md) - Guía detallada de testing de ViewModels
-
