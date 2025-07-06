@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dagger.hilt.android)
     alias(libs.plugins.kover)
+    alias(libs.plugins.ksp)
     kotlin("kapt")
 }
 
@@ -78,7 +79,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
     implementation(libs.moshi.kotlin)
-    kapt(libs.moshi.codegen)
+    ksp(libs.moshi.codegen)
     implementation(libs.okhttp.logging)
     implementation(libs.moshi)
     testImplementation(libs.bundles.test.core)
