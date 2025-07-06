@@ -1,8 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-release-42:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-release-47:/values-en-rXC/values-en-rXC.xml",
             "map": [
+                {
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,243",
+                        "endColumns": "187,186",
+                        "endOffsets": "238,425"
+                    },
+                    "to": {
+                        "startLines": "85,86",
+                        "startColumns": "4,4",
+                        "startOffsets": "17016,17204",
+                        "endColumns": "187,186",
+                        "endOffsets": "17199,17386"
+                    }
+                },
                 {
                     "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/18df64afe1be4972351246314ee2d6e3/transformed/core-1.16.0/res/values-en-rXC/values-en-rXC.xml",
                     "from": {
@@ -21,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/595280e227a60f59ed98d5405a31e320/transformed/ui-release/res/values-en-rXC/values-en-rXC.xml",
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bf6c8da7e3b51683fd2ba4d13712e69b/transformed/ui-release/res/values-en-rXC/values-en-rXC.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -52,30 +69,30 @@
                         "startOffsets": "2872,3092,3309,3523,3740,3941,4139,4349,4588,4806,5045,5231,5431,5625,5825,6046,6274,6481,6711,6937,7166,7427,7649,7868,8089,8314,8509,8709,8927,9153,9352,9555,9760,9990,10231,10440,10641,10820,11018,11214,11421,11611,11801,12006,12188,12374,12578,12782,12984,13186,13376,13585,13789,13996,14215,14398,14599",
                         "endColumns": "219,216,213,216,200,197,209,238,217,238,185,199,193,199,220,227,206,229,225,228,260,221,218,220,224,194,199,217,225,198,202,204,229,240,208,200,178,197,195,206,189,189,204,181,185,203,203,201,201,189,208,203,206,218,182,200,197",
                         "endOffsets": "3087,3304,3518,3735,3936,4134,4344,4583,4801,5040,5226,5426,5620,5820,6041,6269,6476,6706,6932,7161,7422,7644,7863,8084,8309,8504,8704,8922,9148,9347,9550,9755,9985,10226,10435,10636,10815,11013,11209,11416,11606,11796,12001,12183,12369,12573,12777,12979,13181,13371,13580,13784,13991,14210,14393,14594,14792"
-                    }
-                },
-                {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/709bad884700ee6f48da48ac2be2a925/transformed/foundation-release/res/values-en-rXC/values-en-rXC.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,243",
-                        "endColumns": "187,186",
-                        "endOffsets": "238,425"
-                    },
-                    "to": {
-                        "startLines": "85,86",
-                        "startColumns": "4,4",
-                        "startOffsets": "17016,17204",
-                        "endColumns": "187,186",
-                        "endOffsets": "17199,17386"
                     }
                 }
             ]
         },
         {
-            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-mergeReleaseResources-40:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-mergeReleaseResources-45:/values-en-rXC/values-en-rXC.xml",
             "map": [
+                {
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,243",
+                        "endColumns": "187,186",
+                        "endOffsets": "238,425"
+                    },
+                    "to": {
+                        "startLines": "85,86",
+                        "startColumns": "4,4",
+                        "startOffsets": "17016,17204",
+                        "endColumns": "187,186",
+                        "endOffsets": "17199,17386"
+                    }
+                },
                 {
                     "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/18df64afe1be4972351246314ee2d6e3/transformed/core-1.16.0/res/values-en-rXC/values-en-rXC.xml",
                     "from": {
@@ -94,7 +111,7 @@
                     }
                 },
                 {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/595280e227a60f59ed98d5405a31e320/transformed/ui-release/res/values-en-rXC/values-en-rXC.xml",
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bf6c8da7e3b51683fd2ba4d13712e69b/transformed/ui-release/res/values-en-rXC/values-en-rXC.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -125,23 +142,6 @@
                         "startOffsets": "2872,3092,3309,3523,3740,3941,4139,4349,4588,4806,5045,5231,5431,5625,5825,6046,6274,6481,6711,6937,7166,7427,7649,7868,8089,8314,8509,8709,8927,9153,9352,9555,9760,9990,10231,10440,10641,10820,11018,11214,11421,11611,11801,12006,12188,12374,12578,12782,12984,13186,13376,13585,13789,13996,14215,14398,14599",
                         "endColumns": "219,216,213,216,200,197,209,238,217,238,185,199,193,199,220,227,206,229,225,228,260,221,218,220,224,194,199,217,225,198,202,204,229,240,208,200,178,197,195,206,189,189,204,181,185,203,203,201,201,189,208,203,206,218,182,200,197",
                         "endOffsets": "3087,3304,3518,3735,3936,4134,4344,4583,4801,5040,5226,5426,5620,5820,6041,6269,6476,6706,6932,7161,7422,7644,7863,8084,8309,8504,8704,8922,9148,9347,9550,9755,9985,10226,10435,10636,10815,11013,11209,11416,11606,11796,12001,12183,12369,12573,12777,12979,13181,13371,13580,13784,13991,14210,14393,14594,14792"
-                    }
-                },
-                {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/709bad884700ee6f48da48ac2be2a925/transformed/foundation-release/res/values-en-rXC/values-en-rXC.xml",
-                    "from": {
-                        "startLines": "2,3",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,243",
-                        "endColumns": "187,186",
-                        "endOffsets": "238,425"
-                    },
-                    "to": {
-                        "startLines": "85,86",
-                        "startColumns": "4,4",
-                        "startOffsets": "17016,17204",
-                        "endColumns": "187,186",
-                        "endOffsets": "17199,17386"
                     }
                 }
             ]

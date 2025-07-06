@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-release-42:/values-th/values-th.xml",
+            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-release-47:/values-th/values-th.xml",
             "map": [
                 {
                     "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/18df64afe1be4972351246314ee2d6e3/transformed/core-1.16.0/res/values-th/values-th.xml",
@@ -38,24 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/595280e227a60f59ed98d5405a31e320/transformed/ui-release/res/values-th/values-th.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,191,268,365,466,554,639,724,810,893,979,1068,1141,1216,1292,1368,1446,1513",
-                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
-                        "endOffsets": "186,263,360,461,549,634,719,805,888,974,1063,1136,1211,1287,1363,1441,1508,1631"
-                    },
-                    "to": {
-                        "startLines": "9,10,11,12,13,14,15,73,74,75,76,77,78,79,80,82,83,84",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "820,906,983,1080,1181,1269,1354,7559,7645,7728,7814,7903,7976,8051,8127,8304,8382,8449",
-                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
-                        "endOffsets": "901,978,1075,1176,1264,1349,1434,7640,7723,7809,7898,7971,8046,8122,8198,8377,8444,8567"
-                    }
-                },
-                {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/709bad884700ee6f48da48ac2be2a925/transformed/foundation-release/res/values-th/values-th.xml",
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release/res/values-th/values-th.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -69,12 +52,29 @@
                         "startOffsets": "8572,8669",
                         "endColumns": "96,94",
                         "endOffsets": "8664,8759"
+                    }
+                },
+                {
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bf6c8da7e3b51683fd2ba4d13712e69b/transformed/ui-release/res/values-th/values-th.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,191,268,365,466,554,639,724,810,893,979,1068,1141,1216,1292,1368,1446,1513",
+                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
+                        "endOffsets": "186,263,360,461,549,634,719,805,888,974,1063,1136,1211,1287,1363,1441,1508,1631"
+                    },
+                    "to": {
+                        "startLines": "9,10,11,12,13,14,15,73,74,75,76,77,78,79,80,82,83,84",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "820,906,983,1080,1181,1269,1354,7559,7645,7728,7814,7903,7976,8051,8127,8304,8382,8449",
+                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
+                        "endOffsets": "901,978,1075,1176,1264,1349,1434,7640,7723,7809,7898,7971,8046,8122,8198,8377,8444,8567"
                     }
                 }
             ]
         },
         {
-            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-mergeReleaseResources-40:/values-th/values-th.xml",
+            "outputFile": "com.luciaaldana.eccomerceapp.core.ui-mergeReleaseResources-45:/values-th/values-th.xml",
             "map": [
                 {
                     "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/18df64afe1be4972351246314ee2d6e3/transformed/core-1.16.0/res/values-th/values-th.xml",
@@ -111,24 +111,7 @@
                     }
                 },
                 {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/595280e227a60f59ed98d5405a31e320/transformed/ui-release/res/values-th/values-th.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,191,268,365,466,554,639,724,810,893,979,1068,1141,1216,1292,1368,1446,1513",
-                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
-                        "endOffsets": "186,263,360,461,549,634,719,805,888,974,1063,1136,1211,1287,1363,1441,1508,1631"
-                    },
-                    "to": {
-                        "startLines": "9,10,11,12,13,14,15,73,74,75,76,77,78,79,80,82,83,84",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "820,906,983,1080,1181,1269,1354,7559,7645,7728,7814,7903,7976,8051,8127,8304,8382,8449",
-                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
-                        "endOffsets": "901,978,1075,1176,1264,1349,1434,7640,7723,7809,7898,7971,8046,8122,8198,8377,8444,8567"
-                    }
-                },
-                {
-                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/709bad884700ee6f48da48ac2be2a925/transformed/foundation-release/res/values-th/values-th.xml",
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release/res/values-th/values-th.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -142,6 +125,23 @@
                         "startOffsets": "8572,8669",
                         "endColumns": "96,94",
                         "endOffsets": "8664,8759"
+                    }
+                },
+                {
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bf6c8da7e3b51683fd2ba4d13712e69b/transformed/ui-release/res/values-th/values-th.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,191,268,365,466,554,639,724,810,893,979,1068,1141,1216,1292,1368,1446,1513",
+                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
+                        "endOffsets": "186,263,360,461,549,634,719,805,888,974,1063,1136,1211,1287,1363,1441,1508,1631"
+                    },
+                    "to": {
+                        "startLines": "9,10,11,12,13,14,15,73,74,75,76,77,78,79,80,82,83,84",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "820,906,983,1080,1181,1269,1354,7559,7645,7728,7814,7903,7976,8051,8127,8304,8382,8449",
+                        "endColumns": "85,76,96,100,87,84,84,85,82,85,88,72,74,75,75,77,66,122",
+                        "endOffsets": "901,978,1075,1176,1264,1349,1434,7640,7723,7809,7898,7971,8046,8122,8198,8377,8444,8567"
                     }
                 }
             ]

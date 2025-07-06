@@ -1,9 +1,9 @@
 <libraries>
   <library
       name=":@@:core:ui::debug"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/cee9a3eac32126d8fc10f5446a4047a1/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/cee9a3eac32126d8fc10f5446a4047a1/transformed/out/jars/libs/R.jar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/defd2b2294d9680bf344359df52fbf36/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/defd2b2294d9680bf344359df52fbf36/transformed/out/jars/libs/R.jar"
       resolved="EccomerceApp.core:ui:unspecified"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/cee9a3eac32126d8fc10f5446a4047a1/transformed/out"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/defd2b2294d9680bf344359df52fbf36/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -26,10 +26,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-util-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bb81c1817f33f49912fbddecd669ff22/transformed/ui-util-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-util-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bb81c1817f33f49912fbddecd669ff22/transformed/ui-util-release"
+      name="androidx.compose.ui:ui-util-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/24226e4edb9c3a7c53aac13d0343961a/transformed/ui-util-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-util-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/24226e4edb9c3a7c53aac13d0343961a/transformed/ui-util-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -39,10 +39,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-unit-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e5789cad7a9dfcdbb60135b41e9734c1/transformed/ui-unit-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-unit-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e5789cad7a9dfcdbb60135b41e9734c1/transformed/ui-unit-release"
+      name="androidx.compose.ui:ui-unit-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/121a29bf530ba85e514f37a7a420c986/transformed/ui-unit-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-unit-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/121a29bf530ba85e514f37a7a420c986/transformed/ui-unit-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -52,10 +52,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-text-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/efd707f5cc7093b88c088cfe87fcadd0/transformed/ui-text-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-text-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/efd707f5cc7093b88c088cfe87fcadd0/transformed/ui-text-release"
+      name="androidx.compose.ui:ui-text-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/1070a62bf83bb7dc98da3088dc44c5e5/transformed/ui-text-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-text-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/1070a62bf83bb7dc98da3088dc44c5e5/transformed/ui-text-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -65,10 +65,49 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.foundation:foundation-layout-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/0ab5e0ff4a52fc6a8a107fbb3d42cfc7/transformed/foundation-layout-release/jars/classes.jar"
-      resolved="androidx.compose.foundation:foundation-layout-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/0ab5e0ff4a52fc6a8a107fbb3d42cfc7/transformed/foundation-layout-release"
+      name="androidx.navigation:navigation-runtime-android:2.9.0@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e648d8d7943c38902a1e4bb8d5fc70cc/transformed/navigation-runtime-release/jars/classes.jar"
+      resolved="androidx.navigation:navigation-runtime-android:2.9.0"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e648d8d7943c38902a1e4bb8d5fc70cc/transformed/navigation-runtime-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.navigation:navigation-common-android:2.9.0@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bfa2c89a03e8d2332ab4cac3c82ccde4/transformed/navigation-common-release/jars/classes.jar"
+      resolved="androidx.navigation:navigation-common-android:2.9.0"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bfa2c89a03e8d2332ab4cac3c82ccde4/transformed/navigation-common-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.navigation:navigation-compose-android:2.9.0@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/61641fb569a07df9faf0643a7cc4187e/transformed/navigation-compose-release/jars/classes.jar"
+      resolved="androidx.navigation:navigation-compose-android:2.9.0"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/61641fb569a07df9faf0643a7cc4187e/transformed/navigation-compose-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.compose.foundation:foundation-layout-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/250a02dcc2e1bc6f6e537254ff7d18da/transformed/foundation-layout-release/jars/classes.jar"
+      resolved="androidx.compose.foundation:foundation-layout-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/250a02dcc2e1bc6f6e537254ff7d18da/transformed/foundation-layout-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -91,10 +130,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.foundation:foundation-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/709bad884700ee6f48da48ac2be2a925/transformed/foundation-release/jars/classes.jar"
-      resolved="androidx.compose.foundation:foundation-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/709bad884700ee6f48da48ac2be2a925/transformed/foundation-release"
+      name="androidx.compose.foundation:foundation-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release/jars/classes.jar"
+      resolved="androidx.compose.foundation:foundation-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -104,10 +143,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.animation:animation-core-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/2299fbd443fed904478467301de79e4d/transformed/animation-core-release/jars/classes.jar"
-      resolved="androidx.compose.animation:animation-core-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/2299fbd443fed904478467301de79e4d/transformed/animation-core-release"
+      name="androidx.compose.animation:animation-core-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/52eec0fc271a2e01cb71f5f09505aecb/transformed/animation-core-release/jars/classes.jar"
+      resolved="androidx.compose.animation:animation-core-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/52eec0fc271a2e01cb71f5f09505aecb/transformed/animation-core-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -117,10 +156,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.animation:animation-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/74ac5332dab98cd50885644911b7cbfc/transformed/animation-release/jars/classes.jar"
-      resolved="androidx.compose.animation:animation-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/74ac5332dab98cd50885644911b7cbfc/transformed/animation-release"
+      name="androidx.compose.animation:animation-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fd971699647f27381ba80b9a803823a7/transformed/animation-release/jars/classes.jar"
+      resolved="androidx.compose.animation:animation-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fd971699647f27381ba80b9a803823a7/transformed/animation-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -130,10 +169,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-geometry-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e48b7b1efd129a7ab21edc78a134616e/transformed/ui-geometry-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-geometry-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e48b7b1efd129a7ab21edc78a134616e/transformed/ui-geometry-release"
+      name="androidx.compose.ui:ui-geometry-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fa9dbff931b61c5e2b4e83e250ca8dd7/transformed/ui-geometry-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-geometry-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fa9dbff931b61c5e2b4e83e250ca8dd7/transformed/ui-geometry-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -143,10 +182,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-tooling-data-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a0b6128d3fa984155edc915e601e3c39/transformed/ui-tooling-data-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-tooling-data-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a0b6128d3fa984155edc915e601e3c39/transformed/ui-tooling-data-release"
+      name="androidx.compose.ui:ui-tooling-data-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14d203610c23ff9a3dce2f885ec20c1b/transformed/ui-tooling-data-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-tooling-data-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14d203610c23ff9a3dce2f885ec20c1b/transformed/ui-tooling-data-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -156,10 +195,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-tooling-preview-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fc69f1fa54127f4324fdc05734a18632/transformed/ui-tooling-preview-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-tooling-preview-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fc69f1fa54127f4324fdc05734a18632/transformed/ui-tooling-preview-release"
+      name="androidx.compose.ui:ui-tooling-preview-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a92a1211a8950e6841cfd3261da75e37/transformed/ui-tooling-preview-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-tooling-preview-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a92a1211a8950e6841cfd3261da75e37/transformed/ui-tooling-preview-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -169,10 +208,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-graphics-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fcb9e133dc469dab7a1082c15aba6287/transformed/ui-graphics-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-graphics-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/fcb9e133dc469dab7a1082c15aba6287/transformed/ui-graphics-release"
+      name="androidx.compose.ui:ui-graphics-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/673869e90c335c323ec82f70c04576a8/transformed/ui-graphics-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-graphics-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/673869e90c335c323ec82f70c04576a8/transformed/ui-graphics-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -195,75 +234,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.ui:ui-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/595280e227a60f59ed98d5405a31e320/transformed/ui-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/595280e227a60f59ed98d5405a31e320/transformed/ui-release"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="androidx.compose.ui:ui-tooling-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/d337f576295d40e69990a39cb0cd1f8f/transformed/ui-tooling-release/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-tooling-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/d337f576295d40e69990a39cb0cd1f8f/transformed/ui-tooling-release"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="androidx.compose.ui:ui-test-manifest:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/9e54743295d01c2a67f914840c7ddd62/transformed/ui-test-manifest-1.7.0/jars/classes.jar"
-      resolved="androidx.compose.ui:ui-test-manifest:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/9e54743295d01c2a67f914840c7ddd62/transformed/ui-test-manifest-1.7.0"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
       name="androidx.activity:activity-ktx:1.10.1@aar"
       jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/1639fdce166df487d2b14ff5f70d7606/transformed/activity-ktx-1.10.1/jars/classes.jar"
       resolved="androidx.activity:activity-ktx:1.10.1"
       folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/1639fdce166df487d2b14ff5f70d7606/transformed/activity-ktx-1.10.1"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="androidx.activity:activity:1.10.1@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/4b2e65f05bf25d819d3cee4f8fc2c8ed/transformed/activity-1.10.1/jars/classes.jar"
-      resolved="androidx.activity:activity:1.10.1"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/4b2e65f05bf25d819d3cee4f8fc2c8ed/transformed/activity-1.10.1"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
-      name="androidx.activity:activity-compose:1.10.1@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e2ce912311bbe18044b6f2525781d756/transformed/activity-compose-1.10.1/jars/classes.jar"
-      resolved="androidx.activity:activity-compose:1.10.1"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e2ce912311bbe18044b6f2525781d756/transformed/activity-compose-1.10.1"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -303,6 +277,19 @@
       jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/71062f8ef0c166bc7d3ed1762177a313/transformed/lifecycle-runtime-compose-release/jars/classes.jar"
       resolved="androidx.lifecycle:lifecycle-runtime-compose-android:2.9.1"
       folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/71062f8ef0c166bc7d3ed1762177a313/transformed/lifecycle-runtime-compose-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.1@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/c5ea91466fd337297fcb0387862c336b/transformed/lifecycle-viewmodel-savedstate-release/jars/classes.jar"
+      resolved="androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.1"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/c5ea91466fd337297fcb0387862c336b/transformed/lifecycle-viewmodel-savedstate-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -394,10 +381,75 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.1@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/c5ea91466fd337297fcb0387862c336b/transformed/lifecycle-viewmodel-savedstate-release/jars/classes.jar"
-      resolved="androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.1"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/c5ea91466fd337297fcb0387862c336b/transformed/lifecycle-viewmodel-savedstate-release"
+      name="androidx.lifecycle:lifecycle-viewmodel-compose-android:2.9.1@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/2e39bdf69c0c387747ffea2c6b5098b2/transformed/lifecycle-viewmodel-compose-release/jars/classes.jar"
+      resolved="androidx.lifecycle:lifecycle-viewmodel-compose-android:2.9.1"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/2e39bdf69c0c387747ffea2c6b5098b2/transformed/lifecycle-viewmodel-compose-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.compose.ui:ui-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bf6c8da7e3b51683fd2ba4d13712e69b/transformed/ui-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/bf6c8da7e3b51683fd2ba4d13712e69b/transformed/ui-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.compose.ui:ui-tooling-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a351b107d306b341b31b22de96eb3f7c/transformed/ui-tooling-release/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-tooling-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a351b107d306b341b31b22de96eb3f7c/transformed/ui-tooling-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.compose.ui:ui-test-manifest:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/015455e6f6cb3bbf4030696be3f87f31/transformed/ui-test-manifest-1.7.8/jars/classes.jar"
+      resolved="androidx.compose.ui:ui-test-manifest:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/015455e6f6cb3bbf4030696be3f87f31/transformed/ui-test-manifest-1.7.8"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.activity:activity:1.10.1@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/4b2e65f05bf25d819d3cee4f8fc2c8ed/transformed/activity-1.10.1/jars/classes.jar"
+      resolved="androidx.activity:activity:1.10.1"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/4b2e65f05bf25d819d3cee4f8fc2c8ed/transformed/activity-1.10.1"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.activity:activity-compose:1.10.1@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e2ce912311bbe18044b6f2525781d756/transformed/activity-compose-1.10.1/jars/classes.jar"
+      resolved="androidx.activity:activity-compose:1.10.1"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e2ce912311bbe18044b6f2525781d756/transformed/activity-compose-1.10.1"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -446,10 +498,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.runtime:runtime-android:1.7.1@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/d49310e8f46dcdce38a58b2f81326bd8/transformed/runtime-release/jars/classes.jar"
-      resolved="androidx.compose.runtime:runtime-android:1.7.1"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/d49310e8f46dcdce38a58b2f81326bd8/transformed/runtime-release"
+      name="androidx.compose.runtime:runtime-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8f19feb9eeb5c32a922a51a5d7a979cd/transformed/runtime-release/jars/classes.jar"
+      resolved="androidx.compose.runtime:runtime-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8f19feb9eeb5c32a922a51a5d7a979cd/transformed/runtime-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -459,10 +511,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.compose.runtime:runtime-saveable-android:1.7.1@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/98df3f5a0d99172174679cefe092ea1b/transformed/runtime-saveable-release/jars/classes.jar"
-      resolved="androidx.compose.runtime:runtime-saveable-android:1.7.1"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/98df3f5a0d99172174679cefe092ea1b/transformed/runtime-saveable-release"
+      name="androidx.compose.runtime:runtime-saveable-android:1.7.8@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/6422e31a10329bbaf396af19fe04c6cb/transformed/runtime-saveable-release/jars/classes.jar"
+      resolved="androidx.compose.runtime:runtime-saveable-android:1.7.8"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/6422e31a10329bbaf396af19fe04c6cb/transformed/runtime-saveable-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -476,9 +528,9 @@
       jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.2.0/5e1b8b81dfd5f52c56a8d53b18ca759c19a301f3/core-common-2.2.0.jar"
       resolved="androidx.arch.core:core-common:2.2.0"/>
   <library
-      name="androidx.collection:collection-jvm:1.4.2@jar"
-      jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/androidx.collection/collection-jvm/1.4.2/bc60b5568a66d765a9fe8e266fd0c6c727e0b50b/collection-jvm-1.4.2.jar"
-      resolved="androidx.collection:collection-jvm:1.4.2"/>
+      name="androidx.collection:collection-jvm:1.4.5@jar"
+      jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/androidx.collection/collection-jvm/1.4.5/da13a7e557c430276b8cb490420effebc1398c0d/collection-jvm-1.4.5.jar"
+      resolved="androidx.collection:collection-jvm:1.4.5"/>
   <library
       name="androidx.annotation:annotation-jvm:1.9.1@jar"
       jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation-jvm/1.9.1/b17951747e38bf3986a24431b9ba0d039958aa5f/annotation-jvm-1.9.1.jar"
@@ -529,10 +581,10 @@
       jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/org.jspecify/jspecify/1.0.0/7425a601c1c7ec76645a78d22b8c6a627edee507/jspecify-1.0.0.jar"
       resolved="org.jspecify:jspecify:1.0.0"/>
   <library
-      name="androidx.compose.material:material-android:1.7.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/9ae5f1f877c357a4df2096c27be711c0/transformed/material-release/jars/classes.jar"
-      resolved="androidx.compose.material:material-android:1.7.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/9ae5f1f877c357a4df2096c27be711c0/transformed/material-release"
+      name="androidx.autofill:autofill:1.0.0@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/234ef3cee10807f9f15488b223ac0a9c/transformed/autofill-1.0.0/jars/classes.jar"
+      resolved="androidx.autofill:autofill:1.0.0"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/234ef3cee10807f9f15488b223ac0a9c/transformed/autofill-1.0.0"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -542,10 +594,10 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.autofill:autofill:1.0.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/234ef3cee10807f9f15488b223ac0a9c/transformed/autofill-1.0.0/jars/classes.jar"
-      resolved="androidx.autofill:autofill:1.0.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/234ef3cee10807f9f15488b223ac0a9c/transformed/autofill-1.0.0"
+      name="androidx.compose.material:material-android:1.7.0@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/9ae5f1f877c357a4df2096c27be711c0/transformed/material-release/jars/classes.jar"
+      resolved="androidx.compose.material:material-android:1.7.0"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/9ae5f1f877c357a4df2096c27be711c0/transformed/material-release"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -581,19 +633,6 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
-      name="androidx.customview:customview-poolingcontainer:1.0.0@aar"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/0e61d1b9c0749e56e06f4e08813ed8d2/transformed/customview-poolingcontainer-1.0.0/jars/classes.jar"
-      resolved="androidx.customview:customview-poolingcontainer:1.0.0"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/0e61d1b9c0749e56e06f4e08813ed8d2/transformed/customview-poolingcontainer-1.0.0"
-      manifest="AndroidManifest.xml"
-      resFolder="res"
-      assetsFolder="assets"
-      lintJar="lint.jar"
-      publicResources="public.txt"
-      symbolFile="R.txt"
-      externalAnnotations="annotations.zip"
-      proguardRules="proguard.txt"/>
-  <library
       name="androidx.lifecycle:lifecycle-process:2.9.1@aar"
       jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a4a501ba18c2b271de2a4dc5e66d2d1e/transformed/lifecycle-process-2.9.1/jars/classes.jar"
       resolved="androidx.lifecycle:lifecycle-process:2.9.1"
@@ -611,9 +650,35 @@
       jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common-java8/2.9.1/86a8e6b9d0ba0c964fdc7223a38b6ce74bcb24dd/lifecycle-common-java8-2.9.1.jar"
       resolved="androidx.lifecycle:lifecycle-common-java8:2.9.1"/>
   <library
-      name="androidx.collection:collection-ktx:1.4.2@jar"
-      jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/androidx.collection/collection-ktx/1.4.2/2ad14aed781c4a73ed4dbb421966d408a0a06686/collection-ktx-1.4.2.jar"
-      resolved="androidx.collection:collection-ktx:1.4.2"/>
+      name="androidx.savedstate:savedstate-compose-android:1.3.0@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/89bb33305b6dbd1481cecdb68de3c26d/transformed/savedstate-compose-release/jars/classes.jar"
+      resolved="androidx.savedstate:savedstate-compose-android:1.3.0"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/89bb33305b6dbd1481cecdb68de3c26d/transformed/savedstate-compose-release"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.customview:customview-poolingcontainer:1.0.0@aar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/0e61d1b9c0749e56e06f4e08813ed8d2/transformed/customview-poolingcontainer-1.0.0/jars/classes.jar"
+      resolved="androidx.customview:customview-poolingcontainer:1.0.0"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/0e61d1b9c0749e56e06f4e08813ed8d2/transformed/customview-poolingcontainer-1.0.0"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="androidx.collection:collection-ktx:1.4.5@jar"
+      jars="/Users/luciaaldana/.gradle/caches/modules-2/files-2.1/androidx.collection/collection-ktx/1.4.5/2ad14aed781c4a73ed4dbb421966d408a0a06686/collection-ktx-1.4.5.jar"
+      resolved="androidx.collection:collection-ktx:1.4.5"/>
   <library
       name="androidx.interpolator:interpolator:1.0.0@aar"
       jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/5bce13837f97dee23a629649353692da/transformed/interpolator-1.0.0/jars/classes.jar"

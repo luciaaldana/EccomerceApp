@@ -1,22 +1,22 @@
 [
     {
-        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-42:/layout/notification_template_part_chronometer.xml",
-        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-3:/layout/notification_template_part_chronometer.xml"
+        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-47:/layout/custom_dialog.xml",
+        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-5:/layout/custom_dialog.xml"
     },
     {
-        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-42:/layout/custom_dialog.xml",
-        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-3:/layout/custom_dialog.xml"
+        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-47:/layout/ime_secondary_split_test_activity.xml",
+        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-5:/layout/ime_secondary_split_test_activity.xml"
     },
     {
-        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-42:/layout/ime_secondary_split_test_activity.xml",
-        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-3:/layout/ime_secondary_split_test_activity.xml"
+        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-47:/layout/notification_template_part_chronometer.xml",
+        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-5:/layout/notification_template_part_chronometer.xml"
     },
     {
-        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-42:/layout/notification_template_part_time.xml",
-        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-3:/layout/notification_template_part_time.xml"
+        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-47:/layout/ime_base_split_test_activity.xml",
+        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-5:/layout/ime_base_split_test_activity.xml"
     },
     {
-        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-42:/layout/ime_base_split_test_activity.xml",
-        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-3:/layout/ime_base_split_test_activity.xml"
+        "merged": "com.luciaaldana.eccomerceapp.core.ui-release-47:/layout/notification_template_part_time.xml",
+        "source": "com.luciaaldana.eccomerceapp.core.ui-core-1.16.0-5:/layout/notification_template_part_time.xml"
     }
 ]
