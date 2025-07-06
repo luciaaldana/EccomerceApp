@@ -1,0 +1,6 @@
+[
+    {
+        "merged": "com.luciaaldana.eccomerceapp.feature.register-release-56:/drawable-v21/notification_action_background.xml",
+        "source": "com.luciaaldana.eccomerceapp.feature.register-core-1.16.0-5:/drawable-v21/notification_action_background.xml"
+    }
+]
