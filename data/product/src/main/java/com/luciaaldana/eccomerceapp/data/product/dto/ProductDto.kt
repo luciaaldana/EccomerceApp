@@ -10,8 +10,8 @@ data class ProductDto(
     val description: String,
     val imageUrl: String,
     val price: Double,
-    val category: String,
-    @Json(name = "hasDrink") val hasDrink: Boolean,
+    val category: String? = "Sin categoría",
+    @Json(name = "hasDrink") val hasDrink: Boolean? = false,
     val createdAt: String,
     val updatedAt: String
 )

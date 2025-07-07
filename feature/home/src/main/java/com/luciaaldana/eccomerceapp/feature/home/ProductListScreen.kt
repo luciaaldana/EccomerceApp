@@ -28,10 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberAsyncImagePainter
 import com.luciaaldana.eccomerceapp.core.model.utils.toPriceFormat
 import com.luciaaldana.eccomerceapp.core.model.Product
-
-interface CartViewModel {
-    fun add(product: Product)
-}
+import com.luciaaldana.eccomerceapp.feature.cart.CartViewModel
 
 @Composable
 fun ProductListScreen(navController: NavController) {
@@ -39,12 +36,17 @@ fun ProductListScreen(navController: NavController) {
     val cartViewModel: CartViewModel = hiltViewModel()
     val products by viewModel.filteredProducts.collectAsState()
     val all by viewModel.allProducts.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+    val error by viewModel.error.collectAsState()
 
     val searchText by viewModel.searchQuery.collectAsState()
     val selectedCategory by viewModel.selectedCategory.collectAsState()
 
     val categories = remember (all) {
-        all.map {it.category}.distinct()
+        all.map { it.category }
+            .distinct()
+            .filter { it.isNotBlank() }
+            .sorted()
     }
 
     Column(modifier = Modifier
@@ -68,39 +70,47 @@ fun ProductListScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Grid escalonado
-        @OptIn(ExperimentalFoundationApi::class)
-//        (LazyVerticalStaggeredGrid (
-//            columns = StaggeredGridCells.Fixed(2),
-//            modifier = Modifier.fillMaxSize(),
-//            verticalItemSpacing = 12.dp,
-//            horizontalArrangement = Arrangement.Start,
-//    ) {
-//        items(products) { product ->
-//            ProductCard(product = product, onAddToCart = {
-//                cartViewModel.add(product)
-//            })
-//        }
-//    })
-//        LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-//            items(products) { product ->
-//                ProductCard(product = product, onAddToCart = {
-//                cartViewModel.add(product)
-//            })
-//            }
-//        }
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            items(products) { product ->
-                ProductCard(
-                    product = product,
-                    onAddToCart = { cartViewModel.add(product) },
-                    onClick = {
-                        navController.navigate("detail/${product.id}")
+        when {
+            isLoading -> {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = androidx.compose.ui.Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            }
+            error != null -> {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = error ?: "Error desconocido",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.error
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(onClick = { viewModel.retryLoadProducts() }) {
+                        Text("Reintentar")
                     }
-                )
+                }
+            }
+            else -> {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    items(products) { product ->
+                        ProductCard(
+                            product = product,
+                            onAddToCart = { cartViewModel.add(product) },
+                            onClick = {
+                                navController.navigate("detail/${product.id}")
+                            }
+                        )
+                    }
+                }
             }
         }
     }

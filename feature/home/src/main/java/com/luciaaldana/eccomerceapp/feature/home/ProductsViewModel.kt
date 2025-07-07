@@ -17,6 +17,12 @@ class ProductsViewModel @Inject constructor(
     private val _allProducts = MutableStateFlow<List<Product>>(emptyList())
     val allProducts: StateFlow<List<Product>> = _allProducts.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error.asStateFlow()
+
     var searchQuery = MutableStateFlow(value = "")
         private set
 
@@ -37,9 +43,30 @@ class ProductsViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     init {
+        loadProducts()
+    }
+
+    private fun loadProducts() {
         viewModelScope.launch {
-            _allProducts.value = productRepository.getProducts()
+            _isLoading.value = true
+            _error.value = null
+            try {
+                val products = productRepository.getProducts()
+                println("🔍 DEBUG: Productos cargados: ${products.size}")
+                products.forEachIndexed { index, product ->
+                    println("🔍 DEBUG: Producto $index - name: ${product.name}, category: '${product.category}'")
+                }
+                _allProducts.value = products
+            } catch (e: Exception) {
+                _error.value = "Error al cargar productos: ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
         }
+    }
+
+    fun retryLoadProducts() {
+        loadProducts()
     }
 
     fun onSearchQueryChanged(query: String) {

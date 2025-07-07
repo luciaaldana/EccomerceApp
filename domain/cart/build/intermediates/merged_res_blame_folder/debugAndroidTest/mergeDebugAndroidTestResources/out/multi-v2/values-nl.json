@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.luciaaldana.eccomerceapp.domain.cart.test.cart-mergeDebugAndroidTestResources-11:/values-nl/values-nl.xml",
+            "map": [
+                {
+                    "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/18df64afe1be4972351246314ee2d6e3/transformed/core-1.16.0/res/values-nl/values-nl.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,157,259,359,459,566,670,789",
+                        "endColumns": "101,101,99,99,106,103,118,100",
+                        "endOffsets": "152,254,354,454,561,665,784,885"
+                    }
+                }
+            ]
+        }
+    ]
+}

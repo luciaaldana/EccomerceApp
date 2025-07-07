@@ -9,6 +9,6 @@ fun ProductDto.toDomain() = Product(
     description = description,
     price       = price,
     imageUrl    = imageUrl,
-    category    = category,
-    includesDrink = hasDrink
+    category    = category ?: "Sin categoría",
+    includesDrink = hasDrink ?: false
 )

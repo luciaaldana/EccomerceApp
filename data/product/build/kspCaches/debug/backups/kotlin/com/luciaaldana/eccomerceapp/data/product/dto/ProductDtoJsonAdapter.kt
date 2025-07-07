@@ -11,12 +11,15 @@ import com.squareup.moshi.JsonWriter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.`internal`.Util
 import java.lang.NullPointerException
+import java.lang.reflect.Constructor
 import kotlin.Boolean
 import kotlin.Double
+import kotlin.Int
 import kotlin.String
 import kotlin.Suppress
 import kotlin.Unit
 import kotlin.collections.emptySet
+import kotlin.jvm.Volatile
 import kotlin.text.buildString
 
 public class ProductDtoJsonAdapter(
@@ -31,8 +34,14 @@ public class ProductDtoJsonAdapter(
   private val doubleAdapter: JsonAdapter<Double> = moshi.adapter(Double::class.java, emptySet(),
       "price")
 
-  private val booleanAdapter: JsonAdapter<Boolean> = moshi.adapter(Boolean::class.java, emptySet(),
-      "hasDrink")
+  private val nullableStringAdapter: JsonAdapter<String?> = moshi.adapter(String::class.java,
+      emptySet(), "category")
+
+  private val nullableBooleanAdapter: JsonAdapter<Boolean?> =
+      moshi.adapter(Boolean::class.javaObjectType, emptySet(), "hasDrink")
+
+  @Volatile
+  private var constructorRef: Constructor<ProductDto>? = null
 
   public override fun toString(): String = buildString(32) {
       append("GeneratedJsonAdapter(").append("ProductDto").append(')') }
@@ -47,6 +56,7 @@ public class ProductDtoJsonAdapter(
     var hasDrink: Boolean? = null
     var createdAt: String? = null
     var updatedAt: String? = null
+    var mask0 = -1
     reader.beginObject()
     while (reader.hasNext()) {
       when (reader.selectName(options)) {
@@ -59,10 +69,16 @@ public class ProductDtoJsonAdapter(
             "imageUrl", reader)
         4 -> price = doubleAdapter.fromJson(reader) ?: throw Util.unexpectedNull("price", "price",
             reader)
-        5 -> category = stringAdapter.fromJson(reader) ?: throw Util.unexpectedNull("category",
-            "category", reader)
-        6 -> hasDrink = booleanAdapter.fromJson(reader) ?: throw Util.unexpectedNull("hasDrink",
-            "hasDrink", reader)
+        5 -> {
+          category = nullableStringAdapter.fromJson(reader)
+          // $mask = $mask and (1 shl 5).inv()
+          mask0 = mask0 and 0xffffffdf.toInt()
+        }
+        6 -> {
+          hasDrink = nullableBooleanAdapter.fromJson(reader)
+          // $mask = $mask and (1 shl 6).inv()
+          mask0 = mask0 and 0xffffffbf.toInt()
+        }
         7 -> createdAt = stringAdapter.fromJson(reader) ?: throw Util.unexpectedNull("createdAt",
             "createdAt", reader)
         8 -> updatedAt = stringAdapter.fromJson(reader) ?: throw Util.unexpectedNull("updatedAt",
@@ -75,18 +91,43 @@ public class ProductDtoJsonAdapter(
       }
     }
     reader.endObject()
-    return ProductDto(
-        id = id ?: throw Util.missingProperty("id", "_id", reader),
-        name = name ?: throw Util.missingProperty("name", "name", reader),
-        description = description ?: throw Util.missingProperty("description", "description",
-            reader),
-        imageUrl = imageUrl ?: throw Util.missingProperty("imageUrl", "imageUrl", reader),
-        price = price ?: throw Util.missingProperty("price", "price", reader),
-        category = category ?: throw Util.missingProperty("category", "category", reader),
-        hasDrink = hasDrink ?: throw Util.missingProperty("hasDrink", "hasDrink", reader),
-        createdAt = createdAt ?: throw Util.missingProperty("createdAt", "createdAt", reader),
-        updatedAt = updatedAt ?: throw Util.missingProperty("updatedAt", "updatedAt", reader)
-    )
+    if (mask0 == 0xffffff9f.toInt()) {
+      // All parameters with defaults are set, invoke the constructor directly
+      return  ProductDto(
+          id = id ?: throw Util.missingProperty("id", "_id", reader),
+          name = name ?: throw Util.missingProperty("name", "name", reader),
+          description = description ?: throw Util.missingProperty("description", "description",
+              reader),
+          imageUrl = imageUrl ?: throw Util.missingProperty("imageUrl", "imageUrl", reader),
+          price = price ?: throw Util.missingProperty("price", "price", reader),
+          category = category,
+          hasDrink = hasDrink,
+          createdAt = createdAt ?: throw Util.missingProperty("createdAt", "createdAt", reader),
+          updatedAt = updatedAt ?: throw Util.missingProperty("updatedAt", "updatedAt", reader)
+      )
+    } else {
+      // Reflectively invoke the synthetic defaults constructor
+      @Suppress("UNCHECKED_CAST")
+      val localConstructor: Constructor<ProductDto> = this.constructorRef ?:
+          ProductDto::class.java.getDeclaredConstructor(String::class.java, String::class.java,
+          String::class.java, String::class.java, Double::class.javaPrimitiveType,
+          String::class.java, Boolean::class.javaObjectType, String::class.java, String::class.java,
+          Int::class.javaPrimitiveType, Util.DEFAULT_CONSTRUCTOR_MARKER).also {
+          this.constructorRef = it }
+      return localConstructor.newInstance(
+          id ?: throw Util.missingProperty("id", "_id", reader),
+          name ?: throw Util.missingProperty("name", "name", reader),
+          description ?: throw Util.missingProperty("description", "description", reader),
+          imageUrl ?: throw Util.missingProperty("imageUrl", "imageUrl", reader),
+          price ?: throw Util.missingProperty("price", "price", reader),
+          category,
+          hasDrink,
+          createdAt ?: throw Util.missingProperty("createdAt", "createdAt", reader),
+          updatedAt ?: throw Util.missingProperty("updatedAt", "updatedAt", reader),
+          mask0,
+          /* DefaultConstructorMarker */ null
+      )
+    }
   }
 
   public override fun toJson(writer: JsonWriter, value_: ProductDto?): Unit {
@@ -105,9 +146,9 @@ public class ProductDtoJsonAdapter(
     writer.name("price")
     doubleAdapter.toJson(writer, value_.price)
     writer.name("category")
-    stringAdapter.toJson(writer, value_.category)
+    nullableStringAdapter.toJson(writer, value_.category)
     writer.name("hasDrink")
-    booleanAdapter.toJson(writer, value_.hasDrink)
+    nullableBooleanAdapter.toJson(writer, value_.hasDrink)
     writer.name("createdAt")
     stringAdapter.toJson(writer, value_.createdAt)
     writer.name("updatedAt")

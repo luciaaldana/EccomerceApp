@@ -9,9 +9,16 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.luciaaldana.eccomerceapp.ui.screen.*
-import com.luciaaldana.eccomerceapp.viewmodel.CartViewModel
-import com.luciaaldana.eccomerceapp.viewmodel.ProductsViewModel
+import com.luciaaldana.eccomerceapp.feature.login.LoginScreen
+import com.luciaaldana.eccomerceapp.feature.register.RegisterScreen
+import com.luciaaldana.eccomerceapp.feature.home.ProductListScreen
+import com.luciaaldana.eccomerceapp.feature.home.DetailScreen
+import com.luciaaldana.eccomerceapp.feature.cart.CartScreen
+import com.luciaaldana.eccomerceapp.feature.profile.ProfileScreen
+import com.luciaaldana.eccomerceapp.feature.profile.OrderHistoryScreen
+import com.luciaaldana.eccomerceapp.feature.profile.OrderConfirmationScreen
+import com.luciaaldana.eccomerceapp.feature.cart.CartViewModel
+import com.luciaaldana.eccomerceapp.feature.home.ProductsViewModel
 
 @Composable
 fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
