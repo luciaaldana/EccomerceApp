@@ -1,9 +1,9 @@
 <libraries>
   <library
       name=":@@:domain:cart::debug"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/ae698c8002d189c1ad8de1ecea541098/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/ae698c8002d189c1ad8de1ecea541098/transformed/out/jars/libs/R.jar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out/jars/libs/R.jar"
       resolved="EccomerceApp.domain:cart:unspecified"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/ae698c8002d189c1ad8de1ecea541098/transformed/out"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

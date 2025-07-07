@@ -12,6 +12,9 @@
       name=":@@:domain:auth::debug"
       project=":domain:auth"/>
   <library
+      name=":@@:domain:cart::debug"
+      project=":domain:cart"/>
+  <library
       name="androidx.hilt:hilt-navigation-compose:1.1.0@aar"
       jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/b70f03aff98749458519f8104848971e/transformed/hilt-navigation-compose-1.1.0/jars/classes.jar"
       resolved="androidx.hilt:hilt-navigation-compose:1.1.0"

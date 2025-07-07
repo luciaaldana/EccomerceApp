@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.luciaaldana.eccomerceapp.feature.profile-mergeReleaseResources-54:/values-in/values-in.xml",
+            "outputFile": "com.luciaaldana.eccomerceapp.feature.profile-release-57:/values-in/values-in.xml",
             "map": [
                 {
                     "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release/res/values-in/values-in.xml",
@@ -74,7 +74,7 @@
             ]
         },
         {
-            "outputFile": "com.luciaaldana.eccomerceapp.feature.profile-release-56:/values-in/values-in.xml",
+            "outputFile": "com.luciaaldana.eccomerceapp.feature.profile-mergeReleaseResources-55:/values-in/values-in.xml",
             "map": [
                 {
                     "source": "/Users/luciaaldana/.gradle/caches/8.11.1/transforms/14c0d75220e0365ca81792351f735155/transformed/foundation-release/res/values-in/values-in.xml",

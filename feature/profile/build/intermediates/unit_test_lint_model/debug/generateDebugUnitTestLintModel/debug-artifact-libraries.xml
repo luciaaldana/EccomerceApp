@@ -1,9 +1,9 @@
 <libraries>
   <library
       name=":@@:feature:profile::debug"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e89464dbf49a40a56f971f1693eac7ad/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e89464dbf49a40a56f971f1693eac7ad/transformed/out/jars/libs/R.jar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8b9d76da2be00e9f36a48b85a7334620/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8b9d76da2be00e9f36a48b85a7334620/transformed/out/jars/libs/R.jar"
       resolved="EccomerceApp.feature:profile:unspecified"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/e89464dbf49a40a56f971f1693eac7ad/transformed/out"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8b9d76da2be00e9f36a48b85a7334620/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -53,9 +53,22 @@
       proguardRules="proguard.txt"/>
   <library
       name=":@@:domain:auth::debug"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/40191470dfac3f2c89d5a81c5ec0fd7e/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/40191470dfac3f2c89d5a81c5ec0fd7e/transformed/out/jars/libs/R.jar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/f7a3e634c50c2276f2243fda7e279a94/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/f7a3e634c50c2276f2243fda7e279a94/transformed/out/jars/libs/R.jar"
       resolved="EccomerceApp.domain:auth:unspecified"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/40191470dfac3f2c89d5a81c5ec0fd7e/transformed/out"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/f7a3e634c50c2276f2243fda7e279a94/transformed/out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name=":@@:domain:cart::debug"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out/jars/libs/R.jar"
+      resolved="EccomerceApp.domain:cart:unspecified"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

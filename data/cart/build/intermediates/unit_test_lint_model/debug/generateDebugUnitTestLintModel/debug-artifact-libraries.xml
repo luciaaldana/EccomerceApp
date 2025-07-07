@@ -1,9 +1,9 @@
 <libraries>
   <library
       name=":@@:data:cart::debug"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/82f84e7324fcbb4e3fd868a1feb5fc0a/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/82f84e7324fcbb4e3fd868a1feb5fc0a/transformed/out/jars/libs/R.jar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8c2f9867f6e1af95580b6f5d5152c951/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8c2f9867f6e1af95580b6f5d5152c951/transformed/out/jars/libs/R.jar"
       resolved="EccomerceApp.data:cart:unspecified"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/82f84e7324fcbb4e3fd868a1feb5fc0a/transformed/out"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/8c2f9867f6e1af95580b6f5d5152c951/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"
@@ -27,9 +27,9 @@
       proguardRules="proguard.txt"/>
   <library
       name=":@@:domain:cart::debug"
-      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/ae698c8002d189c1ad8de1ecea541098/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/ae698c8002d189c1ad8de1ecea541098/transformed/out/jars/libs/R.jar"
+      jars="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out/jars/classes.jar:/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out/jars/libs/R.jar"
       resolved="EccomerceApp.domain:cart:unspecified"
-      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/ae698c8002d189c1ad8de1ecea541098/transformed/out"
+      folder="/Users/luciaaldana/.gradle/caches/8.11.1/transforms/a119a9efde0330dc3b56119a390b9756/transformed/out"
       manifest="AndroidManifest.xml"
       resFolder="res"
       assetsFolder="assets"

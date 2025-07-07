@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml:2:13-83
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml:2:13-83
+ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml:2:13-83
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml:2:13-83
 	package
-		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml
+		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml
 	xmlns:android
-		ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml:2:23-81
+		ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml:2:23-81
 uses-sdk
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml reason: use-sdk injection requested
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml reason: use-sdk injection requested
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml
 	android:targetSdkVersion
-		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml
+		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml
 	android:minSdkVersion
-		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3376907534742978052.xml
+		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/auth/build/intermediates/tmp/ProcessLibraryManifest/release/tempAndroidManifest3045612992116619771.xml

@@ -1,16 +1,16 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml:2:13-83
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml:2:13-83
+ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml:2:13-83
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml:2:13-83
 	package
-		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml
+		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml
 	xmlns:android
-		ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml:2:23-81
+		ADDED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml:2:23-81
 uses-sdk
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml reason: use-sdk injection requested
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml
-INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml reason: use-sdk injection requested
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml
+INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml
 	android:targetSdkVersion
-		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml
+		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml
 	android:minSdkVersion
-		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest7189868740472551971.xml
+		INJECTED from /Users/luciaaldana/dev/jobs/henry+peya/PI/EccomerceApp/domain/product/build/intermediates/tmp/ProcessLibraryManifest/debug/tempAndroidManifest18052239153634720773.xml
