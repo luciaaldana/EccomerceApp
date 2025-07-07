@@ -114,7 +114,7 @@ fun CartScreen(navController: NavController) {
                 }
                 Button(
                     onClick = { 
-                        viewModel.clearCart()
+                        viewModel.confirmOrder()
                         navController.navigate(route = "orderConfirmation")
                     },
                     modifier = Modifier.fillMaxWidth(),

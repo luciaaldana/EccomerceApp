@@ -14,5 +14,5 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(): AuthRepository = AuthRepositoryImpl()
+    fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
 }

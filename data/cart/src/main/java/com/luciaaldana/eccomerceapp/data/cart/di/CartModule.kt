@@ -16,9 +16,9 @@ object CartModule {
 
     @Provides
     @Singleton
-    fun provideCartItemRepository(): CartItemRepository = CartItemRepositoryImpl()
+    fun provideCartItemRepository(impl: CartItemRepositoryImpl): CartItemRepository = impl
 
     @Provides
     @Singleton
-    fun provideOrderHistoryRepository(): OrderHistoryRepository = OrderHistoryRepositoryImpl()
+    fun provideOrderHistoryRepository(impl: OrderHistoryRepositoryImpl): OrderHistoryRepository = impl
 }

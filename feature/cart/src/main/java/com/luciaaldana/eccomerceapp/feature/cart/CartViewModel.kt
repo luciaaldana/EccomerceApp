@@ -3,8 +3,10 @@ package com.luciaaldana.eccomerceapp.feature.cart
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luciaaldana.eccomerceapp.core.model.CartItem
+import com.luciaaldana.eccomerceapp.core.model.Order
 import com.luciaaldana.eccomerceapp.core.model.Product
 import com.luciaaldana.eccomerceapp.domain.cart.CartItemRepository
+import com.luciaaldana.eccomerceapp.domain.cart.OrderHistoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private val cartItemRepository: CartItemRepository
+    private val cartItemRepository: CartItemRepository,
+    private val orderHistoryRepository: OrderHistoryRepository
 ): ViewModel() {
 
     private val _cartItems = MutableStateFlow<List<CartItem>>(emptyList())
@@ -52,5 +55,16 @@ class CartViewModel @Inject constructor(
     fun clearCart() {
         cartItemRepository.clearCart()
         loadCart()
+    }
+
+    fun confirmOrder() {
+        val cartItems = cartItemRepository.getCartItems()
+        if (cartItems.isNotEmpty()) {
+            val total = cartItems.sumOf { it.product.price * it.quantity }
+            val newOrder = Order(items = cartItems, total = total)
+            orderHistoryRepository.addOrder(newOrder)
+            cartItemRepository.clearCart()
+            loadCart()
+        }
     }
 }
