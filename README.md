@@ -40,79 +40,189 @@ Una aplicación completa de e-commerce desarrollada con **Kotlin**, **Jetpack Co
 - **Flujo de navegación optimizado** para la experiencia de compra
 - **Estados de navegación** que preservan el contexto del usuario
 
-## 🏗️ Arquitectura Técnica
+## 🏗️ Arquitectura Multi-Módulo
 
-### 📋 Patrón MVVM
+### 📋 Arquitectura Clean (Feature → Domain → Data → Core)
 ```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   View (UI)     │◄───│   ViewModel     │◄───│  Repository     │
-│ Jetpack Compose │    │   StateFlow     │    │  Data Layer     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   Feature       │────│     Domain      │────│      Data       │────│      Core       │
+│   UI + VM       │    │   Use Cases     │    │  Repositories   │    │  Models + Utils │
+│   (Compose)     │    │  (Interfaces)   │    │ (Implementation)│    │   (Shared)      │
+└─────────────────┘    └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-### 🎯 Inyección de Dependencias (Hilt)
-- **Módulos especializados** para cada capa de la aplicación
-- **Scoped dependencies** para gestión eficiente de memoria
-- **Testing support** con módulos de prueba dedicados
+**Reglas de Dependencias (solo "hacia abajo"):**
+- `Feature` → `Domain` → `Core`
+- `Data` implementa `Domain`, pero NO depende de `Feature`
+- `Core` no depende de nadie (compartido)
+
+### 🧩 Módulos por Capa
+
+**🎨 Feature Modules (UI + ViewModels):**
+- `:feature:login` - Autenticación de usuarios
+- `:feature:register` - Registro de nuevos usuarios  
+- `:feature:home` - Catálogo y detalles de productos
+- `:feature:cart` - Carrito de compras
+- `:feature:profile` - Perfil y historial de pedidos
+
+**🔗 Domain Modules (Interfaces de negocio):**
+- `:domain:auth` - Interfaces de autenticación
+- `:domain:product` - Interfaces de productos
+- `:domain:cart` - Interfaces de carrito y pedidos
+
+**💾 Data Modules (Implementaciones):**
+- `:data:auth` - Implementación de autenticación
+- `:data:product` - Implementación de productos (API + mappers)
+- `:data:cart` - Implementación de carrito y pedidos
+
+**⚙️ Core Modules (Compartidos):**
+- `:core:model` - Modelos de datos y utilidades
+- `:core:ui` - Componentes UI reutilizables y theme
+- `:core:navigation` - Componentes de navegación
+
+**📱 App Module:**
+- `:app` - Configuración principal, navegación y DI
+
+### 🎯 Beneficios de la Modularización
+- **Compilación paralela** - Mejores tiempos de build
+- **Separación de responsabilidades** - Cada módulo tiene un propósito claro
+- **Reutilización** - Core modules compartidos entre features
+- **Testing aislado** - Cada módulo se puede testear independientemente
+- **Escalabilidad** - Fácil agregar nuevas features sin afectar existentes
 
 ### 🌐 Capa de Red
 - **Retrofit** para comunicación con APIs REST
-- **Moshi** para serialización/deserialización JSON
+- **Moshi** para serialización/deserialización JSON (KSP)
 - **OkHttp** con interceptores para logging
-- **Mappers dedicados** para transformación DTO → Domain
+- **DTOs y Mappers** para transformación API → Domain
 
 ### 💾 Gestión de Estado
 - **StateFlow** para estado reactivo y type-safe
-- **Repository pattern** para abstracción de datos
+- **Repository pattern** implementado en módulos `data:`
 - **In-memory storage** con persistencia durante la sesión
 - **Reactive UI updates** basadas en cambios de estado
 
-## 📁 Estructura del Proyecto
+## 📁 Estructura Multi-Módulo del Proyecto
 
 ```
-app/src/main/java/com/luciaaldana/eccomerceapp/
-├── 📱 ui/
-│   ├── components/          # Componentes reutilizables
-│   │   ├── BottomNavBar.kt
-│   │   └── Header.kt
-│   ├── screen/              # Pantallas principales
-│   │   ├── LoginScreen.kt
-│   │   ├── RegisterScreen.kt
-│   │   ├── ProductListScreen.kt
-│   │   ├── DetailScreen.kt
-│   │   ├── CartScreen.kt
-│   │   ├── OrderConfirmationScreen.kt
-│   │   ├── OrderHistoryScreen.kt
-│   │   └── ProfileScreen.kt
-│   └── theme/               # Theming y estilos
-├── 🧠 viewmodel/            # Lógica de presentación
-│   ├── ProductsViewModel.kt
-│   ├── CartViewModel.kt
-│   ├── LoginViewModel.kt
-│   ├── RegisterViewModel.kt
-│   ├── OrderHistoryViewModel.kt
-│   └── ProfileViewModel.kt
-├── 📊 model/                # Modelos de datos
-│   ├── data/                # Entidades de dominio
-│   │   ├── Product.kt
-│   │   ├── CartItem.kt
-│   │   ├── Order.kt
-│   │   └── MockUser.kt
-│   └── repository/          # Interfaces y implementaciones
-├── 🌐 data/                 # Capa de datos
-│   ├── network/             # APIs y DTOs
-│   │   ├── ProductApi.kt
-│   │   ├── dto/
-│   │   └── mapper/
-├── 💉 di/                   # Módulos de Hilt
-│   ├── NetworkModule.kt
-│   ├── ProductModule.kt
-│   ├── CartModule.kt
-│   ├── AuthModule.kt
-│   └── OrderModule.kt
-├── 🧭 navigation/           # Configuración de navegación
-├── 🛠️ core/utils/          # Utilidades y extensiones
-└── 📱 MainActivity.kt       # Punto de entrada
+EccomerceApp/
+├── 📱 app/                          # Módulo principal
+│   └── src/main/java/com/luciaaldana/eccomerceapp/
+│       ├── navigation/              # Configuración de navegación
+│       │   └── AppNavGraph.kt
+│       ├── di/                      # Configuración de red
+│       │   └── NetworkModule.kt
+│       ├── MainActivity.kt          # Punto de entrada
+│       └── EccomerceApp.kt          # Application class
+│
+├── 🎨 feature/                      # Módulos de características (UI + ViewModels)
+│   ├── login/
+│   │   └── src/main/java/.../feature/login/
+│   │       ├── LoginScreen.kt       # UI con Compose
+│   │       └── LoginViewModel.kt    # Lógica de presentación
+│   ├── register/
+│   │   └── src/main/java/.../feature/register/
+│   │       ├── RegisterScreen.kt
+│   │       └── RegisterViewModel.kt
+│   ├── home/
+│   │   └── src/main/java/.../feature/home/
+│   │       ├── ProductListScreen.kt
+│   │       ├── DetailScreen.kt
+│   │       └── ProductsViewModel.kt
+│   ├── cart/
+│   │   └── src/main/java/.../feature/cart/
+│   │       ├── CartScreen.kt
+│   │       └── CartViewModel.kt
+│   └── profile/
+│       └── src/main/java/.../feature/profile/
+│           ├── ProfileScreen.kt
+│           ├── OrderHistoryScreen.kt
+│           ├── OrderConfirmationScreen.kt
+│           ├── ProfileViewModel.kt
+│           └── OrderHistoryViewModel.kt
+│
+├── 🔗 domain/                       # Módulos de lógica de negocio (Interfaces)
+│   ├── auth/
+│   │   └── src/main/java/.../domain/auth/
+│   │       └── AuthRepository.kt    # Interface
+│   ├── product/
+│   │   └── src/main/java/.../domain/product/
+│   │       └── ProductRepository.kt # Interface
+│   └── cart/
+│       └── src/main/java/.../domain/cart/
+│           ├── CartItemRepository.kt
+│           └── OrderHistoryRepository.kt
+│
+├── 💾 data/                         # Módulos de implementación de datos
+│   ├── auth/
+│   │   └── src/main/java/.../data/auth/
+│   │       ├── AuthRepositoryImpl.kt    # Implementación
+│   │       └── di/AuthModule.kt         # DI específico
+│   ├── product/
+│   │   └── src/main/java/.../data/product/
+│   │       ├── ProductRepositoryImpl.kt
+│   │       ├── network/ProductApi.kt    # API endpoints
+│   │       ├── dto/ProductDto.kt        # DTOs de red
+│   │       ├── mapper/ProductMapper.kt  # Mappers DTO → Domain
+│   │       └── di/ProductModule.kt
+│   └── cart/
+│       └── src/main/java/.../data/cart/
+│           ├── CartItemRepositoryImpl.kt
+│           ├── OrderHistoryRepositoryImpl.kt
+│           └── di/CartModule.kt
+│
+└── ⚙️ core/                         # Módulos compartidos (sin dependencias)
+    ├── model/
+    │   └── src/main/java/.../core/model/
+    │       ├── Product.kt           # Modelos de dominio
+    │       ├── CartItem.kt
+    │       ├── Order.kt
+    │       ├── MockUser.kt
+    │       └── utils/               # Extensiones y utilidades
+    │           ├── DateExtensions.kt
+    │           └── FormatExtensions.kt
+    ├── ui/
+    │   └── src/main/java/.../core/ui/
+    │       ├── components/          # Componentes reutilizables
+    │       │   ├── BottomNavBar.kt
+    │       │   └── Header.kt
+    │       └── theme/               # Theme y estilos
+    │           ├── Color.kt
+    │           ├── Theme.kt
+    │           └── Type.kt
+    └── navigation/
+        └── src/main/java/.../core/navigation/
+            └── [Navegación compartida]
+```
+
+### 📋 Dependencias entre Módulos
+
+```
+app
+├── feature:* (todas las features)
+├── core:ui
+└── data:* (todas las implementaciones)
+
+feature:login
+├── domain:auth
+├── core:model
+└── core:ui
+
+feature:home
+├── domain:product
+├── feature:cart (para agregar al carrito)
+├── core:model
+└── core:ui
+
+data:product
+├── domain:product (implementa)
+└── core:model
+
+domain:product
+└── core:model
+
+core:model
+└── [sin dependencias]
 ```
 
 ## 🚀 Configuración de Desarrollo
@@ -130,23 +240,36 @@ Crear `local.properties` en la raíz del proyecto:
 RENDER_BASE_URL=https://tu-api.render.com
 ```
 
-### 🔧 Comandos de Desarrollo
+### 🔧 Comandos de Desarrollo Multi-Módulo
 
 ```bash
-# Construcción del proyecto
+# Construcción del proyecto completo
 ./gradlew build
+
+# Construcción de módulos específicos
+./gradlew :feature:cart:build
+./gradlew :data:product:build
+./gradlew :core:model:build
 
 # Instalación en dispositivo
 ./gradlew installDebug
 
-# Ejecución de tests unitarios
-./gradlew :app:testDebugUnitTest
+# Tests por módulo
+./gradlew :feature:cart:test                    # Tests de feature específico
+./gradlew :data:auth:test                       # Tests de data layer
+./gradlew test                                  # Todos los tests
 
-# Generación de reporte de cobertura
-./gradlew :app:koverHtmlReportDebug
+# Cobertura de tests por módulo
+./gradlew :feature:cart:koverHtmlReportDebug    # Cobertura de cart feature
+./gradlew :app:koverHtmlReportDebug             # Cobertura general
 
-# Limpieza del proyecto
-./gradlew clean
+# Limpieza
+./gradlew clean                                 # Limpia todo
+./gradlew :feature:home:clean                   # Limpia módulo específico
+
+# Dependencias y análisis
+./gradlew :app:dependencies                     # Ver dependencias del app
+./gradlew projects                              # Listar todos los módulos
 ```
 
 ## 🧪 Testing y Calidad
@@ -206,10 +329,14 @@ open app/build/reports/kover/debug/html/index.html
 
 ## 📚 Documentación Adicional
 
-- [📖 Tecnologías Utilizadas](docs/tecnologias.md)
-- [🔗 Dependencias Hilt](docs/dependencias_hilt.md)
+### 🏗️ Arquitectura
+- [🧩 Arquitectura Multi-Módulo](docs/modularization.md) - Guía completa de modularización
+- [📖 Tecnologías Utilizadas](docs/tecnologias.md) - Stack tecnológico y justificaciones
+- [🔗 Configuración de Hilt](docs/dependencias_hilt.md) - DI distribuida entre módulos
 
 ### 🧪 Testing
-
 - [🧪 Guía de Testing](docs/test/testing.md) - Configuración general y comandos
 - [📋 CartViewModel Testing](docs/test/cartviewmodel-testing.md) - Guía detallada de testing de ViewModels
+
+### 🌐 API y Desarrollo
+- [🚀 Configuración de API](docs/API.md) - Setup de API local y configuración para Android

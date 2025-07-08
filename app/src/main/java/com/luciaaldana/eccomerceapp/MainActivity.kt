@@ -16,8 +16,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.luciaaldana.eccomerceapp.navigation.AppNavGraph
-import com.luciaaldana.eccomerceapp.ui.components.BottomNavBar
-import com.luciaaldana.eccomerceapp.ui.theme.EccomerceAppTheme
+import com.luciaaldana.eccomerceapp.core.ui.components.BottomNavBar
+import com.luciaaldana.eccomerceapp.core.ui.theme.EccomerceAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

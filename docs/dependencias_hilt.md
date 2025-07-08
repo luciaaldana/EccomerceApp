@@ -1,6 +1,6 @@
-# 🛠️ Instrucciones para agregar Hilt al proyecto
+# 🛠️ Configuración de Hilt en Arquitectura Multi-Módulo
 
-Estas instrucciones usan `libs.versions.toml` como base para la configuración.
+Esta documentación explica cómo está configurado Hilt en el proyecto multi-módulo, siguiendo las mejores prácticas de Android para inyección de dependencias distribuida.
 
 ---
 
@@ -45,9 +45,9 @@ plugins {
 
 ---
 
-## ✅ 5. Usarlo en el archivo `build.gradle.kts` del módulo `:app`
+## ✅ 5. Configuración por Módulo
 
-### Bloque `plugins` y `dependencies`
+### 📱 Módulo `:app` (Application)
 
 ```kotlin
 plugins {
@@ -59,22 +59,96 @@ plugins {
 }
 
 dependencies {
-    ...
+    // Todas las implementaciones de data para DI
+    implementation(project(":data:auth"))
+    implementation(project(":data:cart"))
+    implementation(project(":data:product"))
+    
     implementation(libs.hilt.android)
-    implementation(libs.hilt.android.gradle.plugin)
-    kapt(libs.dagger.android.processor)
     kapt(libs.hilt.compiler)
 }
 ```
 
-## ✅ 5. Crear `EccomerceApp.kt`
+### 🎨 Módulos `:feature:*` (UI + ViewModels)
+
+```kotlin
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.dagger.hilt.android) // +
+    alias(libs.plugins.ksp)
+}
+
+dependencies {
+    implementation(project(":domain:auth")) // Solo interfaces
+    implementation(project(":core:model"))
+    implementation(project(":core:ui"))
+    
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.compiler)
+}
+```
+
+### 💾 Módulos `:data:*` (Implementaciones + DI)
+
+```kotlin
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.dagger.hilt.android) // +
+    alias(libs.plugins.ksp)
+}
+
+dependencies {
+    implementation(project(":domain:auth")) // Implementa interfaces
+    implementation(project(":core:model"))
+    
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+}
+```
+
+### 🔗 Módulos `:domain:*` (Interfaces)
+
+```kotlin
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+}
+
+dependencies {
+    implementation(project(":core:model"))
+    // NO necesita Hilt - solo interfaces
+}
+```
+
+### ⚙️ Módulos `:core:*` (Compartidos)
+
+```kotlin
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose) // Solo :core:ui
+}
+
+dependencies {
+    // Ninguna dependencia externa de otros módulos
+    // NO necesita Hilt
+}
+```
+
+## ✅ 6. Application Class
+
+**En `:app/EccomerceApp.kt`:**
 
 ```kotlin
 @HiltAndroidApp
 class EccomerceApp : Application()
 ```
 
-Y en `AndroidManifest.xml` agregar:
+**En `:app/AndroidManifest.xml`:**
 
 ```xml
 <application
@@ -84,7 +158,9 @@ Y en `AndroidManifest.xml` agregar:
 
 ---
 
-## ✅ 6. Crear módulo de Hilt (ej: `AuthModule.kt`)
+## ✅ 7. Módulos de DI Distribuidos
+
+### 🔐 AuthModule (en `:data:auth/di/`)
 
 ```kotlin
 @Module
@@ -93,9 +169,73 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideAuthRepository(): AuthRepository = AuthRepositoryImpl()
+    fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
 }
 ```
+
+### 🛒 CartModule (en `:data:cart/di/`)
+
+```kotlin
+@Module
+@InstallIn(SingletonComponent::class)
+object CartModule {
+
+    @Provides
+    @Singleton
+    fun provideCartItemRepository(impl: CartItemRepositoryImpl): CartItemRepository = impl
+
+    @Provides
+    @Singleton
+    fun provideOrderHistoryRepository(impl: OrderHistoryRepositoryImpl): OrderHistoryRepository = impl
+}
+```
+
+### 📦 ProductModule (en `:data:product/di/`)
+
+```kotlin
+@Module
+@InstallIn(SingletonComponent::class)
+object ProductModule {
+
+    @Provides
+    @Singleton
+    fun provideProductApi(retrofit: Retrofit): ProductApi = retrofit.create(ProductApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideProductRepository(productApi: ProductApi): ProductRepository = ProductRepositoryImpl(productApi)
+}
+```
+
+### 🌐 NetworkModule (en `:app/di/`)
+
+```kotlin
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
+
+    @Provides 
+    @Singleton
+    fun provideOkHttp(): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            setLevel(HttpLoggingInterceptor.Level.BODY)
+        })
+        .build()
+
+    @Provides 
+    @Singleton
+    fun provideMoshi(): Moshi = Moshi.Builder()
+        .addLast(KotlinJsonAdapterFactory())
+        .build()
+
+    @Provides 
+    @Singleton
+    fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.RENDER_BASE_URL)
+        .client(client)
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .build()
+}
 
 ---
 
@@ -114,10 +254,39 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 
 ---
 
-## ✅ En resumen:
+## ✅ Resumen de la Configuración Multi-Módulo
 
-| Dependencia                        | ¿Para qué sirve?                                   | ¿Es obligatoria? |
-|-----------------------------------|----------------------------------------------------|------------------|
-| `hilt-android`                    | Base de Hilt, inyección de dependencias            | ✅ Sí            |
-| `hilt-compiler`                   | Generación de código con anotaciones               | ✅ Sí            |
-| `androidx-hilt-navigation-compose`| Integración con Jetpack Compose                    | 🟡 Recomendado   |
+### 📋 Dependencias por Tipo de Módulo
+
+| Módulo | Hilt Plugin | Hilt Dependencies | Propósito |
+|--------|-------------|-------------------|-----------|
+| `:app` | ✅ Sí | `hilt-android` + `hilt-compiler` | Application class + DI principal |
+| `:feature:*` | ✅ Sí | `hilt-android` + `hilt-navigation-compose` | ViewModels con @HiltViewModel |
+| `:data:*` | ✅ Sí | `hilt-android` + `hilt-compiler` | Módulos DI + implementaciones |
+| `:domain:*` | ❌ No | ❌ Ninguna | Solo interfaces |
+| `:core:*` | ❌ No | ❌ Ninguna | Modelos y utilidades compartidas |
+
+### 🔗 Reglas de Dependencias
+
+```
+feature:login
+├── domain:auth (interfaces)
+├── core:model
+└── core:ui
+
+data:auth  
+├── domain:auth (implementa)
+└── core:model
+
+app
+├── feature:* (todas)
+├── data:* (todas - para DI)
+└── core:ui
+```
+
+### 🎯 Beneficios
+
+- **DI distribuida**: Cada módulo data maneja su propia inyección
+- **Compilación paralela**: Módulos independientes se compilan en paralelo  
+- **Testing aislado**: Cada módulo se puede testear con mocks específicos
+- **Separación clara**: Interfaces en domain, implementaciones en data

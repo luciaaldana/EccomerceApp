@@ -1,7 +1,6 @@
 package com.luciaaldana.eccomerceapp.di
 
 import com.luciaaldana.eccomerceapp.BuildConfig
-import com.luciaaldana.eccomerceapp.data.network.ProductApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.*
@@ -46,7 +45,4 @@ object NetworkModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
-    @Provides @Singleton
-    fun provideProductApi(retrofit: Retrofit): ProductApi =
-        retrofit.create(ProductApi::class.java)
 }
