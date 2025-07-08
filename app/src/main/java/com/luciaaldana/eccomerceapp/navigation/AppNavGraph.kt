@@ -22,7 +22,7 @@ import com.luciaaldana.eccomerceapp.feature.home.ProductsViewModel
 
 @Composable
 fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
-    NavHost(navController = navController, startDestination = "login", modifier = modifier) {
+    NavHost(navController = navController, startDestination = "productList", modifier = modifier) {
         composable( route = "login") { LoginScreen(navController) }
         composable( route = "register") { RegisterScreen(navController) }
         composable( route = "productList") { ProductListScreen(navController) }
@@ -45,7 +45,13 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
                     DetailScreen(
                         productId = productId,
                         navController = navController,
-                        onAddToCart = { cartViewModel.add(it) }
+                        onAddToCart = { 
+                            if (viewModel.isUserLoggedIn()) {
+                                cartViewModel.add(it)
+                            } else {
+                                navController.navigate("login")
+                            }
+                        }
                     )
                 }
             }
