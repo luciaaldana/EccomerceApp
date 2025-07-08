@@ -29,6 +29,7 @@ import coil.compose.rememberAsyncImagePainter
 import com.luciaaldana.eccomerceapp.core.model.utils.toPriceFormat
 import com.luciaaldana.eccomerceapp.core.model.Product
 import com.luciaaldana.eccomerceapp.feature.cart.CartViewModel
+import com.luciaaldana.eccomerceapp.domain.auth.AuthRepository
 
 @Composable
 fun ProductListScreen(navController: NavController) {
@@ -104,7 +105,13 @@ fun ProductListScreen(navController: NavController) {
                     items(products) { product ->
                         ProductCard(
                             product = product,
-                            onAddToCart = { cartViewModel.add(product) },
+                            onAddToCart = { 
+                                if (viewModel.isUserLoggedIn()) {
+                                    cartViewModel.add(product)
+                                } else {
+                                    navController.navigate("login")
+                                }
+                            },
                             onClick = {
                                 navController.navigate("detail/${product.id}")
                             }

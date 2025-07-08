@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
     implementation(project(":domain:product"))
+    implementation(project(":domain:auth"))
     implementation(project(":feature:cart"))
     
     implementation(libs.androidx.core.ktx)
