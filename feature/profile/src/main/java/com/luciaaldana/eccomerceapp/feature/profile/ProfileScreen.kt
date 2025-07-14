@@ -2,20 +2,16 @@ package com.luciaaldana.eccomerceapp.feature.profile
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.AsyncImage
 import com.luciaaldana.eccomerceapp.core.ui.components.Header
+import com.luciaaldana.eccomerceapp.core.ui.components.ProfileImagePicker
 
 @Composable
 fun ProfileScreen(navController: NavController) {
@@ -30,6 +26,7 @@ fun ProfileScreen(navController: NavController) {
     val createdAt by viewModel.createdAt.collectAsState()
     val isUpdating by viewModel.isUpdating.collectAsState()
     val updateMessage by viewModel.updateMessage.collectAsState()
+    val isUploadingImage by viewModel.isUploadingImage.collectAsState()
 
     var isEditing by remember { mutableStateOf(false) }
 
@@ -48,15 +45,15 @@ fun ProfileScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Profile Image
-            AsyncImage(
-                model = userImageUrl,
-                contentDescription = "Foto de perfil",
-                modifier = Modifier
-                    .size(120.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop,
-                placeholder = painterResource(android.R.drawable.ic_menu_gallery),
-                error = painterResource(android.R.drawable.ic_menu_gallery)
+            ProfileImagePicker(
+                imageUrl = userImageUrl,
+                isUploading = isUploadingImage,
+                showEditIndicator = isEditing,
+                onImageSelected = { uri ->
+                    if (isEditing) {
+                        viewModel.uploadImageToCloudinary(uri)
+                    }
+                }
             )
             
             // User ID and creation date (read-only info)
@@ -132,13 +129,6 @@ fun ProfileScreen(navController: NavController) {
                     modifier = Modifier.fillMaxWidth()
                 )
 
-                OutlinedTextField(
-                    value = userImageUrl ?: "",
-                    onValueChange = viewModel::onUserImageUrlChanged,
-                    label = { Text("URL de imagen de perfil") },
-                    modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("https://ejemplo.com/imagen.jpg") }
-                )
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -207,6 +197,7 @@ fun ProfileScreen(navController: NavController) {
         }
     }
 }
+
 
 @Composable
 private fun ProfileInfoItem(label: String, value: String) {

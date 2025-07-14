@@ -27,6 +27,7 @@ include(":app")
 include(":core:model")
 include(":core:navigation")
 include(":core:ui")
+include(":core:cloudinary")
 
 // Domain modules
 include(":domain:auth")

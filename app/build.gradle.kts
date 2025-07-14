@@ -34,6 +34,9 @@ android {
         // ✅ Agregar propiedades a BuildConfig
         buildConfigField("String", "API_KEY", "\"${localProperties["API_KEY"]}\"")
         buildConfigField("String", "RENDER_BASE_URL", "\"${localProperties["RENDER_BASE_URL"]}\"")
+        buildConfigField("String", "CLOUDINARY_CLOUD_NAME", "\"${localProperties["CLOUDINARY_CLOUD_NAME"]}\"")
+        buildConfigField("String", "CLOUDINARY_API_KEY", "\"${localProperties["CLOUDINARY_API_KEY"]}\"")
+        buildConfigField("String", "CLOUDINARY_API_SECRET", "\"${localProperties["CLOUDINARY_API_SECRET"]}\"")
     }
 
     buildTypes {
@@ -71,6 +74,7 @@ android {
 dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:ui"))
+    implementation(project(":core:cloudinary"))
     implementation(project(":feature:home"))
     implementation(project(":feature:cart"))
     implementation(project(":feature:login"))

@@ -5,5 +5,6 @@ data class UserRegistrationDto(
     val firstName: String,
     val lastName: String,
     val nationality: String,
-    val encryptedPassword: String
+    val encryptedPassword: String,
+    val userImageUrl: String? = null
 )

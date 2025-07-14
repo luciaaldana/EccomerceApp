@@ -1,11 +1,13 @@
 package com.luciaaldana.eccomerceapp.feature.register
 
+import android.net.Uri
 import android.util.Patterns
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.luciaaldana.eccomerceapp.core.cloudinary.CloudinaryService
 import com.luciaaldana.eccomerceapp.core.model.User
 import com.luciaaldana.eccomerceapp.domain.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val cloudinaryService: CloudinaryService
 ): ViewModel() {
 
     var firstName by mutableStateOf<String>(value = "")
@@ -25,10 +28,13 @@ class RegisterViewModel @Inject constructor(
     var password by mutableStateOf<String>(value = "")
     var confirmPassword by mutableStateOf<String>(value = "")
     var nationality by mutableStateOf<String>(value = "")
+    var userImageUrl by mutableStateOf<String?>(value = null)
+    var selectedImageUri by mutableStateOf<Uri?>(value = null)
 
     var errorMessage by mutableStateOf<String?>(value = null)
     var isRegistered by mutableStateOf<Boolean>(value = false)
     var isLoading by mutableStateOf<Boolean>(value = false)
+    var isUploadingImage by mutableStateOf<Boolean>(value = false)
 
     fun onRegisterClick() {
         if(!isValid()) return
@@ -39,17 +45,32 @@ class RegisterViewModel @Inject constructor(
                 isLoading = true
                 errorMessage = null
                 
+                // Upload image first if selected
+                var finalImageUrl: String? = null
+                if (selectedImageUri != null) {
+                    try {
+                        isUploadingImage = true
+                        finalImageUrl = cloudinaryService.uploadImage(selectedImageUri!!)
+                    } catch (e: Exception) {
+                        // If image upload fails, continue without image
+                        finalImageUrl = null
+                        // Don't set errorMessage here, let registration continue
+                    } finally {
+                        isUploadingImage = false
+                    }
+                }
+                
+                
                 val user = User(
                     firstName = firstName.trim(), 
                     lastName = lastName.trim(), 
                     email = email.trim(), 
                     password = password, 
-                    nationality = nationality.trim()
+                    nationality = nationality.trim(),
+                    userImageUrl = finalImageUrl
                 )
                 
-                println("Attempting to register user: ${user.email}")
                 val success = authRepository.register(user)
-                println("Registration result: $success")
 
                 if(success) {
                     isRegistered = true
@@ -58,11 +79,11 @@ class RegisterViewModel @Inject constructor(
                     errorMessage = "Error al registrar usuario. Verifica que el email no esté ya registrado o intenta más tarde."
                 }
             } catch (e: Exception) {
-                println("Registration exception: ${e.message}")
                 errorMessage = "Error al registrar usuario. Verifica la conexión e intenta nuevamente."
                 isRegistered = false
             } finally {
                 isLoading = false
+                isUploadingImage = false
             }
         }
     }
@@ -94,6 +115,12 @@ class RegisterViewModel @Inject constructor(
         }
         errorMessage = null
         return true
+    }
+    
+    fun onImageSelected(uri: Uri) {
+        selectedImageUri = uri
+        // Show preview of selected image
+        userImageUrl = uri.toString()
     }
 
 }

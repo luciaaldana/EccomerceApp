@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
+    implementation(project(":core:cloudinary"))
     implementation(project(":domain:auth"))
     implementation(project(":domain:cart"))
     
@@ -60,11 +61,16 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
     
     implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.activity.ktx)
+    implementation(libs.accompanist.permissions)
+    implementation(libs.material.icons.extended)
     ksp(libs.hilt.compiler)
     
     testImplementation(libs.bundles.test.core)
