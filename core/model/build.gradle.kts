@@ -34,6 +34,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
+    implementation(libs.moshi)
     
     testImplementation(libs.bundles.test.core)
 }

@@ -1,11 +1,12 @@
 package com.luciaaldana.eccomerceapp.domain.auth
 
-import com.luciaaldana.eccomerceapp.core.model.MockUser
+import com.luciaaldana.eccomerceapp.core.model.User
 
 interface AuthRepository {
     suspend fun login(email: String, password: String): Boolean
-    suspend fun register(user: MockUser): Boolean
+    suspend fun register(user: User): Boolean
+    suspend fun updateUserProfile(user: User): Boolean
     fun logout()
-    fun updateCurrentUser(updatedUser: MockUser)
-    fun getCurrentUser(): MockUser?
+    fun updateCurrentUser(updatedUser: User)
+    fun getCurrentUser(): User?
 }

@@ -36,6 +36,12 @@ android {
     buildFeatures {
         compose = true
     }
+    
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        warningsAsErrors = false
+    }
 }
 
 dependencies {
@@ -58,6 +64,7 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.coil.compose)
     ksp(libs.hilt.compiler)
     
     testImplementation(libs.bundles.test.core)

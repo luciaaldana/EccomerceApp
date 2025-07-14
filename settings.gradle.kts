@@ -37,6 +37,7 @@ include(":domain:cart")
 include(":data:auth")
 include(":data:product")
 include(":data:cart")
+include(":data:database")
 
 // Feature modules
 include(":feature:login")
