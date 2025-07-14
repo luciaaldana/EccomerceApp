@@ -27,7 +27,16 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
         composable( route = "register") { RegisterScreen(navController) }
         composable( route = "productList") { ProductListScreen(navController) }
         composable( route = "cart") { CartScreen(navController) }
-        composable( route = "profile") { ProfileScreen(navController) }
+        composable( route = "profile") { 
+            val viewModel: ProductsViewModel = hiltViewModel()
+            if (viewModel.isUserLoggedIn()) {
+                ProfileScreen(navController)
+            } else {
+                navController.navigate("login") {
+                    popUpTo("profile") { inclusive = true }
+                }
+            }
+        }
         composable( route = "orderHistory") { OrderHistoryScreen(navController) }
         composable( route = "orderConfirmation") { OrderConfirmationScreen(navController) }
         composable(

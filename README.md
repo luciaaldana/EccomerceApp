@@ -177,7 +177,7 @@ EccomerceApp/
     │       ├── Product.kt           # Modelos de dominio
     │       ├── CartItem.kt
     │       ├── Order.kt
-    │       ├── MockUser.kt
+    │       ├── User.kt
     │       └── utils/               # Extensiones y utilidades
     │           ├── DateExtensions.kt
     │           └── FormatExtensions.kt

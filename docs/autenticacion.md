@@ -538,11 +538,11 @@ fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit =
         .build()
 ```
 
-## ⏱️ ¿Por qué son Necesarios los Timeouts?
+## ¿Por qué son Necesarios los Timeouts?
 
 Los timeouts en la configuración de red son **esenciales** para una aplicación robusta y con buena experiencia de usuario.
 
-### 🚨 **Prevenir Bloqueo Indefinido**
+### **Prevenir Bloqueo Indefinido**
 
 ```kotlin
 // Sin timeout - ¡PELIGROSO!
@@ -553,11 +553,11 @@ val response = api.login() // Puede esperar infinitamente
 .connectTimeout(8, TimeUnit.SECONDS) // Máximo 8s para conectar
 ```
 
-### 📱 **Mejor Experiencia de Usuario**
+### **Mejor Experiencia de Usuario**
 - **Sin timeout**: Usuario espera indefinidamente sin feedback
 - **Con timeout**: Después de 8-10s muestra error claro "No se pudo conectar"
 
-### 🔧 **Tipos de Timeout en la App**
+### **Tipos de Timeout en la App**
 
 ```kotlin
 .connectTimeout(8, TimeUnit.SECONDS)    // Establecer conexión TCP
@@ -566,7 +566,7 @@ val response = api.login() // Puede esperar infinitamente
 .callTimeout(10, TimeUnit.SECONDS)      // Tiempo total de toda la operación
 ```
 
-### 🌐 **Escenarios Reales donde son Críticos**
+### **Escenarios Reales donde son Críticos**
 
 #### **Red Lenta/Inestable:**
 - WiFi público débil
@@ -583,7 +583,7 @@ val response = api.login() // Puede esperar infinitamente
 - Cambio de red (WiFi → Datos)
 - Firewall/proxy bloqueando
 
-### ⚡ **Impacto Sin Timeouts**
+### **Impacto Sin Timeouts**
 
 ```kotlin
 // MALO - Sin timeouts
@@ -605,26 +605,19 @@ fun login() {
 }
 ```
 
-### 🎯 **¿Por qué 8 segundos?**
+### **¿Por qué 8 segundos?**
 
-La app usa **8 segundos** (más corto que el estándar de 30s) porque:
+La app usa **8 segundos** porque:
 
 - ✅ **Autenticación es crítica**: Login/registro son operaciones **síncronas** donde el usuario espera activamente
 - ✅ **Primeras impresiones**: Sin timeout = app parece "rota"
 - ✅ **Feedback rápido**: 8s es suficiente para redes lentas pero no frustra al usuario
 - ✅ **Gestión de recursos**: Libera conexiones y memoria más rápido
 
-### 🔄 **Gestión de Recursos**
+### **Gestión de Recursos**
 
 Los timeouts también:
 - **Liberan conexiones** del pool de OkHttp
 - **Evitan memory leaks** por operaciones colgadas  
 - **Mejoran performance** general de la app
 - **Permiten reintentos** más rápidos
-
-### 💡 **En Contexto de Autenticación**
-
-Para operaciones de auth, los timeouts transforman:
-- **Experiencia horrible** (app congelada) → **Experiencia manejable** (error claro + reintento)
-- **Usuario confundido** → **Usuario informado** sobre problemas de red
-- **App que parece rota** → **App profesional** que maneja errores elegantemente

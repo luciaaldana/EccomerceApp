@@ -122,7 +122,7 @@ core:model/
 ├── Product.kt              # Modelos de dominio
 ├── CartItem.kt
 ├── Order.kt
-├── MockUser.kt
+├── User.kt
 ├── utils/
 │   ├── DateExtensions.kt   # Extensiones de utilidad
 │   └── FormatExtensions.kt

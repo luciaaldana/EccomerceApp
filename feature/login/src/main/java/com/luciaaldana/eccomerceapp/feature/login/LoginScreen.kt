@@ -55,9 +55,37 @@ fun LoginScreen(
 
         Button(
             onClick = { viewModel.onLoginClick() },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = !viewModel.isLoading
+        ) {
+            if (viewModel.isLoading) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(16.dp),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Iniciando sesión...")
+                }
+            } else {
+                Text("Ingresar")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedButton(
+            onClick = { 
+                navController.navigate("productList") {
+                    popUpTo("login") { inclusive = true }
+                }
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Ingresar")
+            Text("Cancelar")
         }
 
         viewModel.errorMessage?.let {

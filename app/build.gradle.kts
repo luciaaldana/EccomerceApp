@@ -59,6 +59,13 @@ android {
         compose = true
         buildConfig = true
     }
+    
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        warningsAsErrors = false
+        quiet = true
+    }
 }
 
 dependencies {

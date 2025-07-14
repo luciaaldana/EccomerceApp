@@ -4,7 +4,6 @@ import com.luciaaldana.eccomerceapp.data.auth.dto.UserRegistrationDto
 import com.luciaaldana.eccomerceapp.data.auth.dto.LoginDto
 import com.luciaaldana.eccomerceapp.data.auth.dto.LoginResponse
 import com.luciaaldana.eccomerceapp.data.auth.dto.UpdateUserDto
-import com.luciaaldana.eccomerceapp.data.auth.dto.UpdateUserResponse
 import com.luciaaldana.eccomerceapp.core.model.User
 import retrofit2.Response
 import retrofit2.http.Body

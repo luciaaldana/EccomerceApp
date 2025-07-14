@@ -37,6 +37,7 @@ android {
 dependencies {
     implementation(project(":core:model"))
     implementation(project(":domain:auth"))
+    implementation(project(":data:database"))
     
     implementation(libs.androidx.core.ktx)
     implementation(libs.hilt.android)

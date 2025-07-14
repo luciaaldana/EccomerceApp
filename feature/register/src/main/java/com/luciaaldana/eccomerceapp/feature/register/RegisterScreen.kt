@@ -33,11 +33,21 @@ fun RegisterScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
-            value = viewModel.fullName,
-            onValueChange = { viewModel.fullName = it },
-            label = { Text("Nombre completo") },
+            value = viewModel.firstName,
+            onValueChange = { viewModel.firstName = it },
+            label = { Text("Nombre") },
             modifier = Modifier.fillMaxWidth(),
             isError = viewModel.errorMessage?.contains("nombre") == true
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        OutlinedTextField(
+            value = viewModel.lastName,
+            onValueChange = { viewModel.lastName = it },
+            label = { Text("Apellido") },
+            modifier = Modifier.fillMaxWidth(),
+            isError = viewModel.errorMessage?.contains("apellido") == true
         )
 
         Spacer(modifier = Modifier.height(12.dp))
@@ -74,11 +84,47 @@ fun RegisterScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(12.dp))
 
+        OutlinedTextField(
+            value = viewModel.nationality,
+            onValueChange = { viewModel.nationality = it },
+            label = { Text("Nacionalidad") },
+            modifier = Modifier.fillMaxWidth(),
+            isError = viewModel.errorMessage?.contains("nacionalidad") == true
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
         Button(
             onClick = { viewModel.onRegisterClick() },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = !viewModel.isLoading
+        ) {
+            if (viewModel.isLoading) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(16.dp),
+                        strokeWidth = 2.dp
+                    )
+                    Text("Registrando...")
+                }
+            } else {
+                Text("Registrarme")
+            }
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        OutlinedButton(
+            onClick = { 
+                navController.navigate("productList") {
+                    popUpTo("register") { inclusive = true }
+                }
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Registrarme")
+            Text("Cancelar")
         }
 
         viewModel.errorMessage?.let {
