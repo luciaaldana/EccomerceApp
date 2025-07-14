@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.luciaaldana.eccomerceapp.core.ui"
+    namespace = "com.luciaaldana.eccomerceapp.core.cloudinary"
     compileSdk = 35
 
     defaultConfig {
@@ -31,28 +32,20 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-    buildFeatures {
-        compose = true
+    
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        warningsAsErrors = false
     }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.navigation.compose)
-    implementation(libs.coil.compose)
-    implementation(libs.activity.ktx)
-    implementation(libs.accompanist.permissions)
-    implementation(libs.material.icons.extended)
+    implementation(libs.hilt.android)
+    implementation(libs.cloudinary.android)
+    ksp(libs.hilt.compiler)
     
     testImplementation(libs.bundles.test.core)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(libs.bundles.mocks)
 }

@@ -1,7 +1,9 @@
 package com.luciaaldana.eccomerceapp.feature.profile
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.luciaaldana.eccomerceapp.core.cloudinary.CloudinaryService
 import com.luciaaldana.eccomerceapp.core.model.User
 import com.luciaaldana.eccomerceapp.domain.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,7 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val cloudinaryService: CloudinaryService
 ) : ViewModel() {
 
     private val _firstName = MutableStateFlow("")
@@ -41,11 +44,13 @@ class ProfileViewModel @Inject constructor(
     private val _updateMessage = MutableStateFlow<String?>(null)
     val updateMessage: StateFlow<String?> = _updateMessage.asStateFlow()
 
+    private val _isUploadingImage = MutableStateFlow(false)
+    val isUploadingImage: StateFlow<Boolean> = _isUploadingImage.asStateFlow()
+
     private var currentUser: User? = null
 
     init {
         currentUser = authRepository.getCurrentUser()
-        println("Perfil cargado: ${currentUser?.email} - ${currentUser?.firstName} ${currentUser?.lastName}")
         currentUser?.let {
             _firstName.value = it.firstName
             _lastName.value = it.lastName
@@ -75,6 +80,24 @@ class ProfileViewModel @Inject constructor(
 
     fun onUserImageUrlChanged(newImageUrl: String) {
         _userImageUrl.value = newImageUrl
+    }
+    
+    fun uploadImageToCloudinary(uri: Uri) {
+        viewModelScope.launch {
+            try {
+                _isUploadingImage.value = true
+                _updateMessage.value = null
+                
+                val cloudinaryUrl = cloudinaryService.uploadImage(uri)
+                _userImageUrl.value = cloudinaryUrl
+                _updateMessage.value = "Imagen subida exitosamente"
+                
+            } catch (e: Exception) {
+                _updateMessage.value = "Error al subir imagen: ${e.message}"
+            } finally {
+                _isUploadingImage.value = false
+            }
+        }
     }
 
     fun saveProfile() {

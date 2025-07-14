@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:navigation"))
     implementation(project(":core:ui"))
+    implementation(project(":core:cloudinary"))
     implementation(project(":domain:auth"))
     
     implementation(libs.androidx.core.ktx)
@@ -63,6 +64,10 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.coil.compose)
+    implementation(libs.activity.ktx)
+    implementation(libs.accompanist.permissions)
+    implementation(libs.material.icons.extended)
     ksp(libs.hilt.compiler)
     
     testImplementation(libs.bundles.test.core)

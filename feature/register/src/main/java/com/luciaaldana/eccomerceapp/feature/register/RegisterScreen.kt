@@ -1,14 +1,18 @@
 package com.luciaaldana.eccomerceapp.feature.register
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.luciaaldana.eccomerceapp.core.ui.components.ProfileImagePicker
 
 @Composable
 fun RegisterScreen(navController: NavController) {
@@ -25,12 +29,31 @@ fun RegisterScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(32.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Crear cuenta", style = MaterialTheme.typography.headlineMedium)
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(24.dp))
+        
+        // Profile Image Picker
+        ProfileImagePicker(
+            imageUrl = viewModel.userImageUrl,
+            isUploading = viewModel.isUploadingImage,
+            onImageSelected = { uri ->
+                viewModel.onImageSelected(uri)
+            }
+        )
+        
+        Text(
+            text = "Foto de perfil (opcional)",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
 
         OutlinedTextField(
             value = viewModel.firstName,
