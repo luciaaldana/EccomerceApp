@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.luciaaldana.eccomerceapp.core.cloudinary.CloudinaryService
 import com.luciaaldana.eccomerceapp.core.model.User
+import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeMode
+import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeRepository
 import com.luciaaldana.eccomerceapp.domain.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -14,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val authRepository: AuthRepository,
-    private val cloudinaryService: CloudinaryService
+    private val cloudinaryService: CloudinaryService,
+    private val themeRepository: ThemeRepository
 ) : ViewModel() {
 
     private val _firstName = MutableStateFlow("")
@@ -46,6 +49,12 @@ class ProfileViewModel @Inject constructor(
 
     private val _isUploadingImage = MutableStateFlow(false)
     val isUploadingImage: StateFlow<Boolean> = _isUploadingImage.asStateFlow()
+
+    val currentThemeMode: StateFlow<ThemeMode> = themeRepository.themeMode.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = ThemeMode.SYSTEM
+    )
 
     private var currentUser: User? = null
 
@@ -138,5 +147,9 @@ class ProfileViewModel @Inject constructor(
     
     fun getCurrentUser(): User? {
         return authRepository.getCurrentUser()
+    }
+    
+    fun setThemeMode(themeMode: ThemeMode) {
+        themeRepository.setThemeMode(themeMode)
     }
 }
