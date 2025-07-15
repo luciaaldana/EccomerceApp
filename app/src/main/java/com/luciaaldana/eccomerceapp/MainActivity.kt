@@ -13,11 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.luciaaldana.eccomerceapp.navigation.AppNavGraph
 import com.luciaaldana.eccomerceapp.core.ui.components.BottomNavBar
 import com.luciaaldana.eccomerceapp.core.ui.theme.EccomerceAppTheme
+import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeMode
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,7 +29,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            EccomerceAppTheme {
+            val viewModel: MainViewModel = hiltViewModel()
+            val themeMode by viewModel.themeMode.collectAsStateWithLifecycle()
+            
+            EccomerceAppTheme(themeMode = themeMode) {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
@@ -61,7 +67,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    EccomerceAppTheme {
+    EccomerceAppTheme(themeMode = ThemeMode.SYSTEM) {
         Greeting("Android")
     }
 }

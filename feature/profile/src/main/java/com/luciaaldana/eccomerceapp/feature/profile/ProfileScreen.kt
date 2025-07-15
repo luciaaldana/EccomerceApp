@@ -12,6 +12,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.luciaaldana.eccomerceapp.core.ui.components.Header
 import com.luciaaldana.eccomerceapp.core.ui.components.ProfileImagePicker
+import com.luciaaldana.eccomerceapp.core.ui.components.ThemeToggle
+import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeMode
 
 @Composable
 fun ProfileScreen(navController: NavController) {
@@ -27,6 +29,7 @@ fun ProfileScreen(navController: NavController) {
     val isUpdating by viewModel.isUpdating.collectAsState()
     val updateMessage by viewModel.updateMessage.collectAsState()
     val isUploadingImage by viewModel.isUploadingImage.collectAsState()
+    val currentThemeMode by viewModel.currentThemeMode.collectAsState()
 
     var isEditing by remember { mutableStateOf(false) }
 
@@ -175,6 +178,34 @@ fun ProfileScreen(navController: NavController) {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Editar perfil")
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+            
+            // Theme Toggle Section
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                )
+            ) {
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
+                    Text(
+                        text = "Tema de la aplicación",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(bottom = 12.dp)
+                    )
+                    
+                    ThemeToggle(
+                        selectedTheme = currentThemeMode,
+                        onThemeSelected = { newTheme ->
+                            viewModel.setThemeMode(newTheme)
+                        }
+                    )
                 }
             }
 

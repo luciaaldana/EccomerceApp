@@ -52,6 +52,9 @@ dependencies {
     implementation(libs.accompanist.permissions)
     implementation(libs.material.icons.extended)
     
+    // Hilt
+    implementation(libs.hilt.android)
+    
     testImplementation(libs.bundles.test.core)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
