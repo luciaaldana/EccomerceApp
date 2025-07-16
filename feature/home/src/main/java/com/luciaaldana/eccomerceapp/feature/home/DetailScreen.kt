@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import kotlinx.coroutines.delay
 import com.luciaaldana.eccomerceapp.core.ui.components.Header
 import com.luciaaldana.eccomerceapp.core.ui.components.ProductHeroImage
 import com.luciaaldana.eccomerceapp.core.ui.components.ProductInfoSection
@@ -27,6 +28,7 @@ fun DetailScreen(
     val product = allProducts.find { it.id == productId }
     
     var quantity by remember { mutableStateOf("1") }
+    var showAddedToCartMessage by remember { mutableStateOf(false) }
 
     if (product != null) {
         // Create dynamic title based on category
@@ -53,6 +55,7 @@ fun DetailScreen(
                         repeat(quantityInt) {
                             onAddToCart()
                         }
+                        showAddedToCartMessage = true
                     }
                 )
             }
@@ -95,6 +98,45 @@ fun DetailScreen(
                         },
                         modifier = Modifier.padding(horizontal = 20.dp)
                     )
+                }
+            }
+        }
+        
+        // Show success message when product is added
+        if (showAddedToCartMessage) {
+            LaunchedEffect(showAddedToCartMessage) {
+                delay(2000) // Show for 2 seconds
+                showAddedToCartMessage = false
+            }
+            
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    ),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 8.dp
+                    )
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "✓ Agregado al carrito",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onPrimary
+                        )
+                    }
                 }
             }
         }
