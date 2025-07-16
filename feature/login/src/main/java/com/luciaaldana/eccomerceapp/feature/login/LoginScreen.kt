@@ -1,13 +1,19 @@
 package com.luciaaldana.eccomerceapp.feature.login
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
-import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.luciaaldana.eccomerceapp.core.ui.components.EmailTextField
+import com.luciaaldana.eccomerceapp.core.ui.components.LoginHeader
+import com.luciaaldana.eccomerceapp.core.ui.components.PasswordTextField
+import com.luciaaldana.eccomerceapp.core.ui.components.PrimaryButton
+import com.luciaaldana.eccomerceapp.core.ui.components.OutlinedButton
 
 @Composable
 fun LoginScreen(
@@ -25,78 +31,117 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(32.dp),
-        verticalArrangement = Arrangement.Center
+            .verticalScroll(rememberScrollState())
+            .padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Iniciar sesión", style = MaterialTheme.typography.headlineMedium)
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        OutlinedTextField(
-            value = viewModel.email,
-            onValueChange = { viewModel.email = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("Email") == true
+        Spacer(modifier = Modifier.height(60.dp))
+        
+        // Header with logo and welcome text
+        LoginHeader(
+            title = "¡Hola de nuevo!",
+            subtitle = "Nos alegra verte otra vez"
         )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = viewModel.password,
-            onValueChange = { viewModel.password = it },
-            label = { Text("Contraseña") },
-            visualTransformation = PasswordVisualTransformation(),
+        
+        Spacer(modifier = Modifier.height(48.dp))
+        
+        // Login form
+        Card(
             modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("contraseña") == true
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Button(
-            onClick = { viewModel.onLoginClick() },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = !viewModel.isLoading
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 8.dp
+            )
         ) {
-            if (viewModel.isLoading) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(16.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text("Iniciando sesión...")
-                }
-            } else {
-                Text("Ingresar")
+            Column(
+                modifier = Modifier.padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                // Email field
+                EmailTextField(
+                    value = viewModel.email,
+                    onValueChange = { viewModel.email = it },
+                    isError = viewModel.errorMessage?.contains("Email", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("Email", ignoreCase = true) == true) {
+                        "Por favor ingresa un email válido"
+                    } else null
+                )
+                
+                // Password field
+                PasswordTextField(
+                    value = viewModel.password,
+                    onValueChange = { viewModel.password = it },
+                    placeholder = "Tu contraseña",
+                    isError = viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true) {
+                        "Contraseña incorrecta"
+                    } else null
+                )
+                
+                Spacer(modifier = Modifier.height(8.dp))
+                
+                // Login button
+                PrimaryButton(
+                    text = if (viewModel.isLoading) "Iniciando sesión..." else "Iniciar sesión",
+                    onClick = { viewModel.onLoginClick() },
+                    enabled = !viewModel.isLoading
+                )
+                
+                // Cancel button
+                OutlinedButton(
+                    text = "Cancelar",
+                    onClick = { 
+                        navController.navigate("productList") {
+                            popUpTo("login") { inclusive = true }
+                        }
+                    }
+                )
             }
         }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        OutlinedButton(
-            onClick = { 
-                navController.navigate("productList") {
-                    popUpTo("login") { inclusive = true }
-                }
-            },
-            modifier = Modifier.fillMaxWidth()
+        
+        // Error message (outside card for better visibility)
+        viewModel.errorMessage?.let { error ->
+            Spacer(modifier = Modifier.height(16.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer
+                )
+            ) {
+                Text(
+                    text = error,
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
+        
+        Spacer(modifier = Modifier.height(32.dp))
+        
+        // Register link
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Cancelar")
+            Text(
+                text = "¿No tenés cuenta? ",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            TextButton(
+                onClick = { navController.navigate("register") }
+            ) {
+                Text(
+                    text = "Registrate",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
         }
-
-        viewModel.errorMessage?.let {
-            Spacer(modifier = Modifier.height(12.dp))
-            Text(text = it, color = MaterialTheme.colorScheme.error)
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        TextButton(onClick = { navController.navigate("register") }) {
-            Text("¿No tenés cuenta? Registrate")
-        }
+        
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }

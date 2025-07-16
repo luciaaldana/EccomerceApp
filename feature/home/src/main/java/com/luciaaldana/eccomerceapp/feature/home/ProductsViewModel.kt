@@ -82,4 +82,6 @@ class ProductsViewModel @Inject constructor(
     fun isUserLoggedIn(): Boolean {
         return authRepository.getCurrentUser() != null
     }
+    
+    fun getCurrentUser() = authRepository.getCurrentUser()
 }
