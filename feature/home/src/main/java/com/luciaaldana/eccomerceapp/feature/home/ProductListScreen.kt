@@ -15,16 +15,20 @@ import com.luciaaldana.eccomerceapp.core.ui.components.HomeHeader
 import com.luciaaldana.eccomerceapp.core.ui.components.SearchBar
 import com.luciaaldana.eccomerceapp.core.ui.components.PromoBanner
 import com.luciaaldana.eccomerceapp.core.ui.components.CategoryChips
-import com.luciaaldana.eccomerceapp.core.ui.components.ProductCard
+import com.luciaaldana.eccomerceapp.core.ui.components.ProductGrid
 import com.luciaaldana.eccomerceapp.core.ui.components.PrimaryButton
+import com.luciaaldana.eccomerceapp.core.ui.components.ScreenLoadingState
 
 @Composable
-fun ProductListScreen(navController: NavController) {
+fun ProductListScreen(
+    navController: NavController,
+    cartViewModel: CartViewModel
+) {
     val viewModel: ProductsViewModel = hiltViewModel()
-    val cartViewModel: CartViewModel = hiltViewModel()
     val products by viewModel.filteredProducts.collectAsState()
     val all by viewModel.allProducts.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
+    val isScreenLoading by viewModel.isScreenLoading.collectAsState()
     val error by viewModel.error.collectAsState()
 
     val searchText by viewModel.searchQuery.collectAsState()
@@ -45,6 +49,11 @@ fun ProductListScreen(navController: NavController) {
     val userName = currentUser?.firstName
     val userImageUrl = currentUser?.userImageUrl
 
+    if (isScreenLoading) {
+        ScreenLoadingState(message = "Cargando productos...")
+        return
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -57,7 +66,7 @@ fun ProductListScreen(navController: NavController) {
                 if (isLoggedIn) {
                     navController.navigate("profile")
                 } else {
-                    navController.navigate("login")
+                    navController.navigate("login?returnTo=profile")
                 }
             }
         )
@@ -214,36 +223,22 @@ fun ProductListScreen(navController: NavController) {
                 }
             }
 
-            // Products grid
+            // Products grid usando componente reutilizable
             if (!isLoading && error == null && products.isNotEmpty()) {
-                items(products.chunked(2)) { rowProducts ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        rowProducts.forEach { product ->
-                            ProductCard(
-                                product = product,
-                                onAddToCart = {
-                                    if (isLoggedIn) {
-                                        cartViewModel.add(product)
-                                    } else {
-                                        navController.navigate("login")
-                                    }
-                                },
-                                onClick = {
-                                    navController.navigate("detail/${product.id}")
-                                },
-                                modifier = Modifier.weight(1f)
-                            )
-                        }
-                        
-                        // Fill remaining space if odd number of products in last row
-                        if (rowProducts.size == 1) {
-                            Spacer(modifier = Modifier.weight(1f))
+                ProductGrid(
+                    products = products,
+                    isLoggedIn = isLoggedIn,
+                    onProductClick = { product ->
+                        navController.navigate("detail/${product.id}")
+                    },
+                    onAddToCart = { product ->
+                        if (isLoggedIn) {
+                            cartViewModel.add(product)
+                        } else {
+                            navController.navigate("login?returnTo=productList")
                         }
                     }
-                }
+                )
             }
 
             item {

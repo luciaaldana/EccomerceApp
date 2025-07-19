@@ -6,6 +6,7 @@ import com.luciaaldana.eccomerceapp.core.model.Product
 import com.luciaaldana.eccomerceapp.domain.product.ProductRepository
 import com.luciaaldana.eccomerceapp.domain.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,6 +22,9 @@ class ProductsViewModel @Inject constructor(
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+    
+    private val _isScreenLoading = MutableStateFlow(true)
+    val isScreenLoading: StateFlow<Boolean> = _isScreenLoading.asStateFlow()
 
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error.asStateFlow()
@@ -46,6 +50,14 @@ class ProductsViewModel @Inject constructor(
 
     init {
         loadProducts()
+        simulateScreenLoading()
+    }
+    
+    private fun simulateScreenLoading() {
+        viewModelScope.launch {
+            delay(800) // Simula tiempo de carga de screen
+            _isScreenLoading.value = false
+        }
     }
 
     private fun loadProducts() {

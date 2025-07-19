@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.LocalDrink
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -25,13 +26,20 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 import coil.compose.rememberAsyncImagePainter
 import com.luciaaldana.eccomerceapp.core.model.Product
 import com.luciaaldana.eccomerceapp.core.model.utils.toPriceFormat
@@ -41,8 +49,10 @@ fun ProductCard(
     product: Product,
     onAddToCart: () -> Unit,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isLoggedIn: Boolean = true
 ) {
+    var isAdded by remember { mutableStateOf(false) }
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -140,18 +150,38 @@ fun ProductCard(
                     
                     // Add button
                     IconButton(
-                        onClick = onAddToCart,
+                        onClick = {
+                            if (!isAdded) {
+                                onAddToCart()
+                                // Only show success state if user is logged in
+                                if (isLoggedIn) {
+                                    isAdded = true
+                                }
+                            }
+                        },
+                        enabled = !isAdded,
                         modifier = Modifier
                             .size(36.dp)
                             .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.primary)
+                            .background(
+                                if (isAdded) Color(0xFF4CAF50) 
+                                else MaterialTheme.colorScheme.primary
+                            )
                     ) {
                         Icon(
-                            imageVector = Icons.Default.Add,
-                            contentDescription = "Agregar al carrito",
-                            tint = MaterialTheme.colorScheme.onPrimary,
+                            imageVector = if (isAdded) Icons.Default.Check else Icons.Default.Add,
+                            contentDescription = if (isAdded) "Agregado" else "Agregar al carrito",
+                            tint = Color.White,
                             modifier = Modifier.size(20.dp)
                         )
+                    }
+                    
+                    // Reset state after showing success
+                    if (isAdded) {
+                        LaunchedEffect(isAdded) {
+                            delay(1500) // Show check for 1.5 seconds
+                            isAdded = false
+                        }
                     }
                 }
             }

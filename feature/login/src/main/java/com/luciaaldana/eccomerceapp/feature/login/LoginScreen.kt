@@ -18,12 +18,23 @@ import com.luciaaldana.eccomerceapp.core.ui.components.OutlinedButton
 @Composable
 fun LoginScreen(
     navController: NavController,
+    returnTo: String = "productList",
     viewModel: LoginViewModel = hiltViewModel()
 ) {
     if (viewModel.isLoggedIn) {
         LaunchedEffect(Unit) {
-            navController.navigate("productList") {
-                popUpTo("login") { inclusive = true }
+            if (returnTo == "profile") {
+                // Si va al perfil después del login, establecer productList como base
+                navController.navigate("productList") {
+                    popUpTo(0) { inclusive = true }
+                }
+                navController.navigate("profile") {
+                    popUpTo("productList") { inclusive = false }
+                }
+            } else {
+                navController.navigate(returnTo) {
+                    popUpTo("login") { inclusive = true }
+                }
             }
         }
     }
@@ -93,7 +104,7 @@ fun LoginScreen(
                 OutlinedButton(
                     text = "Cancelar",
                     onClick = { 
-                        navController.navigate("productList") {
+                        navController.navigate(returnTo) {
                             popUpTo("login") { inclusive = true }
                         }
                     }

@@ -9,6 +9,7 @@ import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeMode
 import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeRepository
 import com.luciaaldana.eccomerceapp.domain.auth.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,6 +44,9 @@ class ProfileViewModel @Inject constructor(
 
     private val _isUpdating = MutableStateFlow(false)
     val isUpdating: StateFlow<Boolean> = _isUpdating.asStateFlow()
+    
+    private val _isScreenLoading = MutableStateFlow(true)
+    val isScreenLoading: StateFlow<Boolean> = _isScreenLoading.asStateFlow()
 
     private val _updateMessage = MutableStateFlow<String?>(null)
     val updateMessage: StateFlow<String?> = _updateMessage.asStateFlow()
@@ -68,6 +72,14 @@ class ProfileViewModel @Inject constructor(
             _userImageUrl.value = it.userImageUrl
             _userId.value = it._id
             _createdAt.value = it.createdAt
+        }
+        simulateScreenLoading()
+    }
+    
+    private fun simulateScreenLoading() {
+        viewModelScope.launch {
+            delay(700) // Simula tiempo de carga de screen
+            _isScreenLoading.value = false
         }
     }
 

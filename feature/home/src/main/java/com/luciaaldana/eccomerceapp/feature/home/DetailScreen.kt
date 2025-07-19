@@ -6,15 +6,18 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
 import com.luciaaldana.eccomerceapp.core.ui.components.Header
 import com.luciaaldana.eccomerceapp.core.ui.components.ProductHeroImage
 import com.luciaaldana.eccomerceapp.core.ui.components.ProductInfoSection
-import com.luciaaldana.eccomerceapp.core.ui.components.QuantityInput
-import com.luciaaldana.eccomerceapp.core.ui.components.AddToCartBottomBar
+import com.luciaaldana.eccomerceapp.core.ui.components.QuantityBuySection
+import com.luciaaldana.eccomerceapp.core.ui.components.ProductGrid
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,12 +25,16 @@ fun DetailScreen(
     productId: String,
     navController: NavController,
     onAddToCart: () -> Unit,
+    onAddRelatedToCart: (String) -> Unit = {},
     viewModel: ProductsViewModel = hiltViewModel()
 ) {
     val allProducts by viewModel.allProducts.collectAsState()
     val product = allProducts.find { it.id == productId }
     
-    var quantity by remember { mutableStateOf("1") }
+    // Filtrar productos excluyendo el actual
+    val relatedProducts = allProducts.filter { it.id != productId }
+    
+    var quantity by remember { mutableIntStateOf(1) }
     var showAddedToCartMessage by remember { mutableStateOf(false) }
 
     if (product != null) {
@@ -45,27 +52,14 @@ fun DetailScreen(
         Scaffold(
             topBar = {
                 Header(title = categoryMessage, navController = navController)
-            },
-            bottomBar = {
-                val quantityInt = quantity.toIntOrNull() ?: 1
-                AddToCartBottomBar(
-                    quantity = quantityInt,
-                    unitPrice = product.price,
-                    onAddToCart = {
-                        repeat(quantityInt) {
-                            onAddToCart()
-                        }
-                        showAddedToCartMessage = true
-                    }
-                )
             }
         ) { innerPadding ->
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                contentPadding = PaddingValues(bottom = 20.dp),
-                verticalArrangement = Arrangement.spacedBy(20.dp)
+                contentPadding = PaddingValues(bottom = 32.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 // Hero image
                 item {
@@ -87,16 +81,60 @@ fun DetailScreen(
                     )
                 }
                 
-                // Quantity input
+                // Quantity and Buy section
                 item {
-                    QuantityInput(
+                    QuantityBuySection(
                         quantity = quantity,
-                        onQuantityChange = { newQuantity ->
-                            if (newQuantity.isEmpty() || (newQuantity.toIntOrNull() ?: 0) >= 1) {
-                                quantity = newQuantity
+                        price = product.price,
+                        onIncrease = { 
+                            if (quantity < 10) quantity++ 
+                        },
+                        onDecrease = { 
+                            if (quantity > 1) quantity-- 
+                        },
+                        onBuyNow = {
+                            if (viewModel.isUserLoggedIn()) {
+                                repeat(quantity) {
+                                    onAddToCart()
+                                }
+                                showAddedToCartMessage = true
+                            } else {
+                                onAddToCart() // This will trigger the navigation to login
+                            }
+                        }
+                    )
+                }
+                
+                // Sección de productos relacionados
+                if (relatedProducts.isNotEmpty()) {
+                    item {
+                        Text(
+                            text = "Otros usuarios probaron...",
+                            style = MaterialTheme.typography.titleLarge.copy(
+                                fontWeight = FontWeight.Bold
+                            ),
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier
+                                .padding(horizontal = 20.dp)
+                                .padding(bottom = 16.dp)
+                        )
+                    }
+                    
+                    // Products grid usando componente reutilizable
+                    ProductGrid(
+                        products = relatedProducts,
+                        isLoggedIn = viewModel.isUserLoggedIn(),
+                        onProductClick = { relatedProduct ->
+                            navController.navigate("detail/${relatedProduct.id}")
+                        },
+                        onAddToCart = { relatedProduct ->
+                            if (viewModel.isUserLoggedIn()) {
+                                onAddRelatedToCart(relatedProduct.id)
+                            } else {
+                                navController.navigate("login?returnTo=detail/${relatedProduct.id}")
                             }
                         },
-                        modifier = Modifier.padding(horizontal = 20.dp)
+                        horizontalPadding = 20
                     )
                 }
             }
@@ -115,26 +153,30 @@ fun DetailScreen(
             ) {
                 Card(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(20.dp),
+                        .padding(horizontal = 24.dp, vertical = 80.dp),
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primary
+                        containerColor = MaterialTheme.colorScheme.surfaceVariant
                     ),
                     elevation = CardDefaults.cardElevation(
-                        defaultElevation = 8.dp
-                    )
+                        defaultElevation = 12.dp
+                    ),
+                    shape = RoundedCornerShape(12.dp)
                 ) {
                     Row(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalArrangement = Arrangement.Center,
+                            .padding(horizontal = 20.dp, vertical = 14.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "✓ Agregado al carrito",
-                            style = MaterialTheme.typography.titleMedium,
-                            color = MaterialTheme.colorScheme.onPrimary
+                            text = "✓",
+                            style = MaterialTheme.typography.titleLarge,
+                            color = Color(0xFF4CAF50)
+                        )
+                        Text(
+                            text = "Agregado al carrito",
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
                 }
