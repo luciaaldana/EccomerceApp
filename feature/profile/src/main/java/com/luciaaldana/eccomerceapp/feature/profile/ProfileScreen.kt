@@ -12,7 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.luciaaldana.eccomerceapp.feature.profile.R
 import androidx.navigation.NavController
 import com.luciaaldana.eccomerceapp.core.ui.components.Header
 import com.luciaaldana.eccomerceapp.core.ui.components.ProfileImagePicker
@@ -48,13 +50,13 @@ fun ProfileScreen(navController: NavController) {
     if (isScreenLoading) {
         Scaffold(
             topBar = {
-                Header(title = "Mi Perfil", navController = navController)
+                Header(title = stringResource(R.string.profile_title), navController = navController)
             },
             containerColor = MaterialTheme.colorScheme.background
         ) { innerPadding ->
             ScreenLoadingState(
                 modifier = Modifier.padding(innerPadding),
-                message = "Cargando perfil..."
+                message = stringResource(R.string.profile_loading)
             )
         }
         return
@@ -62,7 +64,7 @@ fun ProfileScreen(navController: NavController) {
 
     Scaffold(
         topBar = {
-            Header(title = "Mi Perfil", navController = navController)
+            Header(title = stringResource(R.string.profile_title), navController = navController)
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
@@ -144,7 +146,7 @@ fun ProfileScreen(navController: NavController) {
                         .padding(vertical = 8.dp)
                 ) {
                     Text(
-                        text = "Información de la cuenta",
+                        text = stringResource(R.string.profile_account_info),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Bold
                         ),
@@ -158,7 +160,7 @@ fun ProfileScreen(navController: NavController) {
                     ) {
                         Column {
                             Text(
-                                text = "ID de usuario",
+                                text = stringResource(R.string.profile_user_id),
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -174,7 +176,7 @@ fun ProfileScreen(navController: NavController) {
                                 horizontalAlignment = Alignment.End
                             ) {
                                 Text(
-                                    text = "Miembro desde",
+                                    text = stringResource(R.string.profile_member_since),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -191,7 +193,7 @@ fun ProfileScreen(navController: NavController) {
 
             // Sección de opciones del menú
             Text(
-                text = "Mis Opciones",
+                text = stringResource(R.string.profile_my_options),
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -201,8 +203,8 @@ fun ProfileScreen(navController: NavController) {
 
             // Opción de historial de pedidos
             ProfileMenuOption(
-                title = "Historial de Pedidos",
-                subtitle = "Ver mis compras anteriores",
+                title = stringResource(R.string.profile_order_history),
+                subtitle = stringResource(R.string.profile_order_history_subtitle),
                 icon = Icons.Default.Receipt,
                 onClick = {
                     navController.navigate("orderHistory")
@@ -211,8 +213,8 @@ fun ProfileScreen(navController: NavController) {
 
             // Opción de configuración de perfil
             ProfileMenuOption(
-                title = "Editar Información Personal",
-                subtitle = "Actualizar datos del perfil",
+                title = stringResource(R.string.profile_edit_info),
+                subtitle = stringResource(R.string.profile_edit_info_subtitle),
                 icon = Icons.Default.Person,
                 onClick = { showEditDialog = true }
             )
@@ -237,7 +239,7 @@ fun ProfileScreen(navController: NavController) {
                     Spacer(modifier = Modifier.width(12.dp))
                     
                     Text(
-                        text = "Tema de la Aplicación",
+                        text = stringResource(R.string.profile_app_theme),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Bold
                         ),
@@ -272,14 +274,14 @@ fun ProfileScreen(navController: NavController) {
             ) {
                 Icon(
                     imageVector = Icons.Default.ExitToApp,
-                    contentDescription = "Cerrar sesión",
+                    contentDescription = stringResource(R.string.profile_logout_description),
                     modifier = Modifier.size(18.dp)
                 )
                 
                 Spacer(modifier = Modifier.width(8.dp))
                 
                 Text(
-                    text = "Cerrar Sesión",
+                    text = stringResource(R.string.profile_logout_button),
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     )

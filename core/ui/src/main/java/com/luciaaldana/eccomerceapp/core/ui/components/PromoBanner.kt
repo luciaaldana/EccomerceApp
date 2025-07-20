@@ -27,11 +27,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.luciaaldana.eccomerceapp.core.ui.R
 
 @Composable
 fun PromoBanner(
-    title: String = "¡Ofertas especiales!",
-    subtitle: String = "Descuentos increíbles te esperan",
+    title: String = stringResource(R.string.promo_title),
+    subtitle: String = stringResource(R.string.promo_subtitle),
     modifier: Modifier = Modifier
 ) {
     Card(

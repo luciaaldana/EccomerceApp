@@ -16,13 +16,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.compose.ui.res.stringResource
+import com.luciaaldana.eccomerceapp.core.ui.R
 
 data class BottomNavItem(val label: String, val icon: ImageVector, val route: String)
 
-val bottomNavItems = listOf(
-    BottomNavItem("Carrito", Icons.Default.ShoppingCart, "cart"),
-    BottomNavItem("Inicio", Icons.Default.Home, "productList"),
-    BottomNavItem("Perfil", Icons.Default.Person, "profile")
+@Composable
+fun getBottomNavItems() = listOf(
+    BottomNavItem(stringResource(R.string.nav_cart), Icons.Default.ShoppingCart, "cart"),
+    BottomNavItem(stringResource(R.string.nav_home), Icons.Default.Home, "productList"),
+    BottomNavItem(stringResource(R.string.nav_profile), Icons.Default.Person, "profile")
 )
 
 @Composable
@@ -49,7 +52,7 @@ fun BottomNavBar(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            bottomNavItems.forEach { item ->
+            getBottomNavItems().forEach { item ->
                 val isSelected = currentRoute == item.route
                 
                 if (isSelected) {

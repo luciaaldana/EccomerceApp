@@ -76,10 +76,10 @@ class RegisterViewModel @Inject constructor(
                     isRegistered = true
                     errorMessage = null
                 } else {
-                    errorMessage = "Error al registrar usuario. Verifica que el email no esté ya registrado o intenta más tarde."
+                    errorMessage = "Error al registrar usuario. Verifica que el email no esté ya registrado o intenta más tarde." // TODO: Use R.string.register_user_error
                 }
             } catch (e: Exception) {
-                errorMessage = "Error al registrar usuario. Verifica la conexión e intenta nuevamente."
+                errorMessage = "Error al registrar usuario. Verifica la conexión e intenta nuevamente." // TODO: Use R.string.register_network_error
                 isRegistered = false
             } finally {
                 isLoading = false
@@ -90,27 +90,27 @@ class RegisterViewModel @Inject constructor(
 
     private fun isValid(): Boolean {
         if (firstName.isBlank()) {
-            errorMessage = "El nombre es obligatorio"
+            errorMessage = "El nombre es obligatorio" // TODO: Use R.string.register_name_required
             return false
         }
         if (lastName.isBlank()) {
-            errorMessage = "El apellido es obligatorio"
+            errorMessage = "El apellido es obligatorio" // TODO: Use R.string.register_lastname_required
             return false
         }
         if (nationality.isBlank()) {
-            errorMessage = "La nacionalidad es obligatoria"
+            errorMessage = "La nacionalidad es obligatoria" // TODO: Use R.string.register_nationality_required
             return false
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-           errorMessage = "Email inválido"
+           errorMessage = "Email inválido" // TODO: Use R.string.register_invalid_email
            return false
         }
         if (password.length < 8) {
-            errorMessage = "La contraseña debe tener al menos 8 caracteres"
+            errorMessage = "La contraseña debe tener al menos 8 caracteres" // TODO: Use R.string.register_password_length_error
             return false
         }
         if (password != confirmPassword) {
-            errorMessage = "Las constraseñas no coinciden"
+            errorMessage = "Las constraseñas no coinciden" // TODO: Use R.string.register_passwords_mismatch
             return false
         }
         errorMessage = null

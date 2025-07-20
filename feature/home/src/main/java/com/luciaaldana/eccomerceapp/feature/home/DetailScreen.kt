@@ -7,9 +7,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
+import com.luciaaldana.eccomerceapp.feature.home.R
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
@@ -40,13 +42,13 @@ fun DetailScreen(
     if (product != null) {
         // Create dynamic title based on category
         val categoryMessage = when {
-            product.category.contains("italiana", ignoreCase = true) -> "Comida italiana para hoy, perfecto!"
-            product.category.contains("mexicana", ignoreCase = true) -> "Sabor mexicano auténtico, delicioso!"
-            product.category.contains("pizza", ignoreCase = true) -> "Pizza fresca, recién horneada!"
-            product.category.contains("hamburguesa", ignoreCase = true) -> "Hamburguesas jugosas, irresistibles!"
-            product.category.contains("postre", ignoreCase = true) -> "Dulce tentación, el final perfecto!"
-            product.category.contains("bebida", ignoreCase = true) -> "Refrescante y delicioso!"
-            else -> "${product.category.replaceFirstChar { it.uppercase() }}, simplemente delicioso!"
+            product.category.contains("italiana", ignoreCase = true) -> stringResource(R.string.detail_italian_food)
+            product.category.contains("mexicana", ignoreCase = true) -> stringResource(R.string.detail_mexican_food)
+            product.category.contains("pizza", ignoreCase = true) -> stringResource(R.string.detail_pizza)
+            product.category.contains("hamburguesa", ignoreCase = true) -> stringResource(R.string.detail_burger)
+            product.category.contains("postre", ignoreCase = true) -> stringResource(R.string.detail_dessert)
+            product.category.contains("bebida", ignoreCase = true) -> stringResource(R.string.detail_drink)
+            else -> "${product.category.replaceFirstChar { it.uppercase() }}, ${stringResource(R.string.detail_delicious)}"
         }
         
         Scaffold(
@@ -109,7 +111,7 @@ fun DetailScreen(
                 if (relatedProducts.isNotEmpty()) {
                     item {
                         Text(
-                            text = "Otros usuarios probaron...",
+                            text = stringResource(R.string.detail_related_products),
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold
                             ),
@@ -174,7 +176,7 @@ fun DetailScreen(
                             color = Color(0xFF4CAF50)
                         )
                         Text(
-                            text = "Agregado al carrito",
+                            text = stringResource(R.string.detail_added_to_cart),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -192,12 +194,12 @@ fun DetailScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = "Producto no encontrado",
+                    text = stringResource(R.string.detail_product_not_found),
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = "El producto que buscas no existe",
+                    text = stringResource(R.string.detail_product_not_exists),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

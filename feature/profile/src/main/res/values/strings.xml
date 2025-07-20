@@ -1,0 +1,28 @@
+<resources>
+    <!-- Profile Screen -->
+    <string name="profile_title">Mi Perfil</string>
+    <string name="profile_loading">Cargando perfil...</string>
+    <string name="profile_account_info">Información de la cuenta</string>
+    <string name="profile_user_id">ID de usuario</string>
+    <string name="profile_member_since">Miembro desde</string>
+    <string name="profile_my_options">Mis Opciones</string>
+    <string name="profile_order_history">Historial de Pedidos</string>
+    <string name="profile_order_history_subtitle">Ver mis compras anteriores</string>
+    <string name="profile_edit_info">Editar Información Personal</string>
+    <string name="profile_edit_info_subtitle">Actualizar datos del perfil</string>
+    <string name="profile_app_theme">Tema de la Aplicación</string>
+    <string name="profile_logout_description">Cerrar sesión</string>
+    <string name="profile_logout_button">Cerrar Sesión</string>
+    
+    <!-- Order History Screen -->
+    <string name="order_history_title">Historial de Pedidos</string>
+    <string name="order_history_empty_title">No hay pedidos realizados</string>
+    <string name="order_history_empty_subtitle">¡Realiza tu primer pedido y aparecerá aquí!</string>
+    <string name="order_history_empty_button">Explorar Productos</string>
+    <string name="order_history_my_orders">Mis Pedidos</string>
+    <string name="order_history_single_order">pedido realizado</string>
+    <string name="order_history_multiple_orders">pedidos realizados</string>
+    <string name="order_history_clear_description">Limpiar</string>
+    <string name="order_history_clear_button">Limpiar Historial</string>
+    <string name="order_history_continue_shopping">Seguir Comprando</string>
+</resources>

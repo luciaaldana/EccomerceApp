@@ -27,12 +27,12 @@ class LoginViewModel @Inject constructor(
         
         viewModelScope.launch {
             if (!isValidEmail(email)) {
-                errorMessage = "Email inválido"
+                errorMessage = "Email inválido" // TODO: Use R.string.login_invalid_email
                 return@launch
             }
 
             if (password.length < 8) {
-                errorMessage = "La constraseña debe tener al menos 8 caracteres"
+                errorMessage = "La constraseña debe tener al menos 8 caracteres" // TODO: Use R.string.login_password_length_error
                 return@launch
             }
 
@@ -49,11 +49,11 @@ class LoginViewModel @Inject constructor(
                     errorMessage = null
                     println("LoginViewModel: Login successful")
                 } else {
-                    errorMessage = "Error al iniciar sesión. Verifica tu email y contraseña."
+                    errorMessage = "Error al iniciar sesión. Verifica tu email y contraseña." // TODO: Use R.string.login_credentials_error
                     println("LoginViewModel: Login failed - invalid credentials")
                 }
             } catch (e: Exception) {
-                errorMessage = "Error al iniciar sesión. Verifica la conexión e intenta nuevamente."
+                errorMessage = "Error al iniciar sesión. Verifica la conexión e intenta nuevamente." // TODO: Use R.string.login_network_error
                 println("LoginViewModel: Login exception: ${e.message}")
                 e.printStackTrace()
             } finally {

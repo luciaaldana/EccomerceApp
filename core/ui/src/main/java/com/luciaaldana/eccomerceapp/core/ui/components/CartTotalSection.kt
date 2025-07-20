@@ -10,7 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.luciaaldana.eccomerceapp.core.model.utils.toPriceFormat
+import com.luciaaldana.eccomerceapp.core.ui.R
 
 @Composable
 fun CartTotalSection(
@@ -35,7 +37,7 @@ fun CartTotalSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Total",
+                text = stringResource(R.string.cart_total),
                 style = MaterialTheme.typography.titleMedium,
                 color = Color.Gray,
                 fontWeight = FontWeight.Normal
@@ -66,7 +68,7 @@ fun CartTotalSection(
             shape = RoundedCornerShape(12.dp)
         ) {
             Text(
-                text = "Realizar Pedido",
+                text = stringResource(R.string.place_order),
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold
                 )

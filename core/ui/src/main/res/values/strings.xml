@@ -1,0 +1,20 @@
+<resources>
+    <!-- Bottom Navigation -->
+    <string name="nav_cart">Carrito</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_profile">Perfil</string>
+    
+    <!-- Theme Dropdown -->
+    <string name="theme_auto">Automático</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_select_description">Seleccionar tema</string>
+    
+    <!-- Promo Banner -->
+    <string name="promo_title">¡Ofertas especiales!</string>
+    <string name="promo_subtitle">Descuentos increíbles te esperan</string>
+    
+    <!-- Cart Total Section -->
+    <string name="cart_total">Total</string>
+    <string name="place_order">Realizar Pedido</string>
+</resources>

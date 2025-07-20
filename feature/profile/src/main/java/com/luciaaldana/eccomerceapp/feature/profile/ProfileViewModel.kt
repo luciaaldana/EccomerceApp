@@ -139,10 +139,12 @@ class ProfileViewModel @Inject constructor(
                 _isUpdating.value = false
                 
                 if (success) {
+                    // TODO: Replace with string resource when context is available
                     _updateMessage.value = "Perfil actualizado exitosamente"
                     // Update current user reference
                     currentUser = authRepository.getCurrentUser()
                 } else {
+                    // TODO: Replace with string resource when context is available
                     _updateMessage.value = "Error al actualizar el perfil. Inténtalo de nuevo."
                 }
             }

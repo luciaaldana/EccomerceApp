@@ -11,7 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.luciaaldana.eccomerceapp.feature.profile.R
 import androidx.navigation.NavController
 import com.luciaaldana.eccomerceapp.core.ui.components.Header
 import com.luciaaldana.eccomerceapp.core.ui.components.OrderHistoryCard
@@ -24,7 +26,7 @@ fun OrderHistoryScreen(navController: NavController) {
 
     Scaffold(
         topBar = {
-            Header(title = "Historial de Pedidos", navController = navController)
+            Header(title = stringResource(R.string.order_history_title), navController = navController)
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
@@ -37,9 +39,9 @@ fun OrderHistoryScreen(navController: NavController) {
                 // Empty order history state
                 EmptyStateSection(
                     icon = Icons.Default.ShoppingBag,
-                    title = "No hay pedidos realizados",
-                    subtitle = "¡Realiza tu primer pedido y aparecerá aquí!",
-                    buttonText = "Explorar Productos",
+                    title = stringResource(R.string.order_history_empty_title),
+                    subtitle = stringResource(R.string.order_history_empty_subtitle),
+                    buttonText = stringResource(R.string.order_history_empty_button),
                     onButtonClick = {
                         navController.navigate(route = "productList") {
                             popUpTo(route = "orderHistory") { inclusive = true }
@@ -56,7 +58,7 @@ fun OrderHistoryScreen(navController: NavController) {
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
                     ) {
                         Text(
-                            text = "Mis Pedidos",
+                            text = stringResource(R.string.order_history_my_orders),
                             style = MaterialTheme.typography.headlineSmall.copy(
                                 fontWeight = FontWeight.Bold
                             ),
@@ -66,7 +68,7 @@ fun OrderHistoryScreen(navController: NavController) {
                         Spacer(modifier = Modifier.height(4.dp))
                         
                         Text(
-                            text = "${orders.size} ${if (orders.size == 1) "pedido realizado" else "pedidos realizados"}",
+                            text = "${orders.size} ${if (orders.size == 1) stringResource(R.string.order_history_single_order) else stringResource(R.string.order_history_multiple_orders)}",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -108,14 +110,14 @@ fun OrderHistoryScreen(navController: NavController) {
                         ) {
                             Icon(
                                 imageVector = Icons.Default.DeleteOutline,
-                                contentDescription = "Limpiar",
+                                contentDescription = stringResource(R.string.order_history_clear_description),
                                 modifier = Modifier.size(18.dp)
                             )
                             
                             Spacer(modifier = Modifier.width(8.dp))
                             
                             Text(
-                                text = "Limpiar Historial",
+                                text = stringResource(R.string.order_history_clear_button),
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     fontWeight = FontWeight.Medium
                                 )
@@ -136,7 +138,7 @@ fun OrderHistoryScreen(navController: NavController) {
                             )
                         ) {
                             Text(
-                                text = "Seguir Comprando",
+                                text = stringResource(R.string.order_history_continue_shopping),
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     fontWeight = FontWeight.Bold
                                 )
