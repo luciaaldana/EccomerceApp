@@ -149,7 +149,7 @@ fun OrderHistoryCard(
                 // Añadir separador si no es el último item
                 if (index < order.items.size - 1) {
                     Spacer(modifier = Modifier.height(12.dp))
-                    Divider(
+                    HorizontalDivider(
                         modifier = Modifier.fillMaxWidth(),
                         color = MaterialTheme.colorScheme.outlineVariant,
                         thickness = 0.5.dp

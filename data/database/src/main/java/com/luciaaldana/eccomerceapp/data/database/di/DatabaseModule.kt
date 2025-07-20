@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.luciaaldana.eccomerceapp.data.database.AppDatabase
 import com.luciaaldana.eccomerceapp.data.database.dao.UserDao
+import com.luciaaldana.eccomerceapp.data.database.dao.ProductDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,11 +23,18 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             AppDatabase.DATABASE_NAME
-        ).build()
+        )
+        .fallbackToDestructiveMigration()
+        .build()
     }
     
     @Provides
     fun provideUserDao(database: AppDatabase): UserDao {
         return database.userDao()
+    }
+    
+    @Provides
+    fun provideProductDao(database: AppDatabase): ProductDao {
+        return database.productDao()
     }
 }
