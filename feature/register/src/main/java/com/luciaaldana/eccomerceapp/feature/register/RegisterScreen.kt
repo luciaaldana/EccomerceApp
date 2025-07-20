@@ -8,11 +8,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.luciaaldana.eccomerceapp.core.ui.components.ProfileImagePicker
+import com.luciaaldana.eccomerceapp.core.ui.components.EmailTextField
+import com.luciaaldana.eccomerceapp.core.ui.components.PasswordTextField
+import com.luciaaldana.eccomerceapp.core.ui.components.NameTextField
+import com.luciaaldana.eccomerceapp.core.ui.components.PrimaryButton
+import com.luciaaldana.eccomerceapp.core.ui.components.OutlinedButton
+import com.luciaaldana.eccomerceapp.core.ui.components.LoginHeader
 
 @Composable
 fun RegisterScreen(navController: NavController) {
@@ -30,135 +35,179 @@ fun RegisterScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
-            .padding(32.dp),
-        verticalArrangement = Arrangement.Center,
+            .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Crear cuenta", style = MaterialTheme.typography.headlineMedium)
-
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(40.dp))
         
-        // Profile Image Picker
-        ProfileImagePicker(
-            imageUrl = viewModel.userImageUrl,
-            isUploading = viewModel.isUploadingImage,
-            onImageSelected = { uri ->
-                viewModel.onImageSelected(uri)
-            }
+        // Header
+        LoginHeader(
+            title = "Crear cuenta",
+            subtitle = "Únete a nosotros hoy"
         )
         
-        Text(
-            text = "Foto de perfil (opcional)",
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
+        Spacer(modifier = Modifier.height(32.dp))
 
-        Spacer(modifier = Modifier.height(24.dp))
-
-        OutlinedTextField(
-            value = viewModel.firstName,
-            onValueChange = { viewModel.firstName = it },
-            label = { Text("Nombre") },
+        // Registration form
+        Card(
             modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("nombre") == true
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = viewModel.lastName,
-            onValueChange = { viewModel.lastName = it },
-            label = { Text("Apellido") },
-            modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("apellido") == true
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = viewModel.email,
-            onValueChange = { viewModel.email = it },
-            label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("email", true) == true
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = viewModel.password,
-            onValueChange = { viewModel.password = it },
-            label = { Text("Contraseña") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("contraseña") == true
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = viewModel.confirmPassword,
-            onValueChange = { viewModel.confirmPassword = it },
-            label = { Text("Confirmar contraseña") },
-            visualTransformation = PasswordVisualTransformation(),
-            modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("coinciden") == true
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        OutlinedTextField(
-            value = viewModel.nationality,
-            onValueChange = { viewModel.nationality = it },
-            label = { Text("Nacionalidad") },
-            modifier = Modifier.fillMaxWidth(),
-            isError = viewModel.errorMessage?.contains("nacionalidad") == true
-        )
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        Button(
-            onClick = { viewModel.onRegisterClick() },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = !viewModel.isLoading
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surface
+            ),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 8.dp
+            )
         ) {
-            if (viewModel.isLoading) {
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+            Column(
+                modifier = Modifier.padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(20.dp)
+            ) {
+                // Profile Image Picker
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(16.dp),
-                        strokeWidth = 2.dp
+                    ProfileImagePicker(
+                        imageUrl = viewModel.userImageUrl,
+                        isUploading = viewModel.isUploadingImage,
+                        onImageSelected = { uri ->
+                            viewModel.onImageSelected(uri)
+                        }
                     )
-                    Text("Registrando...")
+                    
+                    Spacer(modifier = Modifier.height(8.dp))
+                    
+                    Text(
+                        text = "Foto de perfil (opcional)",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
                 }
-            } else {
-                Text("Registrarme")
+
+                // Name fields
+                NameTextField(
+                    value = viewModel.firstName,
+                    onValueChange = { viewModel.firstName = it },
+                    placeholder = "Tu nombre",
+                    isError = viewModel.errorMessage?.contains("nombre", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("nombre", ignoreCase = true) == true) {
+                        "El nombre es requerido"
+                    } else null
+                )
+
+                NameTextField(
+                    value = viewModel.lastName,
+                    onValueChange = { viewModel.lastName = it },
+                    placeholder = "Tu apellido",
+                    isError = viewModel.errorMessage?.contains("apellido", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("apellido", ignoreCase = true) == true) {
+                        "El apellido es requerido"
+                    } else null
+                )
+
+                // Email field
+                EmailTextField(
+                    value = viewModel.email,
+                    onValueChange = { viewModel.email = it },
+                    isError = viewModel.errorMessage?.contains("email", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("email", ignoreCase = true) == true) {
+                        "Por favor ingresa un email válido"
+                    } else null
+                )
+
+                // Password fields
+                PasswordTextField(
+                    value = viewModel.password,
+                    onValueChange = { viewModel.password = it },
+                    placeholder = "Tu contraseña",
+                    isError = viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true) {
+                        "La contraseña debe tener al menos 6 caracteres"
+                    } else null
+                )
+
+                PasswordTextField(
+                    value = viewModel.confirmPassword,
+                    onValueChange = { viewModel.confirmPassword = it },
+                    placeholder = "Confirmar contraseña",
+                    isError = viewModel.errorMessage?.contains("coinciden", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("coinciden", ignoreCase = true) == true) {
+                        "Las contraseñas no coinciden"
+                    } else null
+                )
+
+                NameTextField(
+                    value = viewModel.nationality,
+                    onValueChange = { viewModel.nationality = it },
+                    placeholder = "Tu nacionalidad",
+                    isError = viewModel.errorMessage?.contains("nacionalidad", ignoreCase = true) == true,
+                    errorMessage = if (viewModel.errorMessage?.contains("nacionalidad", ignoreCase = true) == true) {
+                        "La nacionalidad es requerida"
+                    } else null
+                )
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                // Register button
+                PrimaryButton(
+                    text = if (viewModel.isLoading) "Registrando..." else "Crear cuenta",
+                    onClick = { viewModel.onRegisterClick() },
+                    enabled = !viewModel.isLoading
+                )
+
+                // Cancel button
+                OutlinedButton(
+                    text = "Cancelar",
+                    onClick = { 
+                        navController.navigate("productList") {
+                            popUpTo("register") { inclusive = true }
+                        }
+                    }
+                )
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        // Error message (outside card for better visibility)
+        viewModel.errorMessage?.let { error ->
+            Spacer(modifier = Modifier.height(16.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.errorContainer
+                )
+            ) {
+                Text(
+                    text = error,
+                    color = MaterialTheme.colorScheme.onErrorContainer,
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
 
-        OutlinedButton(
-            onClick = { 
-                navController.navigate("productList") {
-                    popUpTo("register") { inclusive = true }
-                }
-            },
-            modifier = Modifier.fillMaxWidth()
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Login link
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text("Cancelar")
+            Text(
+                text = "¿Ya tenés cuenta? ",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            TextButton(
+                onClick = { navController.navigate("login") }
+            ) {
+                Text(
+                    text = "Iniciar sesión",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.primary
+                )
+            }
         }
-
-        viewModel.errorMessage?.let {
-            Spacer(modifier = Modifier.height(12.dp))
-            Text(text = it, color = MaterialTheme.colorScheme.error)
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        TextButton(onClick = { navController.navigate("login") }) {
-            Text("¿Ya tenés cuenta? Iniciá sesión")
-        }
+        
+        Spacer(modifier = Modifier.height(24.dp))
     }
 }

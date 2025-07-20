@@ -1,217 +1,248 @@
 package com.luciaaldana.eccomerceapp.feature.home
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.staggeredgrid.items
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
-import coil.compose.rememberAsyncImagePainter
-import com.luciaaldana.eccomerceapp.core.model.utils.toPriceFormat
-import com.luciaaldana.eccomerceapp.core.model.Product
 import com.luciaaldana.eccomerceapp.feature.cart.CartViewModel
-import com.luciaaldana.eccomerceapp.domain.auth.AuthRepository
+import com.luciaaldana.eccomerceapp.core.ui.components.HomeHeader
+import com.luciaaldana.eccomerceapp.core.ui.components.SearchBar
+import com.luciaaldana.eccomerceapp.core.ui.components.PromoBanner
+import com.luciaaldana.eccomerceapp.core.ui.components.CategoryChips
+import com.luciaaldana.eccomerceapp.core.ui.components.ProductGrid
+import com.luciaaldana.eccomerceapp.core.ui.components.PrimaryButton
+import com.luciaaldana.eccomerceapp.core.ui.components.ScreenLoadingState
 
 @Composable
-fun ProductListScreen(navController: NavController) {
+fun ProductListScreen(
+    navController: NavController,
+    cartViewModel: CartViewModel
+) {
     val viewModel: ProductsViewModel = hiltViewModel()
-    val cartViewModel: CartViewModel = hiltViewModel()
     val products by viewModel.filteredProducts.collectAsState()
     val all by viewModel.allProducts.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
+    val isScreenLoading by viewModel.isScreenLoading.collectAsState()
     val error by viewModel.error.collectAsState()
 
     val searchText by viewModel.searchQuery.collectAsState()
     val selectedCategory by viewModel.selectedCategory.collectAsState()
 
-    val categories = remember (all) {
+    val categories = remember(all) {
         all.map { it.category }
             .distinct()
             .filter { it.isNotBlank() }
             .sorted()
     }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp)
+    // Get user info
+    val isLoggedIn = viewModel.isUserLoggedIn()
+    val currentUser = if (isLoggedIn) {
+        viewModel.getCurrentUser()
+    } else null
+    val userName = currentUser?.firstName
+    val userImageUrl = currentUser?.userImageUrl
+
+    if (isScreenLoading) {
+        ScreenLoadingState(message = "Cargando productos...")
+        return
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
-        OutlinedTextField(
-            value = searchText,
-            onValueChange = { viewModel.onSearchQueryChanged(it) },
-            label = { Text(text = "Buscar producto") },
-            modifier = Modifier.fillMaxWidth()
+        // Header
+        HomeHeader(
+            userName = userName,
+            userImageUrl = userImageUrl,
+            isLoggedIn = isLoggedIn,
+            onProfileClick = {
+                if (isLoggedIn) {
+                    navController.navigate("profile")
+                } else {
+                    navController.navigate("login?returnTo=profile")
+                }
+            }
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        CategoryDropdown(
-            categories = categories,
-            selected = selectedCategory,
-            onSelected = { viewModel.onCategorySelected(it)}
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        when {
-            isLoading -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = androidx.compose.ui.Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
-            error != null -> {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = error ?: "Error desconocido",
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.error
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = { viewModel.retryLoadProducts() }) {
-                        Text("Reintentar")
-                    }
-                }
-            }
-            else -> {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    modifier = Modifier.fillMaxSize(),
-                ) {
-                    items(products) { product ->
-                        ProductCard(
-                            product = product,
-                            onAddToCart = { 
-                                if (viewModel.isUserLoggedIn()) {
-                                    cartViewModel.add(product)
-                                } else {
-                                    navController.navigate("login")
-                                }
-                            },
-                            onClick = {
-                                navController.navigate("detail/${product.id}")
-                            }
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun CategoryDropdown(
-    categories: List<String>,
-    selected: String?,
-    onSelected: (String?) -> Unit
-) {
-    var expanded by remember { mutableStateOf(value = false) }
-
-    Box {
-        OutlinedButton(onClick = { expanded = true }) {
-            Text(text = selected ?: "Todas las categorías" )
-        }
-        DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
-            DropdownMenuItem(text = { Text(text="Todas") }, onClick = {
-                onSelected(null)
-                expanded = false
-            })
-            categories.forEach { category ->
-                DropdownMenuItem(text = { Text(text=category) }, onClick = {
-                    onSelected(category)
-                    expanded = false
-                })
-            }
-        }
-    }
-}
-
-@Composable
-fun ProductCard(
-    product: Product,
-    onAddToCart: () -> Unit,
-    onClick: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(1.dp)
-            .height(300.dp)
-            .clickable(onClick = onClick),
-        shape = RectangleShape
-    ) {
-        Column(modifier = Modifier.padding(0.dp)) {
-            Image(
-                painter = rememberAsyncImagePainter(product.imageUrl),
-                contentDescription = product.name,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(120.dp),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Column(modifier = Modifier.padding(8.dp)) {
-                Text(
-                    text = product.name,
-                    style = MaterialTheme.typography.titleSmall,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
+        // Main content
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = 20.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            item {
                 Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = product.description,
-                    style = MaterialTheme.typography.bodySmall,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+            }
+
+            // Search bar
+            item {
+                SearchBar(
+                    query = searchText,
+                    onQueryChange = { viewModel.onSearchQueryChanged(it) },
+                    placeholder = "Buscar productos..."
                 )
-                Spacer(modifier = Modifier.height(8.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                ) {
-                    Text(
-                        text = "${product.price.toPriceFormat()}",
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                    if (product.includesDrink) {
+            }
+
+            // Promo banner (only show when not searching)
+            if (searchText.isEmpty()) {
+                item {
+                    PromoBanner()
+                }
+            }
+
+            // Categories
+            if (categories.isNotEmpty()) {
+                item {
+                    Column {
                         Text(
-                            text = "* Incluye bebida 🥤",
-                            style = MaterialTheme.typography.bodySmall
+                            text = "Categorías",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                        CategoryChips(
+                            categories = categories,
+                            selectedCategory = selectedCategory,
+                            onCategorySelected = { viewModel.onCategorySelected(it) }
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(8.dp))
-                Button(
-                    onClick = onAddToCart,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Agregar al carrito")
+            }
+
+            // Products section
+            item {
+                when {
+                    isLoading -> {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(200.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                CircularProgressIndicator(
+                                    color = MaterialTheme.colorScheme.primary
+                                )
+                                Text(
+                                    text = "Cargando productos...",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
+                    error != null -> {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.errorContainer
+                            )
+                        ) {
+                            Column(
+                                modifier = Modifier.padding(20.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(12.dp)
+                            ) {
+                                Text(
+                                    text = "Error al cargar productos",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = MaterialTheme.colorScheme.onErrorContainer
+                                )
+                                Text(
+                                    text = error ?: "Error desconocido",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onErrorContainer
+                                )
+                                PrimaryButton(
+                                    text = "Reintentar",
+                                    onClick = { viewModel.retryLoadProducts() }
+                                )
+                            }
+                        }
+                    }
+                    products.isEmpty() -> {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant
+                            )
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(40.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Column(
+                                    horizontalAlignment = Alignment.CenterHorizontally,
+                                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                                ) {
+                                    Text(
+                                        text = "No hay productos",
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                    Text(
+                                        text = if (searchText.isNotEmpty()) {
+                                            "Intenta con otros términos de búsqueda"
+                                        } else {
+                                            "Vuelve más tarde"
+                                        },
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+                        }
+                    }
+                    else -> {
+                        // Products header
+                        Text(
+                            text = if (searchText.isNotEmpty()) {
+                                "Resultados (${products.size})"
+                            } else if (selectedCategory != null) {
+                                "$selectedCategory (${products.size})"
+                            } else {
+                                "Todos los productos (${products.size})"
+                            },
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.padding(bottom = 8.dp)
+                        )
+                    }
                 }
+            }
+
+            // Products grid usando componente reutilizable
+            if (!isLoading && error == null && products.isNotEmpty()) {
+                ProductGrid(
+                    products = products,
+                    isLoggedIn = isLoggedIn,
+                    onProductClick = { product ->
+                        navController.navigate("detail/${product.id}")
+                    },
+                    onAddToCart = { product ->
+                        if (isLoggedIn) {
+                            cartViewModel.add(product)
+                        } else {
+                            navController.navigate("login?returnTo=productList")
+                        }
+                    }
+                )
+            }
+
+            item {
+                Spacer(modifier = Modifier.height(80.dp))
             }
         }
     }

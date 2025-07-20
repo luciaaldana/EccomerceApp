@@ -21,18 +21,32 @@ import com.luciaaldana.eccomerceapp.feature.cart.CartViewModel
 import com.luciaaldana.eccomerceapp.feature.home.ProductsViewModel
 
 @Composable
-fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+fun AppNavGraph(
+    navController: NavHostController, 
+    cartViewModel: CartViewModel,
+    modifier: Modifier = Modifier
+) {
     NavHost(navController = navController, startDestination = "productList", modifier = modifier) {
-        composable( route = "login") { LoginScreen(navController) }
+        composable( 
+            route = "login?returnTo={returnTo}",
+            arguments = listOf(navArgument("returnTo") { 
+                type = NavType.StringType
+                defaultValue = "productList"
+                nullable = true
+            })
+        ) { backStackEntry ->
+            val returnTo = backStackEntry.arguments?.getString("returnTo") ?: "productList"
+            LoginScreen(navController, returnTo)
+        }
         composable( route = "register") { RegisterScreen(navController) }
-        composable( route = "productList") { ProductListScreen(navController) }
-        composable( route = "cart") { CartScreen(navController) }
+        composable( route = "productList") { ProductListScreen(navController, cartViewModel) }
+        composable( route = "cart") { CartScreen(navController, cartViewModel) }
         composable( route = "profile") { 
             val viewModel: ProductsViewModel = hiltViewModel()
             if (viewModel.isUserLoggedIn()) {
                 ProfileScreen(navController)
             } else {
-                navController.navigate("login") {
+                navController.navigate("login?returnTo=profile") {
                     popUpTo("profile") { inclusive = true }
                 }
             }
@@ -45,7 +59,6 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId")
             if (productId != null) {
-                val cartViewModel: CartViewModel = hiltViewModel()
                 val viewModel: ProductsViewModel = hiltViewModel()
                 val allProducts = viewModel.allProducts.collectAsState().value
                 val product = allProducts.find { it.id == productId }
@@ -58,7 +71,12 @@ fun AppNavGraph(navController: NavHostController, modifier: Modifier = Modifier)
                             if (viewModel.isUserLoggedIn()) {
                                 cartViewModel.add(it)
                             } else {
-                                navController.navigate("login")
+                                navController.navigate("login?returnTo=detail/$productId")
+                            }
+                        },
+                        onAddRelatedToCart = { relatedProductId ->
+                            allProducts.find { p -> p.id == relatedProductId }?.let { relatedProduct ->
+                                cartViewModel.add(relatedProduct)
                             }
                         }
                     )

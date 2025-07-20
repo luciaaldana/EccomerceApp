@@ -21,6 +21,7 @@ import com.luciaaldana.eccomerceapp.navigation.AppNavGraph
 import com.luciaaldana.eccomerceapp.core.ui.components.BottomNavBar
 import com.luciaaldana.eccomerceapp.core.ui.theme.EccomerceAppTheme
 import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeMode
+import com.luciaaldana.eccomerceapp.feature.cart.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,17 +38,26 @@ class MainActivity : ComponentActivity() {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination?.route
 
-                val showBottomBar = currentRoute in listOf("productList", "cart", "detail/{productId}", "profile")
+                val cartViewModel: CartViewModel = hiltViewModel()
+                val cartItems by cartViewModel.cartItems.collectAsStateWithLifecycle()
+                val cartItemCount = cartItems.sumOf { it.quantity }
+                
+
+                val showBottomBar = currentRoute in listOf("productList", "detail/{productId}", "profile")
 
                 Scaffold(
                     bottomBar = {
                         if (showBottomBar) {
-                            BottomNavBar(navController)
+                            BottomNavBar(
+                                navController = navController,
+                                cartItemCount = cartItemCount
+                            )
                         }
                     }
                 ) { innerPadding ->
                     AppNavGraph(
                         navController = navController,
+                        cartViewModel = cartViewModel,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
