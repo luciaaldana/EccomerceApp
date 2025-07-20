@@ -17,8 +17,8 @@ class ProductsViewModel @Inject constructor(
     private val authRepository: AuthRepository
 ): ViewModel() {
 
-    private val _allProducts = MutableStateFlow<List<Product>>(emptyList())
-    val allProducts: StateFlow<List<Product>> = _allProducts.asStateFlow()
+    val allProducts: StateFlow<List<Product>> = productRepository.getProducts()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
@@ -36,7 +36,7 @@ class ProductsViewModel @Inject constructor(
         private set
 
     val filteredProducts: StateFlow<List<Product>> = combine(
-        _allProducts, searchQuery, selectedCategory
+        allProducts, searchQuery, selectedCategory
     ) { products, query, category ->
         products.filter { product ->
             val matchesQuery = query.isBlank() ||
@@ -49,28 +49,31 @@ class ProductsViewModel @Inject constructor(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     init {
-        loadProducts()
         simulateScreenLoading()
+        loadInitialData()
+    }
+
+    private fun loadInitialData() {
+        viewModelScope.launch {
+            if (!productRepository.hasLocalProducts()) {
+                refreshProducts()
+            }
+        }
     }
     
     private fun simulateScreenLoading() {
         viewModelScope.launch {
-            delay(800) // Simula tiempo de carga de screen
+            delay(800)
             _isScreenLoading.value = false
         }
     }
 
-    private fun loadProducts() {
+    fun refreshProducts() {
         viewModelScope.launch {
             _isLoading.value = true
             _error.value = null
             try {
-                val products = productRepository.getProducts()
-                println("🔍 DEBUG: Productos cargados: ${products.size}")
-                products.forEachIndexed { index, product ->
-                    println("🔍 DEBUG: Producto $index - name: ${product.name}, category: '${product.category}'")
-                }
-                _allProducts.value = products
+                productRepository.refreshProducts()
             } catch (e: Exception) {
                 _error.value = "Error al cargar productos: ${e.message}"
             } finally {
@@ -80,7 +83,7 @@ class ProductsViewModel @Inject constructor(
     }
 
     fun retryLoadProducts() {
-        loadProducts()
+        refreshProducts()
     }
 
     fun onSearchQueryChanged(query: String) {

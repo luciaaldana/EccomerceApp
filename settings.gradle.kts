@@ -46,4 +46,5 @@ include(":feature:register")
 include(":feature:home")
 include(":feature:cart")
 include(":feature:profile")
+include(":feature:productlist")
  

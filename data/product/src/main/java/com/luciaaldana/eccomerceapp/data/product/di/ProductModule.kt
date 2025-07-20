@@ -3,6 +3,7 @@ package com.luciaaldana.eccomerceapp.data.product.di
 import com.luciaaldana.eccomerceapp.domain.product.ProductRepository
 import com.luciaaldana.eccomerceapp.data.product.ProductRepositoryImpl
 import com.luciaaldana.eccomerceapp.data.product.network.ProductApi
+import com.luciaaldana.eccomerceapp.data.database.dao.ProductDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,5 +21,5 @@ object ProductModule {
 
     @Provides
     @Singleton
-    fun provideProductRepository(productApi: ProductApi): ProductRepository = ProductRepositoryImpl(productApi)
+    fun provideProductRepository(productApi: ProductApi, productDao: ProductDao): ProductRepository = ProductRepositoryImpl(productApi, productDao)
 }

@@ -1,22 +1,13 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dagger.hilt.android)
     alias(libs.plugins.ksp)
 }
 
-// Leer local.properties
-val localProperties = Properties().apply {
-    val file = rootProject.file("local.properties")
-    if (file.exists()) {
-        load(file.inputStream())
-    }
-}
-
 android {
-    namespace = "com.luciaaldana.eccomerceapp.data.product"
+    namespace = "com.luciaaldana.eccomerceapp.feature.productlist"
     compileSdk = 35
 
     defaultConfig {
@@ -24,9 +15,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
-        
-        // Agregar propiedades a BuildConfig
-        buildConfigField("String", "BASE_URL", "\"${localProperties["RENDER_BASE_URL"]}\"")
     }
 
     buildTypes {
@@ -46,27 +34,33 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        buildConfig = true
+        compose = true
+    }
+    
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+        warningsAsErrors = false
     }
 }
 
 dependencies {
     implementation(project(":core:model"))
     implementation(project(":domain:product"))
-    implementation(project(":data:database"))
     
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    
+    // Compose dependencies (required for kotlin.compose plugin)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material3)
+    
     implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.work)
     ksp(libs.hilt.compiler)
     
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.moshi)
-    implementation(libs.okhttp.logging)
-    implementation(libs.moshi.kotlin)
-    ksp(libs.moshi.codegen)
-    
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
     
     testImplementation(libs.bundles.test.core)
     testImplementation(libs.bundles.mocks)
