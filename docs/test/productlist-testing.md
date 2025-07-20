@@ -369,3 +369,25 @@ BUILD SUCCESSFUL in 19s
 - Metodología TDD asegura calidad desde el diseño
 - Tests atómicos que verifican un comportamiento específico
 - Manejo explícito de estados de error y casos edge
+
+## Coverage
+
+<img width="1440" height="283" alt="Captura de pantalla 2025-07-20 a la(s) 18 47 37" src="https://github.com/user-attachments/assets/81a9f938-fe9b-4ded-9f7d-bd70b27f70f9" />
+
+<img width="1440" height="354" alt="Captura de pantalla 2025-07-20 a la(s) 18 48 14" src="https://github.com/user-attachments/assets/4d852ce4-a621-4836-863a-829490d04e68" />
+
+<img width="1440" height="244" alt="Captura de pantalla 2025-07-20 a la(s) 18 48 28" src="https://github.com/user-attachments/assets/8c156faf-15ff-4228-9999-2cbe73a473ce" />
+
+
+<img width="1440" height="320" alt="Captura de pantalla 2025-07-20 a la(s) 18 48 44" src="https://github.com/user-attachments/assets/a1b6f41b-6743-4e14-8335-57759b643ee9" />
+
+<img width="1440" height="320" alt="Captura de pantalla 2025-07-20 a la(s) 18 49 01" src="https://github.com/user-attachments/assets/501ef25f-5ee9-43f1-9794-6c21c53886d0" />
+
+<img width="1440" height="121" alt="Captura de pantalla 2025-07-20 a la(s) 18 49 31" src="https://github.com/user-attachments/assets/3516cca6-b905-4740-a1f3-56a72c4ef11b" />
+
+
+
+
+
+
+
