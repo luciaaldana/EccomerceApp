@@ -19,23 +19,32 @@ class OrderHistoryViewModel @Inject constructor(
 
     private val _orders = MutableStateFlow<List<Order>>(emptyList())
     val orders: StateFlow<List<Order>> = _orders.asStateFlow()
+    
+    private val _isLoading = MutableStateFlow(true)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
     init {
         loadOrders()
     }
 
     fun loadOrders() {
-        _orders.value = orderRepo.getOrders()
+        viewModelScope.launch {
+            _isLoading.value = true
+            _orders.value = orderRepo.getOrders()
+            _isLoading.value = false
+        }
     }
 
     fun confirmOrder() {
         val cartItems = cartRepo.getCartItems()
         if (cartItems.isNotEmpty()) {
-            val total = cartItems.sumOf { it.product.price * it.quantity }
-            val newOrder = Order(items = cartItems, total = total)
-            orderRepo.addOrder(newOrder)
-            cartRepo.clearCart()
-            loadOrders()
+            viewModelScope.launch {
+                val order = orderRepo.addOrder(cartItems)
+                if (order != null) {
+                    cartRepo.clearCart()
+                    loadOrders()
+                }
+            }
         }
     }
 

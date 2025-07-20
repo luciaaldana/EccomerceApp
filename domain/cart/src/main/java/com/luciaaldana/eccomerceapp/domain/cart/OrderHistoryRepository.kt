@@ -1,9 +1,10 @@
 package com.luciaaldana.eccomerceapp.domain.cart
 
+import com.luciaaldana.eccomerceapp.core.model.CartItem
 import com.luciaaldana.eccomerceapp.core.model.Order
 
 interface OrderHistoryRepository {
-    fun getOrders(): List<Order>
-    fun addOrder(order: Order)
+    suspend fun getOrders(): List<Order>
+    suspend fun addOrder(cartItems: List<CartItem>): Order?
     fun clearHistory()
 }

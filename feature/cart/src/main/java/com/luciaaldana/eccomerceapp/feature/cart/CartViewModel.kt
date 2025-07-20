@@ -73,11 +73,13 @@ class CartViewModel @Inject constructor(
     fun confirmOrder() {
         val cartItems = cartItemRepository.getCartItems()
         if (cartItems.isNotEmpty()) {
-            val total = cartItems.sumOf { it.product.price * it.quantity }
-            val newOrder = Order(items = cartItems, total = total)
-            orderHistoryRepository.addOrder(newOrder)
-            cartItemRepository.clearCart()
-            loadCart()
+            viewModelScope.launch {
+                val order = orderHistoryRepository.addOrder(cartItems)
+                if (order != null) {
+                    cartItemRepository.clearCart()
+                    loadCart()
+                }
+            }
         }
     }
 }

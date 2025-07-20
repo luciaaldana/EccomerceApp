@@ -42,6 +42,12 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     
+    // Network dependencies
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.moshi)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.codegen)
+    
     testImplementation(libs.bundles.test.core)
     testImplementation(libs.bundles.mocks)
 }
