@@ -10,7 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.luciaaldana.eccomerceapp.core.ui.theme.ThemeMode
+import com.luciaaldana.eccomerceapp.core.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,12 +24,12 @@ fun ThemeDropdownMenu(
     var expanded by remember { mutableStateOf(false) }
     
     val themeOptions = listOf<Pair<ThemeMode, String>>(
-        ThemeMode.SYSTEM to "Automático",
-        ThemeMode.LIGHT to "Claro",
-        ThemeMode.DARK to "Oscuro"
+        ThemeMode.SYSTEM to stringResource(R.string.theme_auto),
+        ThemeMode.LIGHT to stringResource(R.string.theme_light),
+        ThemeMode.DARK to stringResource(R.string.theme_dark)
     )
     
-    val currentThemeLabel = themeOptions.find { it.first == currentTheme }?.second ?: "Automático"
+    val currentThemeLabel = themeOptions.find { it.first == currentTheme }?.second ?: stringResource(R.string.theme_auto)
     
     ExposedDropdownMenuBox(
         expanded = expanded,
@@ -41,7 +43,7 @@ fun ThemeDropdownMenu(
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Seleccionar tema",
+                    contentDescription = stringResource(R.string.theme_select_description),
                     tint = MaterialTheme.colorScheme.primary
                 )
             },

@@ -1,0 +1,27 @@
+<resources>
+    <!-- Product List Screen -->
+    <string name="home_loading">Cargando productos...</string>
+    <string name="home_search_placeholder">Buscar productos...</string>
+    <string name="home_categories">Categorías</string>
+    <string name="home_error_loading">Error al cargar productos</string>
+    <string name="home_error_unknown">Error desconocido</string>
+    <string name="home_retry_button">Reintentar</string>
+    <string name="home_no_products">No hay productos</string>
+    <string name="home_search_help">Intenta con otros términos de búsqueda</string>
+    <string name="home_try_later">Vuelve más tarde</string>
+    <string name="home_search_results">Resultados (</string>
+    <string name="home_all_products">Todos los productos (</string>
+    
+    <!-- Detail Screen -->
+    <string name="detail_italian_food">Comida italiana para hoy, perfecto!</string>
+    <string name="detail_mexican_food">Sabor mexicano auténtico, delicioso!</string>
+    <string name="detail_pizza">Pizza fresca, recién horneada!</string>
+    <string name="detail_burger">Hamburguesas jugosas, irresistibles!</string>
+    <string name="detail_dessert">Dulce tentación, el final perfecto!</string>
+    <string name="detail_drink">Refrescante y delicioso!</string>
+    <string name="detail_delicious">simplemente delicioso!</string>
+    <string name="detail_related_products">Otros usuarios probaron...</string>
+    <string name="detail_added_to_cart">Agregado al carrito</string>
+    <string name="detail_product_not_found">Producto no encontrado</string>
+    <string name="detail_product_not_exists">El producto que buscas no existe</string>
+</resources>

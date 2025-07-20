@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -32,13 +33,13 @@ fun CartScreen(
     if (isScreenLoading) {
         Scaffold(
             topBar = {
-                Header(title = "Carrito de compras", navController = navController)
+                Header(title = stringResource(R.string.cart_title), navController = navController)
             },
             containerColor = MaterialTheme.colorScheme.background
         ) { innerPadding ->
             ScreenLoadingState(
                 modifier = Modifier.padding(innerPadding),
-                message = "Cargando carrito..."
+                message = stringResource(R.string.cart_loading)
             )
         }
         return
@@ -46,7 +47,7 @@ fun CartScreen(
 
     Scaffold(
         topBar = {
-            Header(title = "Carrito de compras", navController = navController)
+            Header(title = stringResource(R.string.cart_title), navController = navController)
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
@@ -59,9 +60,9 @@ fun CartScreen(
                 // Empty cart state
                 EmptyStateSection(
                     icon = Icons.Default.ShoppingCart,
-                    title = "Tu carrito está vacío",
-                    subtitle = "¡Agrega algunos productos y aparecerán aquí!",
-                    buttonText = "Explorar Productos",
+                    title = stringResource(R.string.cart_empty_title),
+                    subtitle = stringResource(R.string.cart_empty_subtitle),
+                    buttonText = stringResource(R.string.cart_empty_button),
                     onButtonClick = { 
                         navController.navigate(route = "productList") {
                             popUpTo(route = "cart") { inclusive = false }
@@ -78,7 +79,7 @@ fun CartScreen(
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)
                     ) {
                         Text(
-                            text = "Mi Carrito",
+                            text = stringResource(R.string.cart_my_cart),
                             style = MaterialTheme.typography.headlineSmall.copy(
                                 fontWeight = FontWeight.Bold
                             ),
@@ -88,7 +89,7 @@ fun CartScreen(
                         Spacer(modifier = Modifier.height(4.dp))
                         
                         Text(
-                            text = "$itemCount artículos",
+                            text = "$itemCount${stringResource(R.string.cart_items_count)}",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )

@@ -6,6 +6,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -50,8 +51,8 @@ fun LoginScreen(
         
         // Header with logo and welcome text
         LoginHeader(
-            title = "¡Hola de nuevo!",
-            subtitle = "Nos alegra verte otra vez"
+            title = stringResource(R.string.login_welcome_title),
+            subtitle = stringResource(R.string.login_welcome_subtitle)
         )
         
         Spacer(modifier = Modifier.height(48.dp))
@@ -76,7 +77,7 @@ fun LoginScreen(
                     onValueChange = { viewModel.email = it },
                     isError = viewModel.errorMessage?.contains("Email", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("Email", ignoreCase = true) == true) {
-                        "Por favor ingresa un email válido"
+                        stringResource(R.string.login_email_error)
                     } else null
                 )
                 
@@ -84,10 +85,10 @@ fun LoginScreen(
                 PasswordTextField(
                     value = viewModel.password,
                     onValueChange = { viewModel.password = it },
-                    placeholder = "Tu contraseña",
+                    placeholder = stringResource(R.string.login_password_placeholder),
                     isError = viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true) {
-                        "Contraseña incorrecta"
+                        stringResource(R.string.login_password_error)
                     } else null
                 )
                 
@@ -95,14 +96,14 @@ fun LoginScreen(
                 
                 // Login button
                 PrimaryButton(
-                    text = if (viewModel.isLoading) "Iniciando sesión..." else "Iniciar sesión",
+                    text = if (viewModel.isLoading) stringResource(R.string.login_button_loading) else stringResource(R.string.login_button_text),
                     onClick = { viewModel.onLoginClick() },
                     enabled = !viewModel.isLoading
                 )
                 
                 // Cancel button
                 OutlinedButton(
-                    text = "Cancelar",
+                    text = stringResource(R.string.login_button_cancel),
                     onClick = { 
                         navController.navigate(returnTo) {
                             popUpTo("login") { inclusive = true }
@@ -138,7 +139,7 @@ fun LoginScreen(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "¿No tenés cuenta? ",
+                text = stringResource(R.string.login_no_account),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -146,7 +147,7 @@ fun LoginScreen(
                 onClick = { navController.navigate("register") }
             ) {
                 Text(
-                    text = "Registrate",
+                    text = stringResource(R.string.login_register_link),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary
                 )

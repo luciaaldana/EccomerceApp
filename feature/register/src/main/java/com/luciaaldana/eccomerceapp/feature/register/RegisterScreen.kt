@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -42,8 +43,8 @@ fun RegisterScreen(navController: NavController) {
         
         // Header
         LoginHeader(
-            title = "Crear cuenta",
-            subtitle = "Únete a nosotros hoy"
+            title = stringResource(R.string.register_title),
+            subtitle = stringResource(R.string.register_subtitle)
         )
         
         Spacer(modifier = Modifier.height(32.dp))
@@ -78,7 +79,7 @@ fun RegisterScreen(navController: NavController) {
                     Spacer(modifier = Modifier.height(8.dp))
                     
                     Text(
-                        text = "Foto de perfil (opcional)",
+                        text = stringResource(R.string.register_profile_photo),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -88,20 +89,20 @@ fun RegisterScreen(navController: NavController) {
                 NameTextField(
                     value = viewModel.firstName,
                     onValueChange = { viewModel.firstName = it },
-                    placeholder = "Tu nombre",
+                    placeholder = stringResource(R.string.register_name_placeholder),
                     isError = viewModel.errorMessage?.contains("nombre", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("nombre", ignoreCase = true) == true) {
-                        "El nombre es requerido"
+                        stringResource(R.string.register_name_error)
                     } else null
                 )
 
                 NameTextField(
                     value = viewModel.lastName,
                     onValueChange = { viewModel.lastName = it },
-                    placeholder = "Tu apellido",
+                    placeholder = stringResource(R.string.register_lastname_placeholder),
                     isError = viewModel.errorMessage?.contains("apellido", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("apellido", ignoreCase = true) == true) {
-                        "El apellido es requerido"
+                        stringResource(R.string.register_lastname_error)
                     } else null
                 )
 
@@ -111,7 +112,7 @@ fun RegisterScreen(navController: NavController) {
                     onValueChange = { viewModel.email = it },
                     isError = viewModel.errorMessage?.contains("email", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("email", ignoreCase = true) == true) {
-                        "Por favor ingresa un email válido"
+                        stringResource(R.string.register_email_error)
                     } else null
                 )
 
@@ -119,30 +120,30 @@ fun RegisterScreen(navController: NavController) {
                 PasswordTextField(
                     value = viewModel.password,
                     onValueChange = { viewModel.password = it },
-                    placeholder = "Tu contraseña",
+                    placeholder = stringResource(R.string.register_password_placeholder),
                     isError = viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("contraseña", ignoreCase = true) == true) {
-                        "La contraseña debe tener al menos 6 caracteres"
+                        stringResource(R.string.register_password_error)
                     } else null
                 )
 
                 PasswordTextField(
                     value = viewModel.confirmPassword,
                     onValueChange = { viewModel.confirmPassword = it },
-                    placeholder = "Confirmar contraseña",
+                    placeholder = stringResource(R.string.register_confirm_password_placeholder),
                     isError = viewModel.errorMessage?.contains("coinciden", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("coinciden", ignoreCase = true) == true) {
-                        "Las contraseñas no coinciden"
+                        stringResource(R.string.register_passwords_no_match)
                     } else null
                 )
 
                 NameTextField(
                     value = viewModel.nationality,
                     onValueChange = { viewModel.nationality = it },
-                    placeholder = "Tu nacionalidad",
+                    placeholder = stringResource(R.string.register_nationality_placeholder),
                     isError = viewModel.errorMessage?.contains("nacionalidad", ignoreCase = true) == true,
                     errorMessage = if (viewModel.errorMessage?.contains("nacionalidad", ignoreCase = true) == true) {
-                        "La nacionalidad es requerida"
+                        stringResource(R.string.register_nationality_error)
                     } else null
                 )
 
@@ -150,14 +151,14 @@ fun RegisterScreen(navController: NavController) {
 
                 // Register button
                 PrimaryButton(
-                    text = if (viewModel.isLoading) "Registrando..." else "Crear cuenta",
+                    text = if (viewModel.isLoading) stringResource(R.string.register_button_loading) else stringResource(R.string.register_button_text),
                     onClick = { viewModel.onRegisterClick() },
                     enabled = !viewModel.isLoading
                 )
 
                 // Cancel button
                 OutlinedButton(
-                    text = "Cancelar",
+                    text = stringResource(R.string.register_button_cancel),
                     onClick = { 
                         navController.navigate("productList") {
                             popUpTo("register") { inclusive = true }
@@ -193,7 +194,7 @@ fun RegisterScreen(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "¿Ya tenés cuenta? ",
+                text = stringResource(R.string.register_has_account),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -201,7 +202,7 @@ fun RegisterScreen(navController: NavController) {
                 onClick = { navController.navigate("login") }
             ) {
                 Text(
-                    text = "Iniciar sesión",
+                    text = stringResource(R.string.register_login_link),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.primary
                 )

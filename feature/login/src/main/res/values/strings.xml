@@ -1,0 +1,19 @@
+<resources>
+    <!-- Login Screen -->
+    <string name="login_welcome_title">¡Hola de nuevo!</string>
+    <string name="login_welcome_subtitle">Nos alegra verte otra vez</string>
+    <string name="login_email_error">Por favor ingresa un email válido</string>
+    <string name="login_password_placeholder">Tu contraseña</string>
+    <string name="login_password_error">Contraseña incorrecta</string>
+    <string name="login_button_loading">Iniciando sesión...</string>
+    <string name="login_button_text">Iniciar sesión</string>
+    <string name="login_button_cancel">Cancelar</string>
+    <string name="login_no_account">¿No tenés cuenta? </string>
+    <string name="login_register_link">Registrate</string>
+    
+    <!-- Login ViewModel -->
+    <string name="login_invalid_email">Email inválido</string>
+    <string name="login_password_length_error">La constraseña debe tener al menos 8 caracteres</string>
+    <string name="login_credentials_error">Error al iniciar sesión. Verifica tu email y contraseña.</string>
+    <string name="login_network_error">Error al iniciar sesión. Verifica la conexión e intenta nuevamente.</string>
+</resources>

@@ -7,8 +7,10 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.luciaaldana.eccomerceapp.feature.home.R
 import androidx.navigation.NavController
 import com.luciaaldana.eccomerceapp.feature.cart.CartViewModel
 import com.luciaaldana.eccomerceapp.core.ui.components.HomeHeader
@@ -50,7 +52,7 @@ fun ProductListScreen(
     val userImageUrl = currentUser?.userImageUrl
 
     if (isScreenLoading) {
-        ScreenLoadingState(message = "Cargando productos...")
+        ScreenLoadingState(message = stringResource(R.string.home_loading))
         return
     }
 
@@ -86,7 +88,7 @@ fun ProductListScreen(
                 SearchBar(
                     query = searchText,
                     onQueryChange = { viewModel.onSearchQueryChanged(it) },
-                    placeholder = "Buscar productos..."
+                    placeholder = stringResource(R.string.home_search_placeholder)
                 )
             }
 
@@ -102,7 +104,7 @@ fun ProductListScreen(
                 item {
                     Column {
                         Text(
-                            text = "Categorías",
+                            text = stringResource(R.string.home_categories),
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier.padding(bottom = 8.dp)
@@ -134,7 +136,7 @@ fun ProductListScreen(
                                     color = MaterialTheme.colorScheme.primary
                                 )
                                 Text(
-                                    text = "Cargando productos...",
+                                    text = stringResource(R.string.home_loading),
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -154,17 +156,17 @@ fun ProductListScreen(
                                 verticalArrangement = Arrangement.spacedBy(12.dp)
                             ) {
                                 Text(
-                                    text = "Error al cargar productos",
+                                    text = stringResource(R.string.home_error_loading),
                                     style = MaterialTheme.typography.titleMedium,
                                     color = MaterialTheme.colorScheme.onErrorContainer
                                 )
                                 Text(
-                                    text = error ?: "Error desconocido",
+                                    text = error ?: stringResource(R.string.home_error_unknown),
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onErrorContainer
                                 )
                                 PrimaryButton(
-                                    text = "Reintentar",
+                                    text = stringResource(R.string.home_retry_button),
                                     onClick = { viewModel.retryLoadProducts() }
                                 )
                             }
@@ -188,15 +190,15 @@ fun ProductListScreen(
                                     verticalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
                                     Text(
-                                        text = "No hay productos",
+                                        text = stringResource(R.string.home_no_products),
                                         style = MaterialTheme.typography.titleMedium,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                     Text(
                                         text = if (searchText.isNotEmpty()) {
-                                            "Intenta con otros términos de búsqueda"
+                                            stringResource(R.string.home_search_help)
                                         } else {
-                                            "Vuelve más tarde"
+                                            stringResource(R.string.home_try_later)
                                         },
                                         style = MaterialTheme.typography.bodyMedium,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -209,11 +211,11 @@ fun ProductListScreen(
                         // Products header
                         Text(
                             text = if (searchText.isNotEmpty()) {
-                                "Resultados (${products.size})"
+                                stringResource(R.string.home_search_results) + "${products.size})"
                             } else if (selectedCategory != null) {
                                 "$selectedCategory (${products.size})"
                             } else {
-                                "Todos los productos (${products.size})"
+                                stringResource(R.string.home_all_products) + "${products.size})"
                             },
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurface,
