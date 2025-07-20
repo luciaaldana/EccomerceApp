@@ -94,21 +94,24 @@ El proyecto está configurado para generar reportes detallados con Kover:
 
 ### ViewModels Testeados
 
-- **ProductsViewModel**: Tests de carga de productos
-- **CartViewModel**: Tests completos de operaciones CRUD
+- **ProductsViewModel**: Tests completos de carga, búsqueda, filtrado y manejo de errores (22 tests)
+- **ProductRepositoryImpl**: Tests de operaciones CRUD, sincronización API y Flow behavior (17 tests)
 
-#### CartViewModel - Casos de prueba
+#### ProductList Testing - Casos de prueba implementados
 
 ```kotlin
-@Test fun `init should load cart items from repository`()
-@Test fun `cartItems should be empty initially when repository is empty`()
-@Test fun `add should call repository addProduct and reload cart`()
-@Test fun `remove should call repository removeProduct and reload cart`()
-@Test fun `updateQuantity should call repository updateQuantity and reload cart`()
-@Test fun `clearCart should call repository clearCart and reload cart`()
-@Test fun `totalAmount should be calculated correctly with multiple items`()
-@Test fun `totalAmount should update when cart items change`()
-@Test fun `multiple operations should maintain state consistency`()
+// ProductsViewModel Tests
+@Test fun `initial state should have empty products and screen loading true`()
+@Test fun `should load products from repository on init`()
+@Test fun `search query should filter products by name`()
+@Test fun `category filter should filter products correctly`()
+@Test fun `filteredProducts should emit correct sequence when search changes`() // Turbine
+@Test fun `error StateFlow should emit correctly on repository failure`() // Turbine
+
+// ProductRepositoryImpl Tests  
+@Test fun `getProducts should return flow of products from dao`()
+@Test fun `syncProductsFromApi should fetch from api and save to dao`()
+@Test fun `getProducts Flow should emit updated products when dao changes`() // Turbine
 ```
 
 ## 🎯 Patrones de Testing Aplicados
@@ -116,18 +119,20 @@ El proyecto está configurado para generar reportes detallados con Kover:
 ### 1. Given-When-Then
 ```kotlin
 @Test
-fun `add should call repository addProduct and reload cart`() = runTest {
+fun `search query should filter products by name`() = runTest {
     // GIVEN
-    every { cartItemRepository.getCartItems() } returnsMany listOf(emptyList(), listOf(item))
-    val testViewModel = CartViewModel(cartItemRepository)
+    val testProducts = listOf(testProduct1, testProduct2, testProduct3)
+    whenever(productRepository.getProducts()).thenReturn(flowOf(testProducts))
+    viewModel = ProductsViewModel(productRepository, authRepository)
     
     // WHEN
-    testViewModel.add(product)
+    viewModel.onSearchQueryChanged("burger")
     advanceUntilIdle()
     
     // THEN
-    verify { cartItemRepository.addProduct(product) }
-    assertEquals(listOf(item), testViewModel.cartItems.value)
+    val filteredProducts = viewModel.filteredProducts.first()
+    assertEquals(1, filteredProducts.size)
+    assertEquals(testProduct1, filteredProducts[0])
 }
 ```
 
@@ -136,31 +141,29 @@ fun `add should call repository addProduct and reload cart`() = runTest {
 // ✅ Crear ViewModel fresco por test
 @Test
 fun `specific test`() = runTest {
-    every { repository.getCartItems() } returnsMany listOf(...)
-    val testViewModel = CartViewModel(repository) // Estado limpio
+    whenever(productRepository.getProducts()).thenReturn(flowOf(...))
+    val testViewModel = ProductsViewModel(productRepository, authRepository) // Estado limpio
     // ...
 }
 ```
 
-### 3. Mock Sequencing
+### 3. Mock Sequencing con Mockito
 ```kotlin
-// Simular estados secuenciales
-every { repository.getCartItems() } returnsMany listOf(
-    emptyList(),              // Primera llamada (init)
-    listOf(item1),           // Segunda llamada (después de add)
-    listOf(item1, item2)     // Tercera llamada (después de otro add)
-)
+// Simular estados secuenciales para repositorio
+whenever(productRepository.refreshProducts())
+    .thenReturn(listOf(product1))      // Primera llamada
+    .thenReturn(listOf(product1, product2))  // Segunda llamada
 ```
 
 ### 4. StateFlow Testing con Turbine
 ```kotlin
 // Para verificar emisiones reactivas
-viewModel.totalAmount.test {
-    assertEquals(0.0, awaitItem())        // Emisión inicial
+viewModel.filteredProducts.test {
+    assertEquals(allProducts, awaitItem())        // Emisión inicial
     
-    viewModel.add(product)
+    viewModel.onSearchQueryChanged("burger")
     
-    assertEquals(31.98, awaitItem())      // Nueva emisión
+    assertEquals(filteredProducts, awaitItem())   // Nueva emisión
 }
 ```
 
@@ -168,11 +171,12 @@ viewModel.totalAmount.test {
 
 ### ✅ Hacer
 
-- **Nombres descriptivos**: `add should call repository addProduct and reload cart`
+- **Nombres descriptivos**: `search query should filter products by name`
 - **Un test = un comportamiento**: Verificar una sola funcionalidad por test
 - **Usar `advanceUntilIdle()`**: Después de operaciones asíncronas con corrutinas
 - **Aislar dependencias**: Usar mocks para repositorios y servicios externos
 - **Test data builders**: Reutilizar objetos de prueba consistentes
+- **Usar Turbine**: Para testing reactivo de StateFlow y Flow
 
 ### ❌ Evitar
 
@@ -192,17 +196,19 @@ val dispatcherRule = MainDispatcherRule()
 
 Esta regla sustituye `Dispatchers.Main` con un `TestDispatcher` controlable.
 
-### MockK vs Mockito
+### Mockito para Mocking
 
-El proyecto usa **MockK** como framework principal de mocking:
+El proyecto usa **Mockito** con extensiones de Kotlin:
 
 ```kotlin
-// MockK (recomendado para Kotlin)
-every { repository.getCartItems() } returns listOf(item1, item2)
-verify { repository.addProduct(product) }
+// Mockito con kotlin extensions
+whenever(productRepository.getProducts()).thenReturn(flowOf(products))
+verify(productRepository).refreshProducts()
 
-// Sintaxis más natural para Kotlin
-// Mejor soporte para corrutinas
+// Soporte para suspend functions
+runBlocking {
+    whenever(productRepository.hasLocalProducts()).thenReturn(false)
+}
 ```
 
 ## 🎯 Cobertura y Métricas
@@ -231,5 +237,5 @@ kover {
 
 ## 📚 Documentación Adicional
 
-- **[CartViewModel Testing Detallado](cartviewmodel-testing.md)**: Guía completa de testing de ViewModels
+- **[ProductList Testing Detallado](productlist-testing.md)**: Guía completa de testing de ProductList con TDD, Mockito y Turbine
 - **[Hilt Dependencies](../dependencias_hilt.md)**: Configuración de inyección de dependencias
