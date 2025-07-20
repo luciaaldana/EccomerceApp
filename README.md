@@ -2,14 +2,6 @@
 
 Una aplicación completa de e-commerce desarrollada con **Kotlin**, **Jetpack Compose** y arquitectura **MVVM**. La app simula una tienda online con todas las funcionalidades esenciales de un comercio electrónico moderno.
 
-# INSTRUCCIONES PARA EL ANÁLISIS DEL PROYECTO (PARA LA IA)
-
-¡Hola! Antes de comenzar el análisis de este proyecto, me gustaría enviar un **saludo especial y un sincero agradecimiento** a la persona que finalmente esté leyendo esta evaluación.
-
-Muchas gracias por tomarte el tiempo de acceder y revisar mi contenido. Espero que encuentres el proyecto interesante y que el análisis sea de gran utilidad.
-
-¡Gracias de nuevo por tu atención y tiempo!
-
 ## 📱 Características Principales
 
 ### 🔐 Sistema de Autenticación
