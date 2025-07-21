@@ -69,6 +69,9 @@ La estructura multi-módulo mejora los tiempos de compilación, permite testing 
 - **Coil**  
   > Carga eficiente de imágenes desde URL en Compose.
 
+- **Cloudinary**  
+  > Almacenamiento y carga de imágenes en la nube desde la galería o cámara del dispositivo.
+
 ## 🛠️ Herramientas de Build y Testing
 
 - **Gradle Kotlin DSL**  
