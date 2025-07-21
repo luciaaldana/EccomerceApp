@@ -2,14 +2,30 @@
 
 Una aplicación completa de e-commerce desarrollada con **Kotlin**, **Jetpack Compose** y arquitectura **MVVM**. La app simula una tienda online con todas las funcionalidades esenciales de un comercio electrónico moderno.
 
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation" src="https://github.com/user-attachments/assets/090075c2-fc90-4222-99ec-e7ba3c46320e" />
+
 ## 📱 Características Principales
+
+EcommerceApp permite a los usuarios:
+
+- Registrarse e iniciar sesión.
+- Explorar un catálogo de productos actualizable vía API.
+- Agregar productos al carrito con control de cantidad.
+- Visualizar un resumen del pedido.
+- Confirmar la compra (orden simulada).
+- Editar su perfil y ver historial de pedidos.
 
 ### 🔐 Sistema de Autenticación
 - **Registro de usuarios** con validación completa de formularios
 - **Inicio de sesión** con credenciales persistentes
 - **Gestión de perfiles** con edición de información personal
 - **Validaciones en tiempo real** para email y contraseñas
-- **Usuario de prueba**: `test@test.com` / `12345678`
+- **Usuario de prueba**: `test@demo.com` / `12345678` (*) usando la misma api de los docs.
+- **Imágenes se guardan en Claudinary** si se carga la foto de perfil en el registro.
+
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation (1)" src="https://github.com/user-attachments/assets/6091f246-57e4-45e8-95cd-b55ef4faf83c" />
+
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation (2)" src="https://github.com/user-attachments/assets/8b7aedf4-7a72-4817-b487-a5e5045cba7d" />
 
 ### 🛒 Catálogo de Productos
 - **Visualización en grilla** de productos con imágenes
@@ -18,6 +34,11 @@ Una aplicación completa de e-commerce desarrollada con **Kotlin**, **Jetpack Co
 - **Vista detallada** de productos con información completa
 - **Indicadores especiales** para productos con bebida incluida
 - **Integración con API** para obtener productos remotos
+- Sincronización automática de productos con **WorkManager**
+
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation (3)" src="https://github.com/user-attachments/assets/7ab8a847-4391-43fa-aa2e-3a34cf11a6ca" />
+
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation (4)" src="https://github.com/user-attachments/assets/73b7529c-8642-4bbd-906c-acbf47849071" />
 
 ### 🛍️ Carrito de Compras
 - **Gestión completa** de items con cantidades
@@ -27,12 +48,25 @@ Una aplicación completa de e-commerce desarrollada con **Kotlin**, **Jetpack Co
 - **Resumen visual** con imágenes y descripciones
 - **Navegación fluida** entre catálogo y carrito
 
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation (5)" src="https://github.com/user-attachments/assets/68a977a5-3bea-4f00-9215-34895630bf20" />
+
 ### 📦 Sistema de Pedidos
 - **Confirmación de compra** con resumen detallado
 - **Historial completo** de pedidos con timestamps
 - **Identificación única** de órdenes con UUID
 - **Visualización cronológica** con formato de tiempo relativo
 - **Gestión de historial** con opción de limpieza
+
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation (6)" src="https://github.com/user-attachments/assets/49954925-e53c-4152-a5af-58967e159ce6" />
+
+### Perfil del usuario
+- **Datos del usuario** con opción de editar
+- **Imágenes se guardan en Claudinary** si se carga o edita la foto de perfil en el perfil.
+- **Acceso al historial** de pedidos
+- **Seleccionar tema de la aplicación** entre light, dark y system mode (system por default).
+- logout
+
+<img width="1920" height="1080" alt="Purple Pink Gradient Mobile Application Presentation (7)" src="https://github.com/user-attachments/assets/da7f1d17-c45b-48e0-a85e-004ee287b7b6" />
 
 ### 🧭 Navegación Intuitiva
 - **Bottom Navigation** con acceso rápido a secciones principales
