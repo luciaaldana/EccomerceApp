@@ -5,7 +5,7 @@ Esta guía te ayudará a levantar la API de que usa la app para conectarla con t
 ## 📋 Requisitos Previos
 
 ### Node.js Version
-- **Node.js 16.x o 18.x** (NO uses versiones más nuevas)
+- **Node.js 16.x o 18.x**
 - Verificar versión: `node --version`
 
 ### MongoDB Atlas
@@ -33,7 +33,7 @@ npm install
 Crear archivo `.env` en la raíz del proyecto:
 ```bash
 MONGODB_URI=mongodb+srv://tu-usuario:tu-password@cluster0.xxxxxx.mongodb.net/PeyaDB?retryWrites=true&w=majority
-PORT=4000
+PORT=10000
 ```
 
 ### 4. Poblar la Base de Datos
@@ -77,7 +77,7 @@ npm install express@4.18.2
 lsof -ti:4000 | xargs kill -9
 
 # Windows
-netstat -ano | findstr :4000
+netstat -ano | findstr :10000
 taskkill /PID <PID> /F
 ```
 
@@ -132,7 +132,7 @@ fetch('http://localhost:10000/foods')
 
 ### Crear pedido
 ```javascript
-fetch('http://localhost:4000/orders', {
+fetch('http://localhost:10000/orders', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -174,7 +174,7 @@ fetch('http://localhost:4000/orders', {
 ### Variables de Entorno en Producción
 ```
 MONGODB_URI=mongodb+srv://...
-PORT=4000
+PORT=10000
 ```
 
 ---
@@ -256,7 +256,7 @@ RENDER_BASE_URL=http://10.0.2.2:10000
 Si estás usando un **dispositivo físico conectado**, usa tu IP local:
 
 ```properties
-RENDER_BASE_URL=http://192.168.1.XXX:10000
+RENDER_BASE_URL=http://XXX.XXX.X.XXX:10000
 ```
 
 **Para encontrar tu IP local:**
@@ -269,7 +269,7 @@ ifconfig | grep "inet " | grep -v 127.0.0.1
 ipconfig | findstr "IPv4"
 ```
 
-Busca una IP que empiece con `192.168.x.x` o `10.x.x.x`.
+Busca una IP que empiece con `XXX.XXX.x.x` o `10.x.x.x`.
 
 ### 🔧 **Configuración del Servidor para Android**
 
