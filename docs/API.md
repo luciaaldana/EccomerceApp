@@ -102,6 +102,7 @@ http://localhost:4000
 - `GET /foods` - Obtener todos los productos
 - `POST /foods` - Crear producto
 - `GET /foods/:id` - Obtener producto por ID
+- `GET /foods/categories` - Obtener lista de categorías de todos los productos
 - `PUT /foods/:id` - Actualizar producto
 - `DELETE /foods/:id` - Eliminar producto
 
@@ -124,7 +125,7 @@ http://localhost:4000
 
 ### Obtener productos
 ```javascript
-fetch('http://localhost:4000/foods')
+fetch('http://localhost:10000/foods')
   .then(response => response.json())
   .then(data => console.log(data));
 ```
@@ -204,7 +205,7 @@ PORT=4000
 
 ### Si el servidor no arranca
 1. Verificar Node.js version: `node --version`
-2. Verificar puerto disponible: `lsof -i:4000`
+2. Verificar puerto disponible: `lsof -i:10000`
 3. Verificar variables de entorno en `.env`
 4. Verificar conexión a MongoDB Atlas
 
