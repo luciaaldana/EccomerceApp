@@ -92,30 +92,32 @@ EcommerceApp permite a los usuarios:
 
 ### 🧩 Módulos por Capa
 
-**🎨 Feature Modules (UI + ViewModels):**
-- `:feature:login` - Autenticación de usuarios
-- `:feature:register` - Registro de nuevos usuarios  
-- `:feature:home` - Catálogo y detalles de productos
-- `:feature:cart` - Carrito de compras
-- `:feature:profile` - Perfil y historial de pedidos
+#### 📱 **Capa de Presentación (UI)**
+- **`:app`** - Módulo principal con MainActivity y configuración DI
+- **`:feature:*`** - Módulos de características específicas:
+  - `:feature:login` - Pantalla de inicio de sesión con validaciones
+  - `:feature:register` - Pantalla de registro con upload de imágenes
+  - `:feature:home` - Lista de productos, búsqueda y pantalla de detalle
+  - `:feature:cart` - Carrito de compras con gestión de cantidades
+  - `:feature:profile` - Perfil de usuario, historial de órdenes y configuración
+  - `:feature:productlist` - WorkManager para sincronización en background
 
-**🔗 Domain Modules (Interfaces de negocio):**
-- `:domain:auth` - Interfaces de autenticación
-- `:domain:product` - Interfaces de productos
-- `:domain:cart` - Interfaces de carrito y pedidos
+#### 🎯 **Capa de Dominio (Business Logic)**
+- **`:domain:auth`** - Reglas de negocio de autenticación y validaciones
+- **`:domain:product`** - Reglas de negocio de productos y catálogo
+- **`:domain:cart`** - Reglas de negocio del carrito y gestión de órdenes
 
-**💾 Data Modules (Implementaciones):**
-- `:data:auth` - Implementación de autenticación
-- `:data:product` - Implementación de productos (API + mappers)
-- `:data:cart` - Implementación de carrito y pedidos
+#### 💾 **Capa de Datos (Data Layer)**
+- **`:data:auth`** - Implementación de autenticación (API + DTOs + validaciones)
+- **`:data:product`** - Implementación de productos (API + Room + Mappers + cache)
+- **`:data:cart`** - Implementación del carrito (API + DTOs + persistencia local)
+- **`:data:database`** - Base de datos Room con DAOs y entities
 
-**⚙️ Core Modules (Compartidos):**
-- `:core:model` - Modelos de datos y utilidades
-- `:core:ui` - Componentes UI reutilizables y theme
-- `:core:navigation` - Componentes de navegación
-
-**📱 App Module:**
-- `:app` - Configuración principal, navegación y DI
+#### 🔧 **Módulos Centrales (Core)**
+- **`:core:model`** - Modelos de datos compartidos y extensiones utilitarias
+- **`:core:ui`** - Componentes UI reutilizables, tema y design system
+- **`:core:navigation`** - Componentes de navegación compartidos
+- **`:core:cloudinary`** - Servicio centralizado para manejo de imágenes
 
 ### 🎯 Beneficios de la Modularización
 - **Compilación paralela** - Mejores tiempos de build
@@ -140,124 +142,254 @@ EcommerceApp permite a los usuarios:
 
 ```
 EccomerceApp/
-├── 📱 app/                          # Módulo principal
+├── 📱 app/                              # Módulo principal de la aplicación
+│   ├── build.gradle.kts                # Configuración de build del app
 │   └── src/main/java/com/luciaaldana/eccomerceapp/
-│       ├── navigation/              # Configuración de navegación
-│       │   └── AppNavGraph.kt
-│       ├── di/                      # Configuración de red
-│       │   └── NetworkModule.kt
-│       ├── MainActivity.kt          # Punto de entrada
-│       └── EccomerceApp.kt          # Application class
+│       ├── navigation/                  # Configuración de navegación principal
+│       │   └── AppNavGraph.kt          # Grafo de navegación global
+│       ├── di/                         # Módulos de inyección de dependencias
+│       │   ├── NetworkModule.kt        # Configuración de red (Retrofit, OkHttp)
+│       │   └── CloudinaryModule.kt     # Configuración de Cloudinary
+│       ├── MainActivity.kt             # Actividad principal
+│       ├── MainViewModel.kt            # ViewModel principal
+│       └── EccomerceApp.kt             # Application class con Hilt
 │
-├── 🎨 feature/                      # Módulos de características (UI + ViewModels)
+├── 🎨 feature/                         # Módulos de características (UI + ViewModels)
 │   ├── login/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../feature/login/
-│   │       ├── LoginScreen.kt       # UI con Compose
-│   │       └── LoginViewModel.kt    # Lógica de presentación
+│   │       ├── LoginScreen.kt          # UI con Compose y validaciones
+│   │       └── LoginViewModel.kt       # Lógica de presentación y estados
 │   ├── register/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../feature/register/
-│   │       ├── RegisterScreen.kt
-│   │       └── RegisterViewModel.kt
+│   │       ├── RegisterScreen.kt       # UI con upload de imágenes
+│   │       └── RegisterViewModel.kt    # Gestión de registro y Cloudinary
 │   ├── home/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../feature/home/
-│   │       ├── ProductListScreen.kt
-│   │       ├── DetailScreen.kt
-│   │       └── ProductsViewModel.kt
+│   │       ├── ProductListScreen.kt    # Lista con búsqueda y filtros
+│   │       ├── DetailScreen.kt         # Detalle de producto
+│   │       └── ProductsViewModel.kt    # Gestión de estado de productos
 │   ├── cart/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../feature/cart/
-│   │       ├── CartScreen.kt
-│   │       └── CartViewModel.kt
-│   └── profile/
-│       └── src/main/java/.../feature/profile/
-│           ├── ProfileScreen.kt
-│           ├── OrderHistoryScreen.kt
-│           ├── OrderConfirmationScreen.kt
-│           ├── ProfileViewModel.kt
-│           └── OrderHistoryViewModel.kt
+│   │       ├── CartScreen.kt           # UI del carrito con cantidades
+│   │       └── CartViewModel.kt        # Lógica de carrito y totales
+│   ├── profile/
+│   │   ├── build.gradle.kts
+│   │   └── src/main/java/.../feature/profile/
+│   │       ├── ProfileScreen.kt        # Perfil con edición de datos
+│   │       ├── OrderHistoryScreen.kt   # Historial de pedidos
+│   │       ├── OrderConfirmationScreen.kt # Confirmación de compra
+│   │       ├── ProfileViewModel.kt     # Gestión de perfil y temas
+│   │       └── OrderHistoryViewModel.kt # Gestión de historial
+│   └── productlist/
+│       ├── build.gradle.kts
+│       └── src/main/java/.../feature/productlist/
+│           └── worker/                 # Sincronización en background
+│               ├── ProductSyncWorker.kt
+│               └── ProductSyncScheduler.kt
 │
-├── 🔗 domain/                       # Módulos de lógica de negocio (Interfaces)
+├── 🎯 domain/                          # Módulos de lógica de negocio (Interfaces)
 │   ├── auth/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../domain/auth/
-│   │       └── AuthRepository.kt    # Interface
+│   │       └── AuthRepository.kt       # Interface de autenticación
 │   ├── product/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../domain/product/
-│   │       └── ProductRepository.kt # Interface
+│   │       └── ProductRepository.kt    # Interface de productos
 │   └── cart/
+│       ├── build.gradle.kts
 │       └── src/main/java/.../domain/cart/
-│           ├── CartItemRepository.kt
-│           └── OrderHistoryRepository.kt
+│           ├── CartItemRepository.kt   # Interface de carrito
+│           └── OrderHistoryRepository.kt # Interface de órdenes
 │
-├── 💾 data/                         # Módulos de implementación de datos
+├── 💾 data/                            # Módulos de implementación de datos
 │   ├── auth/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../data/auth/
-│   │       ├── AuthRepositoryImpl.kt    # Implementación
-│   │       └── di/AuthModule.kt         # DI específico
+│   │       ├── AuthRepositoryImpl.kt   # Implementación de autenticación
+│   │       ├── network/UserApi.kt      # API endpoints de usuarios
+│   │       ├── dto/                    # DTOs de red
+│   │       │   ├── LoginDto.kt
+│   │       │   ├── LoginResponse.kt
+│   │       │   ├── UserRegistrationDto.kt
+│   │       │   └── UpdateUserDto.kt
+│   │       ├── utils/PasswordEncoder.kt # Utilidades de encriptación
+│   │       └── di/AuthModule.kt        # DI específico de auth
 │   ├── product/
+│   │   ├── build.gradle.kts
 │   │   └── src/main/java/.../data/product/
-│   │       ├── ProductRepositoryImpl.kt
-│   │       ├── network/ProductApi.kt    # API endpoints
-│   │       ├── dto/ProductDto.kt        # DTOs de red
-│   │       ├── mapper/ProductMapper.kt  # Mappers DTO → Domain
-│   │       └── di/ProductModule.kt
-│   └── cart/
-│       └── src/main/java/.../data/cart/
-│           ├── CartItemRepositoryImpl.kt
-│           ├── OrderHistoryRepositoryImpl.kt
-│           └── di/CartModule.kt
+│   │       ├── ProductRepositoryImpl.kt # Implementación con cache
+│   │       ├── network/ProductApi.kt   # API endpoints de productos
+│   │       ├── dto/ProductDto.kt       # DTOs de red
+│   │       ├── mapper/                 # Mappers DTO → Domain
+│   │       │   ├── ProductMapper.kt
+│   │       │   └── ProductEntityMapper.kt
+│   │       └── di/ProductModule.kt     # DI específico de productos
+│   ├── cart/
+│   │   ├── build.gradle.kts
+│   │   └── src/main/java/.../data/cart/
+│   │       ├── CartItemRepositoryImpl.kt # Implementación de carrito
+│   │       ├── OrderHistoryRepositoryImpl.kt # Implementación de órdenes
+│   │       ├── network/OrderApi.kt     # API endpoints de órdenes
+│   │       ├── dto/OrderDto.kt         # DTOs de órdenes
+│   │       ├── mapper/OrderMapper.kt   # Mappers de órdenes
+│   │       └── di/CartModule.kt        # DI específico de carrito
+│   └── database/
+│       ├── build.gradle.kts
+│       └── src/main/java/.../data/database/
+│           ├── AppDatabase.kt          # Configuración de Room
+│           ├── dao/                    # Data Access Objects
+│           │   ├── ProductDao.kt
+│           │   └── UserDao.kt
+│           ├── entity/                 # Entidades de base de datos
+│           │   ├── ProductEntity.kt
+│           │   └── UserEntity.kt
+│           └── di/DatabaseModule.kt    # DI de base de datos
 │
-└── ⚙️ core/                         # Módulos compartidos (sin dependencias)
+└── ⚙️ core/                            # Módulos compartidos (sin dependencias)
     ├── model/
+    │   ├── build.gradle.kts
     │   └── src/main/java/.../core/model/
-    │       ├── Product.kt           # Modelos de dominio
+    │       ├── Product.kt              # Modelos de dominio
     │       ├── CartItem.kt
     │       ├── Order.kt
     │       ├── User.kt
-    │       └── utils/               # Extensiones y utilidades
+    │       └── utils/                  # Extensiones y utilidades
     │           ├── DateExtensions.kt
     │           └── FormatExtensions.kt
     ├── ui/
+    │   ├── build.gradle.kts
     │   └── src/main/java/.../core/ui/
-    │       ├── components/          # Componentes reutilizables
+    │       ├── components/             # Componentes reutilizables
     │       │   ├── BottomNavBar.kt
-    │       │   └── Header.kt
-    │       └── theme/               # Theme y estilos
+    │       │   ├── Header.kt
+    │       │   ├── ProductCard.kt
+    │       │   ├── CustomButton.kt
+    │       │   ├── SearchBar.kt
+    │       │   └── [20+ componentes más...]
+    │       └── theme/                  # Sistema de temas
     │           ├── Color.kt
     │           ├── Theme.kt
-    │           └── Type.kt
-    └── navigation/
-        └── src/main/java/.../core/navigation/
-            └── [Navegación compartida]
+    │           ├── Type.kt
+    │           ├── ThemeProvider.kt
+    │           └── ThemeRepository.kt
+    ├── navigation/
+    │   ├── build.gradle.kts
+    │   └── src/main/java/.../core/navigation/
+    │       └── PlaceholderNavigation.kt # Navegación compartida
+    └── cloudinary/
+        ├── build.gradle.kts
+        └── src/main/java/.../core/cloudinary/
+            ├── CloudinaryConfig.kt    # Configuración de Cloudinary
+            └── CloudinaryService.kt   # Servicio de upload de imágenes
 ```
 
 ### 📋 Dependencias entre Módulos
 
+```plaintext
+:app
+├── depends on → :feature:login
+├── depends on → :feature:register  
+├── depends on → :feature:home
+├── depends on → :feature:cart
+├── depends on → :feature:profile
+├── depends on → :core:ui
+├── depends on → :core:navigation
+└── depends on → :core:cloudinary
+
+:feature:login
+├── depends on → :domain:auth
+├── depends on → :data:auth
+├── depends on → :core:model
+└── depends on → :core:ui
+
+:feature:register
+├── depends on → :domain:auth
+├── depends on → :data:auth
+├── depends on → :core:model
+├── depends on → :core:ui
+└── depends on → :core:cloudinary
+
+:feature:home
+├── depends on → :domain:product
+├── depends on → :data:product
+├── depends on → :domain:cart (para agregar al carrito)
+├── depends on → :data:cart
+├── depends on → :core:model
+└── depends on → :core:ui
+
+:feature:cart
+├── depends on → :domain:cart
+├── depends on → :data:cart
+├── depends on → :core:model
+└── depends on → :core:ui
+
+:feature:profile
+├── depends on → :domain:auth
+├── depends on → :domain:cart (historial de órdenes)
+├── depends on → :data:auth
+├── depends on → :data:cart
+├── depends on → :core:model
+├── depends on → :core:ui
+└── depends on → :core:cloudinary
+
+:feature:productlist
+├── depends on → :domain:product
+├── depends on → :data:product
+└── depends on → :core:model
+
+:data:auth
+├── depends on → :domain:auth (implementa)
+├── depends on → :core:model
+└── depends on → :core:cloudinary
+
+:data:product
+├── depends on → :domain:product (implementa)
+├── depends on → :data:database
+└── depends on → :core:model
+
+:data:cart
+├── depends on → :domain:cart (implementa)
+└── depends on → :core:model
+
+:data:database
+└── depends on → :core:model
+
+:domain:auth
+└── depends on → :core:model
+
+:domain:product
+└── depends on → :core:model
+
+:domain:cart
+└── depends on → :core:model
+
+:core:* (todos los módulos core)
+└── Sin dependencias entre sí (independientes)
 ```
-app
-├── feature:* (todas las features)
-├── core:ui
-└── data:* (todas las implementaciones)
 
-feature:login
-├── domain:auth
-├── core:model
-└── core:ui
+#### 🏗️ **Reglas de Arquitectura Implementadas**
 
-feature:home
-├── domain:product
-├── feature:cart (para agregar al carrito)
-├── core:model
-└── core:ui
+**✅ Clean Architecture Flow:**
+- **Feature** → **Domain** ← **Data** (inversión de dependencias)
+- **Domain** solo define interfaces, **Data** las implementa
+- **Feature** no conoce implementaciones específicas de **Data**
 
-data:product
-├── domain:product (implementa)
-└── core:model
+**✅ Modularización Correcta:**
+- **Core modules** son completamente independientes
+- **App module** solo orquesta features y configuración global  
+- **Domain** no depende de **Data** (principio de inversión)
+- **No dependencias circulares** entre módulos
 
-domain:product
-└── core:model
-
-core:model
-└── [sin dependencias]
-```
+**✅ Separación de Responsabilidades:**
+- **UI/ViewModels** (:feature) → Presentación
+- **Interfaces** (:domain) → Reglas de negocio
+- **Implementaciones** (:data) → Acceso a datos
+- **Modelos compartidos** (:core) → Utilities y modelos
 
 ## 🚀 Configuración de Desarrollo
 
@@ -272,6 +404,10 @@ core:model
 Crear `local.properties` en la raíz del proyecto:
 ```properties
 RENDER_BASE_URL=https://tu-api.render.com
+
+CLOUDINARY_CLOUD_NAME=YOUR_CLOUDINARY_CLOUD_NAME
+CLOUDINARY_API_KEY=YOUR_CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET=YOUR_CLOUDINARY_API_SECRET
 ```
 
 ### 🔧 Comandos de Desarrollo Multi-Módulo
@@ -336,6 +472,7 @@ open app/build/reports/kover/debug/html/index.html
 - **Material 3** - Design system de Google
 - **Navigation Compose** - Navegación type-safe
 - **Coil** - Carga asíncrona de imágenes
+- **Cloudinary** – Carga y almacenamiento de imágenes de perfil en la nube
 
 ### 🔧 Backend/Data
 - **Retrofit** - Cliente HTTP type-safe
@@ -360,17 +497,22 @@ open app/build/reports/kover/debug/html/index.html
 - ✅ **Integración con API** para productos remotos
 - ✅ **Testing unitario** con cobertura de código
 - ✅ **Arquitectura escalable** con separación de responsabilidades
+- ✅ Lista con textos centralizados en **strings.xml** por módulos
 
 ## 📚 Documentación Adicional
 
 ### 🏗️ Arquitectura
-- [🧩 Arquitectura Multi-Módulo](docs/modularization.md) - Guía completa de modularización
-- [📖 Tecnologías Utilizadas](docs/tecnologias.md) - Stack tecnológico y justificaciones
-- [🔗 Configuración de Hilt](docs/dependencias_hilt.md) - DI distribuida entre módulos
+- [🧩 Arquitectura Multi-Módulo](docs/modularization.md) – Guía completa de modularización
+- [📖 Tecnologías Utilizadas](docs/tecnologias.md) – Stack tecnológico y justificaciones
+- [🔗 Configuración de Hilt](docs/dependencias_hilt.md) – DI distribuida entre módulos
+- [🎨 Diseño y Temas](docs/theme.md) – Personalización visual con Material 3
 
 ### 🧪 Testing
-- [🧪 Guía de Testing](docs/test/testing.md) - Configuración general y comandos
-- [📋 CartViewModel Testing](docs/test/cartviewmodel-testing.md) - Guía detallada de testing de ViewModels
+- [🧪 Guía de Testing](docs/test/testing.md) – Configuración general y comandos
+- [📋 ProductList Testing](docs/test/productlist-testing.md) – Guía detallada de testing de ViewModels
 
 ### 🌐 API y Desarrollo
-- [🚀 Configuración de API](docs/API.md) - Setup de API local y configuración para Android
+- [🚀 Configuración de API](docs/API.md) – Setup de API local y configuración para Android
+- [🔐 Autenticación](docs/autenticacion.md) – Manejo de login, registro y sesión
+- [☁️ Cloudinary](docs/cloudinary.md) – Subida y carga de imágenes desde galería o cámara
+- [📦 WorkManager](docs/workmanager.md) – Tareas en segundo plano con CoroutineWorker  
